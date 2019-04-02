@@ -43,19 +43,21 @@ function git_prompt_info() {
   echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
-command_not_found_handler() {
-  local pkgs cmd="$1"
+if [ -x /usr/bin/pkgfile ]; then
+  command_not_found_handler() {
+    local pkgs cmd="$1"
 
-  pkgs=(${(f)"$(pkgfile -b -v -- "$cmd" 2>/dev/null)"})
-  if [[ -n "$pkgs" ]]; then
-    printf '%s may be found in the following packages:\n' "$cmd"
-    printf '  %s\n' $pkgs[@]
-  else
-    printf '%s not found :(\n' "$cmd"
-  fi
+    pkgs=(${(f)"$(pkgfile -b -v -- "$cmd" 2>/dev/null)"})
+    if [[ -n "$pkgs" ]]; then
+      printf '%s may be found in the following packages:\n' "$cmd"
+      printf '  %s\n' $pkgs[@]
+    else
+      printf '%s not found :(\n' "$cmd"
+    fi
 
-  return 127
-}
+    return 127
+  }
+fi
 
 function countdown(){
   date1=$((`date +%s` + $1));
