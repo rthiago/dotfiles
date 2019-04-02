@@ -5,10 +5,7 @@ if ! hash git 2>/dev/null; then
     exit;
 fi
 
-git clone https://github.com/rthiago/dotfiles.git ~/projects/dotfiles
-cd ~/projects/dotfiles
-git submodule init
-git submodule update
+git clone --recursive https://github.com/rthiago/dotfiles.git ~/projects/dotfiles
 
 ln -s -f ~/projects/dotfiles/zshrc ~/.zshrc
 ln -s -f ~/projects/dotfiles/gitconfig ~/.gitconfig
