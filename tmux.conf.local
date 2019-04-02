@@ -306,5 +306,6 @@ set -s escape-time 0
 set -g history-limit 50000
 set -g status-interval 5
 set -g default-terminal "screen-256color"
+set -g display-time 4000
 
 bind -n C-l send-keys C-l
