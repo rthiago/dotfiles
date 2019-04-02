@@ -6,7 +6,7 @@ ZSH_THEME="thiago"
 # ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
-ZSH_CUSTOM="/home/thiago/projects/dotfiles/oh-my-zsh/custom"
+ZSH_CUSTOM="$HOME/projects/dotfiles/oh-my-zsh-custom"
 plugins=(git colored-man-pages)
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin"
