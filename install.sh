@@ -6,6 +6,9 @@ if ! hash git 2>/dev/null; then
 fi
 
 git clone https://github.com/rthiago/dotfiles.git ~/projects/dotfiles
+cd ~/projects/dotfiles
+git submodule init
+git submodule update
 
 ln -s -f ~/projects/dotfiles/zshrc ~/.zshrc
 ln -s -f ~/projects/dotfiles/gitconfig ~/.gitconfig
