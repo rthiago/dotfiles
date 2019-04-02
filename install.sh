@@ -5,13 +5,10 @@ if ! hash git 2>/dev/null; then
     exit;
 fi
 
-#git clone https://github.com/rthiago/dotfiles.git ~/projects/dotfiles
+git clone https://github.com/rthiago/dotfiles.git ~/projects/dotfiles
 
-ln -s ~/projects/dotfiles/zshrc ~/.zshrc
-ln -s ~/projects/dotfiles/gitconfig ~/.gitconfig
-ln -s ~/projects/dotfiles/vimrc ~/.vimrc
-ln -s ~/projects/dotfiles/tmux.conf.local ~/.tmux.conf.local
-
-# @TODO install .tmux
-
-source ~/.zshrc
+ln -s -f ~/projects/dotfiles/zshrc ~/.zshrc
+ln -s -f ~/projects/dotfiles/gitconfig ~/.gitconfig
+ln -s -f ~/projects/dotfiles/vimrc ~/.vimrc
+ln -s -f ~/projects/dotfiles/tmux.conf.local ~/.tmux.conf.local
+ln -s -f ~/projects/dotfiles/tmux/.tmux.conf ~/.tmux.conf
