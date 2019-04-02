@@ -5,3 +5,12 @@
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	pr = pull --rebase
 	st = status
+	dt = difftool
+	dc = diff --cached
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+[merge]
+	tool = meld
+[difftool]
+	prompt = false
