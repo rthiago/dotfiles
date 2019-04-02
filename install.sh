@@ -5,7 +5,7 @@ if ! hash git 2>/dev/null; then
     exit;
 fi
 
-git clone --recursive https://github.com/rthiago/dotfiles.git ~/projects/dotfiles
+git clone --recursive git@github.com:rthiago/dotfiles.git ~/projects/dotfiles
 
 ln -s -f ~/projects/dotfiles/zshrc ~/.zshrc
 ln -s -f ~/projects/dotfiles/gitconfig ~/.gitconfig
