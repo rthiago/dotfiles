@@ -9,6 +9,7 @@ set t_Co=256
 set title
 set updatetime=100
 set vb
+set clipboard=unnamedplus
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
