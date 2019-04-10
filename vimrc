@@ -11,6 +11,7 @@ set updatetime=100
 set vb
 set clipboard=unnamedplus
 set relativenumber
+set showcmd
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
