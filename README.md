@@ -9,4 +9,4 @@ curl https://raw.githubusercontent.com/rthiago/dotfiles/master/install.sh | sh
 
 ## Requirements
 
-Git, zsh, oh-my-zsh, tmux, curl
+Git, zsh, tmux, curl
