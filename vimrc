@@ -29,8 +29,8 @@ let g:ctrlp_map = '<c-p>'
 syntax on
 
 nnoremap <F2> :NERDTreeToggle<CR>
-nnoremap <S-Tab> :bp<CR>
-nnoremap <Tab> :bn<CR>
+"nnoremap <S-Tab> :bp<CR>
+"nnoremap <Tab> :bn<CR>
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
