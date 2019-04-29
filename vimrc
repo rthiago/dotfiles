@@ -13,6 +13,7 @@ set clipboard=unnamedplus
 set relativenumber
 set showcmd
 set scrolloff=10
+set tabstop=4 shiftwidth=4 expandtab
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
