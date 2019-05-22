@@ -7,9 +7,12 @@ fi
 
 git clone --recursive git@github.com:rthiago/dotfiles.git ~/projects/dotfiles
 
+mkdir -p ~/.config/alacritty
+
 ln -s -f ~/projects/dotfiles/zshrc ~/.zshrc
 ln -s -f ~/projects/dotfiles/gitconfig ~/.gitconfig
 ln -s -f ~/projects/dotfiles/vimrc ~/.vimrc
 ln -s -f ~/projects/dotfiles/tmux.conf.local ~/.tmux.conf.local
 ln -s -f ~/projects/dotfiles/tmux/.tmux.conf ~/.tmux.conf
 ln -s -f ~/projects/dotfiles/oh-my-zsh ~/.oh-my-zsh
+ln -s -f ~/projects/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
