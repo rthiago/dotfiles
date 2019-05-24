@@ -16,3 +16,4 @@ ln -s -f ~/projects/dotfiles/tmux.conf.local ~/.tmux.conf.local
 ln -s -f ~/projects/dotfiles/tmux/.tmux.conf ~/.tmux.conf
 ln -s -f ~/projects/dotfiles/oh-my-zsh ~/.oh-my-zsh
 ln -s -f ~/projects/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
+ln -s -f ~/projects/dotfiles/polybar_config polybar
