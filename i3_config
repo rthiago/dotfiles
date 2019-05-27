@@ -177,5 +177,6 @@ focus_follows_mouse no
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id "xrandr --output eDP1 --off"
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Downloads/wallpapers/"
+exec_always --no-startup-id "killall compton ; compton --config ~/.config/compton.conf -b"
 
 bindsym Mod1+Control+l exec "i3lock-fancy -- scrot -z"
