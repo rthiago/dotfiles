@@ -180,3 +180,15 @@ exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Downloads/wallpaper
 exec_always --no-startup-id "killall compton ; compton --config ~/.config/compton.conf -b"
 
 bindsym Mod1+Control+l exec "i3lock-fancy -- scrot -z"
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +1% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -1% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
