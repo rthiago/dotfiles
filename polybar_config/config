@@ -57,7 +57,7 @@ font-2 = "Siji:pixelsize=11;1"
 modules-left = i3
 modules-center = songinfo
 ;modules-top = filesystem xbacklight alsa pulseaudio memory cpu wlan eth battery temperature date powermenu
-modules-right = cpu load memory wlan battery temperature alsa date
+modules-right = cpu load memory wlan battery temperature pulseaudio date
 
 tray-position = right
 tray-padding = 2
@@ -266,10 +266,10 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
+label-muted =  muted
 label-muted-foreground = #666
 
 bar-volume-width = 10
@@ -329,7 +329,7 @@ format-charging-underline = #ffb52a
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " BAT "
+format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
