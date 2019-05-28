@@ -425,6 +425,6 @@ type = custom/script
 label = %output:0:70%
 format-prefix = "♪ "
 
-exec = ~/Dropbox/Backup/gpmdp-info.sh
+exec = ~/projects/dotfiles/gpmdp-info.sh
 exec-if = ps aux|grep 'Google Play Music Desktop Player'|grep -v grep
 interval = 1
