@@ -32,8 +32,8 @@ let g:ctrlp_show_hidden = 1
 syntax on
 
 nnoremap <F2> :NERDTreeToggle<CR>
-"nnoremap <S-Tab> :bp<CR>
-"nnoremap <Tab> :bn<CR>
+nnoremap <silent> <F12> :bn<CR>
+nnoremap <silent> <S-F12> :bp<CR>
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
