@@ -57,7 +57,7 @@ font-2 = "Siji:pixelsize=11;1"
 modules-left = i3
 modules-center = songinfo
 ;modules-top = filesystem xbacklight alsa pulseaudio memory cpu wlan eth battery temperature date powermenu
-modules-right = cpu load memory wlan battery temperature pulseaudio date
+modules-right = cpu load memory wlan battery pulseaudio date
 
 tray-position = right
 tray-padding = 2
