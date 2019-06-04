@@ -1,6 +1,6 @@
 #!/usr/sbin/bash
 
-yay -S --needed --noconfirm ibus tlp
+yay -S --needed --noconfirm ibus tlp i3-battery-popup-git
 
 # Configure Ç on international keyboard (requires ibus package above)
 sudo tee -a /etc/environment <<-EOF
