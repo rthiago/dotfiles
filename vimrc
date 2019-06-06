@@ -25,8 +25,6 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'powerlineish'
 "let g:CSApprox_loaded = 1
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_map = '<c-p>'
 let g:ctrlp_show_hidden = 1
 
 syntax on
@@ -34,6 +32,7 @@ syntax on
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F12> :bn<CR>
 nnoremap <silent> <S-F12> :bp<CR>
+nnoremap <C-P> :FZF<CR>
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -44,7 +43,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'kien/ctrlp.vim'
 Plug 'morhetz/gruvbox'
 Plug 'Raimondi/delimitMate'
 Plug 'ryanoasis/vim-devicons'
@@ -55,6 +53,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/CSApprox'
 Plug 'Yggdroot/indentLine'
+Plug '/usr/sbin/fzf'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
