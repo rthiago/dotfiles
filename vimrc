@@ -33,6 +33,7 @@ nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F12> :bn<CR>
 nnoremap <silent> <S-F12> :bp<CR>
 nnoremap <C-P> :FZF<CR>
+nnoremap <BS> <C-^>
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
