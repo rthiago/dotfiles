@@ -30,9 +30,8 @@ set undoreload=10000
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'powerlineish'
-"let g:CSApprox_loaded = 1
-let g:ctrlp_show_hidden = 1
+let g:airline_theme = 'violet'
+let g:CSApprox_loaded = 1
 
 syntax on
 
@@ -52,7 +51,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'morhetz/gruvbox'
 Plug 'Raimondi/delimitMate'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
@@ -64,10 +62,15 @@ Plug 'vim-scripts/CSApprox'
 Plug 'Yggdroot/indentLine'
 Plug '/usr/sbin/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
 call plug#end()
 
-colorscheme gruvbox
+colorscheme challenger_deep
+
+if has('termguicolors')
+    set termguicolors
+endif
 
 if exists('&signcolumn')  " Vim 7.4.2201
     set signcolumn=yes
