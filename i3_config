@@ -169,7 +169,7 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 6
 gaps inner 10
 gaps outer 2
 focus_follows_mouse no
@@ -194,3 +194,11 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
+
+# class                 border  bground text    indicator child_border
+client.focused          #6700ED #6700ED #FFFFFF #280063   #6700ED
+client.focused_inactive #280063 #280063 #FFFFFF #280063   #280063
+client.unfocused        #280063 #280063 #888888 #280063   #280063
+client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+client.background       #FFFFFF
