@@ -9,6 +9,7 @@ git clone --recursive git@github.com:rthiago/dotfiles.git ~/projects/dotfiles
 
 mkdir -p ~/.config/alacritty
 mkdir -p ~/.config/i3
+mkdir -p ~/.vim/undo
 
 ln -s -f ~/projects/dotfiles/zshrc ~/.zshrc
 ln -s -f ~/projects/dotfiles/gitconfig ~/.gitconfig
