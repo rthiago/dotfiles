@@ -179,7 +179,7 @@ exec --no-startup-id "xrandr --output eDP1 --off"
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Downloads/wallpapers/"
 exec_always --no-startup-id "killall compton ; compton --config ~/.config/compton.conf -b"
 exec --no-startup-id ~/.dropbox-dist/dropboxd
-exec --no-startup-id i3-battery-popup -n
+exec --no-startup-id i3-battery-popup -n -D -L 20 -l 10 >> /var/log/i3-battery-popup
 
 bindsym Mod1+Control+l exec "i3lock-fancy -- scrot -z"
 
