@@ -133,6 +133,8 @@ exec --no-startup-id i3-battery-popup -n -D -L 20 -l 10 >> /var/log/i3-battery-p
 
 bindsym Mod1+Control+l exec "i3lock-fancy -- scrot -z"
 
+bindsym Print exec gnome-screenshot -i
+
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
