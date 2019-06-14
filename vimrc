@@ -35,12 +35,16 @@ let g:CSApprox_loaded = 1
 
 syntax on
 
+let g:mapleader = ','
+
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F12> :bn<CR>
 nnoremap <silent> <S-F12> :bp<CR>
 nnoremap <C-P> :FZF<CR>
 nnoremap <BS> <C-^>
 inoremap ;; <C-o>A;
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>r :Rg<CR>
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
