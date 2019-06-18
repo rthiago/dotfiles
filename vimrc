@@ -50,6 +50,11 @@ nnoremap <Leader>w :bd<CR>
 nnoremap <Leader>e :edit $MYVIMRC<CR>
 nnoremap <Leader>s :source $MYVIMRC<CR>
 nnoremap <Leader>i :History<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gl :Commits<CR>
+nnoremap <Leader>gbl :BCommits<CR>
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -72,6 +77,7 @@ Plug 'Yggdroot/indentLine'
 Plug '/usr/sbin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
