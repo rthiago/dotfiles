@@ -42,9 +42,14 @@ nnoremap <silent> <F12> :bn<CR>
 nnoremap <silent> <S-F12> :bp<CR>
 nnoremap <C-P> :FZF<CR>
 nnoremap <BS> <C-^>
-inoremap ;; <C-o>A;
+inoremap ;; <C-o>A;<ESC>
+inoremap :; <C-o>A;exit;<ESC>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>r :Rg<CR>
+nnoremap <Leader>w :bd<CR>
+nnoremap <Leader>e :edit $MYVIMRC<CR>
+nnoremap <Leader>s :source $MYVIMRC<CR>
+nnoremap <Leader>i :History<CR>
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
