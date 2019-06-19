@@ -78,6 +78,7 @@ Plug '/usr/sbin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
 
 call plug#end()
 
