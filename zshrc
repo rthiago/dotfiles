@@ -28,6 +28,7 @@ alias moon='curl wttr\.in/Moon'
 alias bc='bc -l'
 alias yaourt='yaourt --noconfirm'
 alias glg='git lg'
+alias vims='vim -S .session.vim'
 
 function cs() {
   cd $1 && clear && ll
