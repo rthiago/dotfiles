@@ -14,3 +14,5 @@
 	tool = meld
 [difftool]
 	prompt = false
+[core]
+	excludesfile = ~/.gitignore

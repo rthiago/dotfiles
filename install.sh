@@ -21,3 +21,4 @@ ln -s -f ~/projects/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
 ln -s -f ~/projects/dotfiles/polybar_config ~/.config/polybar
 ln -s -f ~/projects/dotfiles/i3_config ~/.config/i3/config
 ln -s -f ~/projects/dotfiles/compton.conf ~/.config/compton.conf
+ln -s -f ~/projects/dotfiles/gitignore ~/.gitignore
