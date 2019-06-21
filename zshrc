@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="thiago"
+ZSH_THEME=""
 # CASE_SENSITIVE="true"
 # ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
@@ -16,6 +16,12 @@ export GIT_EDITOR="vi"
 export VISUAL="vi"
 
 source $ZSH/oh-my-zsh.sh
+
+fpath=("$HOME/projects/dotfiles/zfunctions" $fpath)
+autoload -U promptinit; promptinit
+prompt pure
+prompt_newline='%666v'
+PROMPT=" $PROMPT"
 
 alias ls='ls --color=tty -N'
 alias psgrep='ps aux | grep -v grep | grep -i'
@@ -37,12 +43,6 @@ function cs() {
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 40% --reverse'
-
-function git_prompt_info() {
-  # Ignores the dirty prompt, making it faster on big repos.
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-}
 
 if [ -x /usr/bin/pkgfile ]; then
   command_not_found_handler() {
@@ -89,4 +89,5 @@ function timer(){
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]='fg=white'
 [ -f  /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/nvm/init-nvm.sh
+
+# source /usr/share/nvm/init-nvm.sh
