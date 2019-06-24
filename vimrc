@@ -83,8 +83,18 @@ Plug 'junegunn/fzf.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
+Plug 'hecal3/vim-leader-guide'
 
 call plug#end()
+
+call leaderGuide#register_prefix_descriptions(",", "g:lmap")
+nnoremap <silent> <leader> :<c-u>LeaderGuide ','<CR>
+vnoremap <silent> <leader> :<c-u>LeaderGuideVisual ','<CR>
+
+" Leader guide menus
+let g:lmap =  {}
+let g:lmap.g = { 'name' : 'Git' }
+let g:lmap.h = { 'name' : 'GitGutter' }
 
 colorscheme challenger_deep
 
