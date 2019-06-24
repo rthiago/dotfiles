@@ -124,6 +124,10 @@ gaps inner 10
 gaps outer 2
 focus_follows_mouse no
 
+for_window [class="Solaar"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="zoom"] floating enable
+
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id "xrandr --output eDP1 --off"
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Downloads/wallpapers/"
