@@ -59,6 +59,7 @@ nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :Commits<CR>
 nnoremap <Leader>gbl :BCommits<CR>
+nnoremap <Leader>gc :Gcommit<CR>
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
