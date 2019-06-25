@@ -40,8 +40,8 @@ syntax on
 let g:mapleader = ','
 
 nnoremap <F2> :NERDTreeToggle<CR>
-nnoremap <silent> <F12> :bn<CR>
-nnoremap <silent> <S-F12> :bp<CR>
+nnoremap <C-J> :bn<CR>
+nnoremap <C-K> :bp<CR>
 nnoremap <C-P> :FZF<CR>
 nnoremap <BS> <C-^>
 inoremap ;; <C-o>A;<ESC>
