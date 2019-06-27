@@ -34,6 +34,7 @@ let g:airline_theme = 'violet'
 let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#obsession#indicator_text = '[Tracking session]'
 let g:CSApprox_loaded = 1
+let g:indentLine_setConceal = 0
 
 syntax on
 
