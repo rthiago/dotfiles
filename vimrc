@@ -86,7 +86,6 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'hecal3/vim-leader-guide'
-Plug 'vim-vdebug/vdebug'
 
 call plug#end()
 
@@ -141,8 +140,3 @@ endif
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | GitGutterAll | endif
 autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed externally." | echohl None
 autocmd BufWritePost * GitGutterAll
-
-let g:vdebug_options = {'ide_key': 'docker'}
-let g:vdebug_options = {'break_on_open': 0}
-let g:vdebug_options = {'server': '172.25.0.12'}
-let g:vdebug_options = {'port': '9000'}
