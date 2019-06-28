@@ -35,6 +35,7 @@ let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#obsession#indicator_text = '[Tracking session]'
 let g:CSApprox_loaded = 1
 let g:indentLine_setConceal = 0
+let g:EasyMotion_smartcase = 1
 
 syntax on
 
@@ -61,6 +62,8 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :Commits<CR>
 nnoremap <Leader>gbl :BCommits<CR>
 nnoremap <Leader>gc :Gcommit<CR>
+nmap s <Plug>(easymotion-overwin-f)
+nmap S <Plug>(easymotion-overwin-f2)
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -86,6 +89,7 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'hecal3/vim-leader-guide'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 
