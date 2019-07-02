@@ -79,6 +79,8 @@ inherit = bar/monitor
 monitor = "eDP1"
 tray-position =
 
+modules-right = cpu load memory filesystem battery pulseaudio date
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:50:...%
