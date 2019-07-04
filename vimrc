@@ -34,7 +34,6 @@ let g:airline_theme = 'violet'
 let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#obsession#indicator_text = '[Tracking session]'
 let g:CSApprox_loaded = 1
-let g:indentLine_setConceal = 0
 let g:EasyMotion_smartcase = 1
 
 syntax on
@@ -82,7 +81,6 @@ Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/CSApprox'
-Plug 'Yggdroot/indentLine'
 Plug '/usr/sbin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
