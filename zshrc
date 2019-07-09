@@ -8,6 +8,7 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM="$HOME/projects/dotfiles/oh-my-zsh-custom"
 plugins=(git colored-man-pages)
+ZSH_DISABLE_COMPFIX="true"
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin"
 export GEM_HOME="$HOME/gems"
