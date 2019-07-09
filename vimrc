@@ -139,6 +139,6 @@ if v:version >= 700
     autocmd BufEnter * call AutoRestoreWinView()
 endif
 
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | GitGutterAll | endif
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | silent! checktime | GitGutterAll | endif
 autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed externally." | echohl None
 autocmd BufWritePost * GitGutterAll
