@@ -40,7 +40,7 @@ syntax on
 
 let g:mapleader = ','
 
-nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F2> :Explore<CR>
 nnoremap <C-J> :bn<CR>
 nnoremap <C-K> :bp<CR>
 nnoremap <C-P> :FZF<CR>
@@ -75,7 +75,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
 Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
