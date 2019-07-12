@@ -15,6 +15,8 @@ set showcmd
 set scrolloff=20
 set tabstop=4 shiftwidth=4 expandtab
 set hidden
+set completeopt-=preview
+set completeopt+=menu,menuone,noinsert,noselect
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -63,6 +65,9 @@ nnoremap <Leader>gbl :BCommits<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nmap s <Plug>(easymotion-overwin-f)
 nmap S <Plug>(easymotion-overwin-f2)
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -87,6 +92,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'hecal3/vim-leader-guide'
 Plug 'easymotion/vim-easymotion'
+Plug 'ajh17/VimCompletesMe'
 
 call plug#end()
 
