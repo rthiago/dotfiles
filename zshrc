@@ -7,7 +7,7 @@ ZSH_THEME=""
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM="$HOME/projects/dotfiles/oh-my-zsh-custom"
-plugins=(git colored-man-pages)
+plugins=(git colored-man-pages auto-notify)
 ZSH_DISABLE_COMPFIX="true"
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin"
@@ -17,6 +17,9 @@ export GIT_EDITOR="vi"
 export VISUAL="vi"
 
 source $ZSH/oh-my-zsh.sh
+
+export AUTO_NOTIFY_THRESHOLD=120
+AUTO_NOTIFY_IGNORE+=("docker" "tail" "docker-compose" "vi")
 
 fpath=("$HOME/projects/dotfiles/zfunctions" $fpath)
 autoload -U promptinit; promptinit
