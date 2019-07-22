@@ -47,6 +47,7 @@ function cs() {
 
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 export FZF_DEFAULT_OPTS='--height 40% --reverse'
 
 if [ -x /usr/bin/pkgfile ]; then
