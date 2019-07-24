@@ -12,7 +12,7 @@ set vb
 set clipboard=unnamedplus
 set relativenumber
 set showcmd
-set scrolloff=20
+set scrolloff=999
 set tabstop=4 shiftwidth=4 expandtab
 set hidden
 set completeopt-=preview
