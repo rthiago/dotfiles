@@ -15,6 +15,7 @@ export GEM_HOME="$HOME/gems"
 export EDITOR="vi"
 export GIT_EDITOR="vi"
 export VISUAL="vi"
+export NPM_TOKEN="adf8fab3-0b26-4adc-bff6-c5119abfe8d0"
 
 source $ZSH/oh-my-zsh.sh
 
