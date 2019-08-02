@@ -7,7 +7,7 @@ ZSH_THEME=""
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM="$HOME/projects/dotfiles/oh-my-zsh-custom"
-plugins=(git colored-man-pages auto-notify command-not-found)
+plugins=(git colored-man-pages auto-notify command-not-found fzf)
 ZSH_DISABLE_COMPFIX="true"
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin"
@@ -46,8 +46,6 @@ function cs() {
   cd $1 && clear && ll
 }
 
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 export FZF_DEFAULT_OPTS='--height 40% --reverse'
 
