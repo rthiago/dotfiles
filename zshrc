@@ -20,7 +20,7 @@ export NPM_TOKEN="adf8fab3-0b26-4adc-bff6-c5119abfe8d0"
 source $ZSH/oh-my-zsh.sh
 
 export AUTO_NOTIFY_THRESHOLD=120
-AUTO_NOTIFY_IGNORE+=("docker" "tail" "docker-compose" "vi" "ctop" "sudo" "git" "glg" "grip")
+AUTO_NOTIFY_IGNORE+=("docker" "tail" "docker-compose" "vi" "ctop" "sudo" "git" "glg" "grip" "zsh")
 
 fpath=("$HOME/projects/dotfiles/zfunctions" $fpath)
 autoload -U promptinit; promptinit
