@@ -7,7 +7,7 @@ ZSH_THEME=""
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM="$HOME/projects/dotfiles/oh-my-zsh-custom"
-plugins=(git colored-man-pages auto-notify)
+plugins=(git colored-man-pages auto-notify command-not-found)
 ZSH_DISABLE_COMPFIX="true"
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin"
@@ -50,22 +50,6 @@ function cs() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 export FZF_DEFAULT_OPTS='--height 40% --reverse'
-
-if [ -x /usr/bin/pkgfile ]; then
-  command_not_found_handler() {
-    local pkgs cmd="$1"
-
-    pkgs=(${(f)"$(pkgfile -b -v -- "$cmd" 2>/dev/null)"})
-    if [[ -n "$pkgs" ]]; then
-      printf '%s may be found in the following packages:\n' "$cmd"
-      printf '  %s\n' $pkgs[@]
-    else
-      printf '%s not found :(\n' "$cmd"
-    fi
-
-    return 127
-  }
-fi
 
 function countdown(){
   date1=$((`date +%s` + $1));
