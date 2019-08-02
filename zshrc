@@ -2,8 +2,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME=""
-# CASE_SENSITIVE="true"
-# ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM="$HOME/projects/dotfiles/oh-my-zsh-custom"
@@ -32,7 +30,6 @@ alias ls='ls --color=tty -N'
 alias psgrep='ps aux | grep -v grep | grep -i'
 alias a=ll
 alias ac='clear && ll'
-# alias cat='pygmentize -g'
 alias yellow='lynx -stdin -dump'
 alias weather='curl wttr\.in'
 alias moon='curl wttr\.in/Moon'
@@ -78,5 +75,3 @@ function timer(){
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]='fg=white'
 [ -f  /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# source /usr/share/nvm/init-nvm.sh
