@@ -29,6 +29,7 @@ vm.swappiness=1
 vm.vfs_cache_pressure=50
 vm.dirty_background_bytes=16777216
 vm.dirty_bytes=50331648
+vm.max_map_count=524288
 EOF
 
 # Handles magnet link to transmission
