@@ -16,3 +16,4 @@
 	prompt = false
 [core]
 	excludesfile = ~/.gitignore
+	trustctime = false
