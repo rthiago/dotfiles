@@ -111,6 +111,7 @@ Plug 'tpope/vim-obsession'
 Plug 'hecal3/vim-leader-guide'
 Plug 'easymotion/vim-easymotion'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
