@@ -95,7 +95,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-sensible'
