@@ -68,6 +68,8 @@ nmap S <Plug>(easymotion-overwin-f2)
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+nnoremap <Leader>t :terminal<CR>
+nnoremap <leader><space> :%s/\s\+$//<CR>
 
 " Coc.vim
 nmap <silent> gd <Plug>(coc-definition)
@@ -97,7 +99,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ryanoasis/vim-devicons'
-Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -107,21 +108,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
-Plug 'hecal3/vim-leader-guide'
-Plug 'easymotion/vim-easymotion'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomtom/tcomment_vim'
 
 call plug#end()
-
-call leaderGuide#register_prefix_descriptions(",", "g:lmap")
-nnoremap <silent> <leader> :<c-u>LeaderGuide ','<CR>
-vnoremap <silent> <leader> :<c-u>LeaderGuideVisual ','<CR>
-
-" Leader guide menus
-let g:lmap =  {}
-let g:lmap.g = { 'name' : 'Git' }
-let g:lmap.h = { 'name' : 'GitGutter' }
 
 colorscheme challenger_deep
 
