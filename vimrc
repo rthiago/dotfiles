@@ -54,7 +54,7 @@ nnoremap <Leader>r :Rg<CR>
 nnoremap <Leader>w :bd<CR>
 nnoremap <Leader>e :edit $MYVIMRC<CR>
 nnoremap <Leader>s :source $MYVIMRC<CR>
-nnoremap <Leader>i :History<CR>
+nnoremap <Leader>i :FZFMru<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
@@ -106,6 +106,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomtom/tcomment_vim'
+Plug 'pbogut/fzf-mru.vim'
 
 call plug#end()
 
