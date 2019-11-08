@@ -47,7 +47,6 @@ nnoremap <C-K> :bp<CR>
 nnoremap <Leader>p :FZF<CR>
 nnoremap <BS> <C-^>
 inoremap ;; <C-o>A;<ESC>
-inoremap :; <C-o>A;exit;<ESC>
 noremap H ^
 noremap L g_
 nnoremap <Leader>b :Buffers<CR>
