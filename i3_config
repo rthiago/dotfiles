@@ -144,7 +144,7 @@ for_window [class="Steam"] floating enable
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id "xrandr --output eDP1 --auto --output HDMI1 --auto --right-of eDP1"
-exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Downloads/wallpapers/"
+exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/"
 exec_always --no-startup-id "killall compton ; compton --config ~/.config/compton.conf -b"
 exec --no-startup-id ~/.dropbox-dist/dropboxd
 exec --no-startup-id i3-battery-popup -n -D -L 20 -l 10 >> /var/log/i3-battery-popup
