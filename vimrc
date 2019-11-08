@@ -36,7 +36,6 @@ let g:airline_theme = 'violet'
 let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#obsession#indicator_text = '[Tracking session]'
 let g:CSApprox_loaded = 1
-let g:EasyMotion_smartcase = 1
 
 syntax on
 
@@ -63,8 +62,6 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :Commits<CR>
 nnoremap <Leader>gbl :BCommits<CR>
 nnoremap <Leader>gc :Gcommit<CR>
-nmap s <Plug>(easymotion-overwin-f)
-nmap S <Plug>(easymotion-overwin-f2)
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
