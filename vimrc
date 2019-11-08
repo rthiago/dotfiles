@@ -35,7 +35,13 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'violet'
 let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#obsession#indicator_text = '[Tracking session]'
+
 let g:CSApprox_loaded = 1
+
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+let g:pear_tree_repeatable_expand = 0
 
 syntax on
 
@@ -94,7 +100,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'jiangmiao/auto-pairs'
+Plug 'tmsvg/pear-tree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
