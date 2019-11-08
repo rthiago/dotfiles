@@ -66,6 +66,7 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 nnoremap <Leader>t :terminal<CR>
 nnoremap <leader><space> :%s/\s\+$//<CR>
+noremap <silent> <F4> :let @+=expand("%:p")<CR>
 
 " Coc.vim
 nmap <silent> gd <Plug>(coc-definition)
