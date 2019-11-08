@@ -17,7 +17,7 @@ export VISUAL="vi"
 source $ZSH/oh-my-zsh.sh
 
 export AUTO_NOTIFY_THRESHOLD=120
-AUTO_NOTIFY_IGNORE+=("docker" "tail" "docker-compose" "vi" "ctop" "sudo" "git" "glg" "grip" "zsh" "fg" "bg")
+AUTO_NOTIFY_IGNORE+=("docker" "tail" "docker-compose" "vi" "ctop" "sudo" "git" "glg" "grip" "zsh" "fg" "bg", "bc")
 
 fpath=("$HOME/projects/dotfiles/zfunctions" $fpath)
 autoload -U promptinit; promptinit
