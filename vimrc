@@ -42,6 +42,7 @@ let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 let g:pear_tree_repeatable_expand = 0
+let g:pear_tree_map_special_keys = 0
 
 syntax on
 
@@ -67,7 +68,8 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :Commits<CR>
 nnoremap <Leader>gbl :BCommits<CR>
 nnoremap <Leader>gc :Gcommit<CR>
-inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 nnoremap <Leader>t :terminal<CR>
@@ -100,7 +102,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'tmsvg/pear-tree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
