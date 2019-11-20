@@ -150,7 +150,7 @@ exec --no-startup-id ~/.dropbox-dist/dropboxd
 exec --no-startup-id i3-battery-popup -n -D -L 20 -l 10 >> /var/log/i3-battery-popup
 exec --no-startup-id solaar
 
-bindsym Mod1+Control+l exec "i3lock-fancy -- scrot -z"
+bindsym Mod1+Control+l exec "i3lock-fancy"
 
 bindsym Print exec gnome-screenshot -i
 
