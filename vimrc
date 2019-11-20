@@ -75,6 +75,7 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 nnoremap <Leader>t :terminal<CR>
 nnoremap <leader><space> :%s/\s\+$//<CR>
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
+nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
 " Coc.vim
 nmap <silent> gd <Plug>(coc-definition)
@@ -92,6 +93,22 @@ function! s:show_documentation()
 endfunction
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+let g:coc_global_extensions = ['coc-phpls', 'coc-pairs', 'coc-yank', 'coc-snippets']
+
+" Coc-snippets tab completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
