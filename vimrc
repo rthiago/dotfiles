@@ -135,6 +135,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomtom/tcomment_vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'machakann/vim-sandwich'
 
 call plug#end()
 
