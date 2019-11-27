@@ -44,6 +44,8 @@ let g:pear_tree_smart_backspace = 1
 let g:pear_tree_repeatable_expand = 0
 let g:pear_tree_map_special_keys = 0
 
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+
 syntax on
 
 let g:mapleader = ' '
@@ -132,6 +134,7 @@ Plug 'tpope/vim-obsession'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomtom/tcomment_vim'
 Plug 'pbogut/fzf-mru.vim'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
