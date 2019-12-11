@@ -17,6 +17,7 @@ set tabstop=4 shiftwidth=4 expandtab
 set hidden
 set completeopt-=preview
 set completeopt+=menu,menuone,noinsert,noselect
+set synmaxcol=5000
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
