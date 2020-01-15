@@ -10,3 +10,6 @@
 [submodule "/home/thiago/projects/dotfiles/oh-my-zsh-custom/plugins/auto-notify"]
 	path = /home/thiago/projects/dotfiles/oh-my-zsh-custom/plugins/auto-notify
 	url = https://github.com/MichaelAquilina/zsh-auto-notify.git
+[submodule "oh-my-zsh-custom/plugins/auto-notify"]
+	path = oh-my-zsh-custom/plugins/auto-notify
+	url = https://github.com/MichaelAquilina/zsh-auto-notify.git
