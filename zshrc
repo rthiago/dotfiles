@@ -38,6 +38,7 @@ alias glg='git lg'
 alias vims='vim -S .session.vim'
 alias gvims='gvim -S .session.vim'
 alias open='xdg-open'
+alias cat='ccat'
 
 function cs() {
   cd $1 && clear && ll
