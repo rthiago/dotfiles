@@ -26,7 +26,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/monitor]
-monitor = "HDMI1"
+monitor = "DP-0"
 width = 100%
 height = 30
 ;offset-x = 1%
@@ -106,8 +106,7 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
-mount-1 = /mnt/bigssd
-mount-2 = /mnt/moar
+mount-1 = /mnt/moar
 
 label-mounted = [%{F#0a81f5}%mountpoint%%{F-} %percentage_used%%]
 ;label-mounted = used %percentage_used%%
@@ -426,7 +425,7 @@ margin-bottom = 5
 [module/songinfo]
 type = custom/script
 
-label = %output:0:70%
+label = %output:0:90%
 format-prefix = "♪ "
 
 exec = ~/projects/dotfiles/gpmdp-info.sh
