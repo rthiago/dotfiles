@@ -1,11 +1,6 @@
 #!/usr/sbin/bash
 
-yay -S --needed --noconfirm ibus tlp i3-battery-popup-git
-
-# Configure Ç on international keyboard (requires ibus package above)
-sudo tee -a /etc/environment <<-EOF
-GTK_IM_MODULE=cedilla
-EOF
+yay -S --needed --noconfirm tlp i3-battery-popup-git
 
 sudo gpasswd -a $USER bumblebee
 
