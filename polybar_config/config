@@ -57,7 +57,7 @@ font-2 = "Siji:pixelsize=11;1"
 modules-left = i3
 modules-center = songinfo
 ;modules-top = filesystem xbacklight alsa pulseaudio memory cpu wlan eth battery temperature date powermenu
-modules-right = cpu load memory filesystem eth battery pulseaudio date
+modules-right = cpu load memory filesystem eth wlan battery pulseaudio date
 
 tray-position = right
 tray-padding = 2
@@ -213,7 +213,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp5s0
+interface = wlp4s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -235,7 +235,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp4s0
+interface = enp5s0
 interval = 3.0
 
 format-connected-underline = #55aa55
