@@ -193,7 +193,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
 
 # class                 border  bground text    indicator child_border
-client.focused          #6700ED #6700ED #FFFFFF #280063   #6700ED
+client.focused          #9D65FF #9D65FF #FFFFFF #280063   #9D65FF
 client.focused_inactive #280063 #280063 #FFFFFF #280063   #280063
 client.unfocused        #280063 #280063 #888888 #280063   #280063
 client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
