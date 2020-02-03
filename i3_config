@@ -174,7 +174,7 @@ exec --no-startup-id pamac-tray
 # exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 10 -locker i3lock-fancy
 
-bindsym Mod1+Control+l exec "i3lock-fancy"
+bindsym Mod1+Control+l exec "i3lock-fancy-rapid 6 4"
 
 bindsym Print exec gnome-screenshot -i
 
