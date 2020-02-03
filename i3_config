@@ -168,21 +168,22 @@ exec_always --no-startup-id "killall picom ; picom --config ~/.config/picom.conf
 # exec --no-startup-id ~/.dropbox-dist/dropboxd
 # exec --no-startup-id i3-battery-popup -n -D -L 20 -l 10 >> /var/log/i3-battery-popup
 exec --no-startup-id solaar
-exec --no-startup-id volumeicon
+# exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
-exec --no-startup-id pamac-tray
-# exec --no-startup-id blueman-applet
+# exec --no-startup-id pamac-tray
+exec --no-startup-id blueman-applet
 # exec --no-startup-id start_conky_maia
-exec --no-startup-id xautolock -time 10 -locker i3lock-fancy
+exec --no-startup-id xautolock -time 20 -locker "i3lock-fancy-rapid 6 4"
+exec --no-startup-id xiccd
 
 bindsym Mod1+Control+l exec "i3lock-fancy-rapid 6 4"
 
 bindsym Print exec gnome-screenshot -i
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle # mute sound
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
