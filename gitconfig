@@ -8,8 +8,8 @@
 	dt = difftool
 	dc = diff --cached
 [pager]
-	diff = diff-so-fancy | less --tabs=4 -RFX
-	show = diff-so-fancy | less --tabs=4 -RFX
+	diff = diff-so-fancy | less --tabs=4 -RF
+	show = diff-so-fancy | less --tabs=4 -RF
 [merge]
 	tool = meld
 [difftool]
