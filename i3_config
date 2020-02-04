@@ -156,24 +156,17 @@ for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
-# for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Google Play Music Desktop Player"] floating enable
 for_window [class="Blueman-manager"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-#exec --no-startup-id "xrandr --output eDP1 --auto --output HDMI1 --auto --right-of eDP1"
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/"
 exec_always --no-startup-id "killall picom ; picom --config ~/.config/picom.conf -b"
-# exec --no-startup-id ~/.dropbox-dist/dropboxd
-# exec --no-startup-id i3-battery-popup -n -D -L 20 -l 10 >> /var/log/i3-battery-popup
 exec --no-startup-id solaar
-# exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
-# exec --no-startup-id pamac-tray
 exec --no-startup-id blueman-applet
-# exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 20 -locker "i3lock-fancy-rapid 6 4"
 exec --no-startup-id xiccd
 
