@@ -159,6 +159,8 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="Google Play Music Desktop Player"] floating enable
 for_window [class="Blueman-manager"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Snapper-gui"] floating enable
+for_window [class="uhk-agent"] floating enable
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
