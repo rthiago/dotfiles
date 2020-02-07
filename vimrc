@@ -57,7 +57,6 @@ nnoremap <C-K> :bp<CR>
 nnoremap <Leader>p :FZF<CR>
 nnoremap <BS> <C-^>
 inoremap ;; <C-o>A;<ESC>
-nnoremap ;; A;<ESC>
 noremap H ^
 noremap L g_
 nnoremap <Leader>b :Buffers<CR>
