@@ -78,7 +78,8 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 nnoremap <Leader>t :terminal<CR>
 nnoremap <leader><space> :%s/\s\+$//<CR>
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
-nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
+vnoremap <silent> <leader>y dh:<C-u>CocList -A --normal yank<cr>
 
 " Coc.vim
 nmap <silent> gd <Plug>(coc-definition)
