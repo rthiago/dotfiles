@@ -191,3 +191,5 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
+
+let g:fzf_layout = { 'window': {'width': 1.0, 'height': 0.4, 'yoffset': 1.0, 'border': 'sharp'} }
