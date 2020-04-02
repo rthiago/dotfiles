@@ -13,6 +13,7 @@ export GEM_HOME="$HOME/gems"
 export EDITOR="vi"
 export GIT_EDITOR="vi"
 export VISUAL="vi"
+export TERM=xterm-256color
 
 source $ZSH/oh-my-zsh.sh
 
