@@ -82,6 +82,15 @@ noremap <silent> <F4> :let @+=expand("%:p")<CR>
 nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
 vnoremap <silent> <leader>y dh:<C-u>CocList -A --normal yank<cr>
 
+" Map s, S and ss just like d, D and dd but without overwriting the unnamed
+" register
+nnoremap s "_d
+vnoremap s "_d
+nnoremap S "_d$
+vnoremap S "_d$
+nnoremap ss ^"_d$
+vnoremap ss ^"_d$
+
 " Coc.vim
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
