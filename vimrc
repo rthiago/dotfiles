@@ -203,3 +203,10 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 let g:fzf_layout = { 'window': {'width': 1.0, 'height': 0.4, 'yoffset': 1.0, 'border': 'sharp'} }
+
+" Turn off relative numbers on insert mode.
+augroup every
+  autocmd!
+  au InsertEnter * set norelativenumber
+  au InsertLeave * set relativenumber
+augroup END
