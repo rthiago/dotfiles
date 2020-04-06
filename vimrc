@@ -1,6 +1,7 @@
 set background=dark
 set hlsearch
 set ignorecase
+set smartcase
 set guifont=Hack\ Regular\ 13
 set mouse=a
 set noswapfile
