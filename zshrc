@@ -34,12 +34,14 @@ alias yellow='lynx -stdin -dump'
 alias weather='curl wttr\.in'
 alias moon='curl wttr\.in/Moon'
 alias bc='bc -l'
-alias yaourt='yaourt --noconfirm'
 alias glg='git lg'
 alias vims='vim -S .session.vim'
 alias gvims='gvim -S .session.vim'
 alias open='xdg-open'
 alias cat='bat --paging=never'
+alias dd='dd status=progress'
+alias free='free -h'
+alias df='df -h'
 
 function cs() {
   cd $1 && clear && ll
