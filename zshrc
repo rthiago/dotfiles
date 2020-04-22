@@ -42,6 +42,7 @@ alias cat='bat --paging=never'
 alias dd='dd status=progress'
 alias free='free -h'
 alias df='df -h'
+alias du='du -h'
 
 function cs() {
   cd $1 && clear && ll
