@@ -18,7 +18,7 @@ export TERM=xterm-256color
 source $ZSH/oh-my-zsh.sh
 
 export AUTO_NOTIFY_THRESHOLD=120
-AUTO_NOTIFY_IGNORE+=("docker" "tail" "docker-compose" "vi" "ctop" "sudo" "git" "glg" "grip" "zsh" "fg" "bg", "bc", "nvtop")
+AUTO_NOTIFY_IGNORE+=("docker" "tail" "docker-compose" "vi" "ctop" "sudo" "git" "glg" "grip" "zsh" "fg" "bg", "bc", "nvtop", "glances")
 
 fpath=("$HOME/projects/dotfiles/zfunctions" $fpath)
 autoload -U promptinit; promptinit
