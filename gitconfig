@@ -17,3 +17,5 @@
 [core]
 	excludesfile = ~/.gitignore
 	trustctime = false
+[pull]
+	rebase = false
