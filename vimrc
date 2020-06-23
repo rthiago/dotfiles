@@ -205,7 +205,7 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
 
-" let g:fzf_layout = { 'window': {'width': 1.0, 'height': 0.4, 'yoffset': 1.0, 'border': 'sharp'} }
+let g:fzf_layout = { 'window': {'width': 1.0, 'height': 0.4, 'yoffset': 1.0, 'border': 'sharp'} }
 
 " Turn off relative numbers on insert mode.
 augroup every
