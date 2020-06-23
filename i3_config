@@ -166,7 +166,7 @@ for_window [class="uhk-agent"] floating enable
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/"
-exec_always --no-startup-id "killall picom ; picom --config ~/.config/picom.conf -b --experimental-backends"
+exec_always --no-startup-id "killall picom; sleep 2 ; picom --config ~/.config/picom.conf -b --experimental-backends --log-level debug --log-file /var/log/picom.log"
 exec --no-startup-id solaar
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
