@@ -82,6 +82,9 @@ noremap <silent> <F4> :let @+=expand("%:p")<CR>
 nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
 vnoremap <silent> <leader>y dh:<C-u>CocList -A --normal yank<cr>
 
+nnoremap n nzz
+nnoremap N Nzz
+
 " Map s, S and ss just like d, D and dd but without overwriting the unnamed
 " register
 nnoremap s "_d
