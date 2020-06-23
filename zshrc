@@ -49,7 +49,7 @@ function cs() {
   cd $1 && clear && ll
 }
 
-export FZF_DEFAULT_COMMAND='fd --hidden --no-ignore --type file --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --hidden --no-ignore --type file --follow --exclude .git --exclude Games --exclude .wine --exclude .vim --exclude .steam --exclude .snapshots --exclude .cache'
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type directory --type symlink"
 export FZF_CTRL_T_OPTS="
