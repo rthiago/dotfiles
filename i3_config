@@ -18,7 +18,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec rofi -show run -theme solarized_alternate -font "hack 14"
+bindsym $mod+d exec rofi -show drun -theme solarized_alternate -font "hack 18"
 
 # change focus
 bindsym $mod+h focus left
