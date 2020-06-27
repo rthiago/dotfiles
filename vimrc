@@ -63,7 +63,7 @@ noremap L g_
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>r :Rg<CR>
 nnoremap <Leader>w :bd<CR>
-nnoremap <Leader>e :edit $MYVIMRC<CR>
+nnoremap <Leader>e :edit ~/.vimrc<CR>
 nnoremap <Leader>s :source $MYVIMRC<CR>
 nnoremap <Leader>i :FZFMru<CR>
 nnoremap <Leader>gs :Gstatus<CR>
