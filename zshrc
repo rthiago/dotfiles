@@ -44,6 +44,7 @@ alias dd='dd status=progress'
 alias free='free -h'
 alias df='df -h'
 alias du='du -h'
+alias vnstat='vnstat -i enp5s0'
 
 function cs() {
   cd $1 && clear && ll
