@@ -95,10 +95,10 @@ nnoremap ss ^"_d$
 vnoremap ss ^"_d$
 
 " Coc.vim
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition) zz
+nmap <silent> gy <Plug>(coc-type-definition) zz
+nmap <silent> gi <Plug>(coc-implementation) zz
+nmap <silent> gr <Plug>(coc-references) zz
 nmap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
