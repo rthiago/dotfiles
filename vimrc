@@ -194,7 +194,7 @@ if v:version >= 700
 endif
 
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | silent! checktime | GitGutterAll | endif
-autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed externally." | echohl None
+" autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed externally." | echohl None
 autocmd BufWritePost * GitGutterAll
 autocmd BufReadPost .env* set syntax=sh
 
