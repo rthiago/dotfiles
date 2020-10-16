@@ -132,6 +132,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+bindsym $mod+n exec "dunstctl close-all"
+
 for_window [class="^.*"] border pixel 3
 gaps inner 10
 gaps outer 0
