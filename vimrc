@@ -31,7 +31,7 @@ set undodir=$HOME/.vim/undo
 set undolevels=1000
 set undoreload=10000
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'violet'
@@ -53,8 +53,8 @@ syntax on
 let g:mapleader = ' '
 
 nnoremap <F2> :Explore<CR>
-nnoremap <C-J> :bn<CR>
-nnoremap <C-K> :bp<CR>
+" nnoremap <C-J> :bn<CR>
+" nnoremap <C-K> :bp<CR>
 nnoremap <Leader>p :FZF<CR>
 nnoremap <BS> <C-^>
 inoremap ;; <C-o>A;<ESC>
@@ -62,7 +62,7 @@ noremap H ^
 noremap L g_
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>r :Rg<CR>
-nnoremap <Leader>w :bd<CR>
+" nnoremap <Leader>w :bd<CR>
 nnoremap <Leader>e :edit ~/.vimrc<CR>
 nnoremap <Leader>s :source $MYVIMRC<CR>
 nnoremap <Leader>i :FZFMru<CR>
@@ -110,8 +110,7 @@ function! s:show_documentation()
 endfunction
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-let g:coc_global_extensions = ['coc-phpls', 'coc-pairs', 'coc-yank', 'coc-snippets']
+let g:coc_global_extensions = ['coc-phpls', 'coc-pairs', 'coc-yank', 'coc-snippets', 'coc-tsserver']
 
 " Coc-snippets tab completion
 inoremap <silent><expr> <TAB>
@@ -126,6 +125,15 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" vem-tabline
+nmap <leader>k <Plug>vem_move_buffer_left-
+nmap <leader>j <Plug>vem_move_buffer_right-
+nmap <C-J> <Plug>vem_next_buffer-
+nmap <C-K> <Plug>vem_prev_buffer-
+nmap <leader>w <Plug>vem_delete_buffer-
+
+let g:vem_tabline_show = 2
 
 " Vim plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -151,6 +159,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'machakann/vim-sandwich'
+Plug 'pacha/vem-tabline'
 
 call plug#end()
 
