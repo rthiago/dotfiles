@@ -160,6 +160,7 @@ Plug 'pbogut/fzf-mru.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'machakann/vim-sandwich'
 Plug 'pacha/vem-tabline'
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
