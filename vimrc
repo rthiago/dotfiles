@@ -19,6 +19,8 @@ set hidden
 set completeopt-=preview
 set completeopt+=menu,menuone,noinsert,noselect
 set synmaxcol=5000
+set cursorline
+set nolist
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
