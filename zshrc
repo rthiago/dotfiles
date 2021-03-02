@@ -5,10 +5,10 @@ ZSH_THEME=""
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM="$HOME/projects/dotfiles/oh-my-zsh-custom"
-plugins=(git colored-man-pages auto-notify command-not-found fzf sudo)
+plugins=(git colored-man-pages auto-notify command-not-found fzf sudo poetry)
 ZSH_DISABLE_COMPFIX="true"
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin:$HOME/.local/bin"
 export GEM_HOME="$HOME/gems"
 export EDITOR="vi"
 export GIT_EDITOR="vi"
@@ -48,7 +48,7 @@ alias du='du -h'
 alias vnstat='vnstat -i enp5s0'
 
 function cs() {
-  cd $1 && clear && ll
+    cd $1 && clear && ll
 }
 
 export FZF_DEFAULT_COMMAND='fd --hidden --no-ignore --type file --follow --exclude .git --exclude Games --exclude .wine --exclude .vim --exclude .steam --exclude .snapshots --exclude .cache'
@@ -74,27 +74,27 @@ export FZF_DEFAULT_OPTS="
 "
 
 function countdown(){
-  date1=$((`date +%s` + $1));
-  while [ "$date1" -ge `date +%s` ]; do
-    echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
-    sleep 0.1
-  done
+    date1=$((`date +%s` + $1));
+    while [ "$date1" -ge `date +%s` ]; do
+        echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+        sleep 0.1
+    done
 }
 
 function stopwatch(){
-  date1=`date +%s`;
-  while true; do
-    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
-    sleep 0.1
-  done
+    date1=`date +%s`;
+    while true; do
+        echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
+        sleep 0.1
+    done
 }
 
 function timer(){
-  if [[ $1 ]]; then
-    countdown $1
-  else
-    stopwatch
-  fi
+    if [[ $1 ]]; then
+        countdown $1
+    else
+        stopwatch
+    fi
 }
 
 [ -f /home/thiago/.unlock_keys ] && source /home/thiago/.unlock_keys
