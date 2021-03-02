@@ -163,6 +163,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'machakann/vim-sandwich'
 Plug 'pacha/vem-tabline'
 Plug 'leafgarland/typescript-vim'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
