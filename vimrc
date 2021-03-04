@@ -50,6 +50,9 @@ let g:pear_tree_map_special_keys = 0
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
+" This is for vim-python/python-syntax plugin
+let g:python_highlight_all = 1
+
 syntax on
 
 let g:mapleader = ' '
@@ -112,7 +115,7 @@ function! s:show_documentation()
 endfunction
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
-let g:coc_global_extensions = ['coc-phpls', 'coc-pairs', 'coc-yank', 'coc-snippets', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-phpls', 'coc-pairs', 'coc-yank', 'coc-snippets', 'coc-tsserver', 'coc-pyright']
 
 " Coc-snippets tab completion
 inoremap <silent><expr> <TAB>
@@ -164,6 +167,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'pacha/vem-tabline'
 Plug 'leafgarland/typescript-vim'
 Plug 'cespare/vim-toml'
+Plug 'vim-python/python-syntax'
 
 call plug#end()
 
@@ -213,7 +217,8 @@ autocmd BufReadPost .env* set syntax=sh
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --glob !poetry.lock --no-heading --color=always --smart-case '
+  \   .shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
