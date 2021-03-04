@@ -106,3 +106,6 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=white'
 source /usr/share/nvm/init-nvm.sh
 
 [ -f /home/thiago/.local_keys ] && source /home/thiago/.local_keys
+
+# Invoke completion
+source $ZSH_CUSTOM/scripts/invoke/invoke_completion
