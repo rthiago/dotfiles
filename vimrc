@@ -166,16 +166,15 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'machakann/vim-sandwich'
 Plug 'pacha/vem-tabline'
 Plug 'leafgarland/typescript-vim'
-Plug 'cespare/vim-toml'
-Plug 'vim-python/python-syntax'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
-
-colorscheme challenger_deep
 
 if has('termguicolors')
     set termguicolors
 endif
+
+colorscheme challenger_deep
 
 if exists('&signcolumn')  " Vim 7.4.2201
     set signcolumn=yes
