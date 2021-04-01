@@ -177,6 +177,10 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id xiccd
 exec --no-startup-id /usr/bin/notify-send 'Welcome' -t 1 # Invisible notification (time = 1 millisecond) just to start dunst
 
+exec --no-startup-id autossh -M 0 -f -T -N sb-mysql-dev-tunnel
+exec --no-startup-id autossh -M 0 -f -T -N sb-mysql-staging-tunnel
+exec --no-startup-id autossh -M 0 -f -T -N sb-mysql-production-tunnel
+
 bindsym Mod1+Control+l exec "i3lock-fancy-rapid 6 4"
 
 bindsym Print exec gnome-screenshot -i
