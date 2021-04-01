@@ -15,6 +15,7 @@ export GIT_EDITOR="vi"
 export VISUAL="vi"
 export TERM=xterm-256color
 export XZ_DEFAULTS=--threads=0
+export PYTHONBREAKPOINT="pudb.set_trace"
 
 source $ZSH/oh-my-zsh.sh
 
