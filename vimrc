@@ -36,9 +36,11 @@ set undoreload=10000
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'violet'
+let g:airline_theme = 'gruvbox'
 let g:airline#extensions#obsession#enabled = 0
 let g:airline#extensions#obsession#indicator_text = '[Tracking session]'
+
+let g:gruvbox_contrast_dark = 'hard'
 
 let g:CSApprox_loaded = 1
 
@@ -86,6 +88,9 @@ nnoremap <leader><space> :%s/\s\+$//<CR>
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
 nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
 vnoremap <silent> <leader>y dh:<C-u>CocList -A --normal yank<cr>
+
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
 
 nnoremap n nzz
 nnoremap N Nzz
@@ -156,7 +161,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/CSApprox'
 Plug '/usr/sbin/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -167,6 +171,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'pacha/vem-tabline'
 Plug 'leafgarland/typescript-vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -174,7 +179,8 @@ if has('termguicolors')
     set termguicolors
 endif
 
-colorscheme challenger_deep
+colorscheme gruvbox
+
 
 if exists('&signcolumn')  " Vim 7.4.2201
     set signcolumn=yes
