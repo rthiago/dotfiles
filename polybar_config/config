@@ -29,12 +29,12 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = hack:pixelsize=12;1
-font-1 = Font Awesome 5 Free Solid:size=13;2
+font-0 = hack:pixelsize=11;1
+font-1 = Font Awesome 5 Free Solid:size=12;2
 
 modules-left = i3
-modules-center = songinfo
-modules-right = cpu load temperature memory filesystem eth wlan battery pulseaudio date
+; modules-center = songinfo
+modules-right = cpu load temperature memory filesystem eth wlan battery pulseaudio weather date
 
 tray-position = right
 tray-padding = 2
@@ -217,3 +217,10 @@ format-prefix = "♪ "
 exec = ~/projects/dotfiles/gpmdp-info.sh
 exec-if = ps aux|grep 'Google Play Music Desktop Player'|grep -v grep
 interval = 1
+
+[module/weather]
+type = custom/script
+label = %output:0:90%
+exec = ~/projects/dotfiles/weather_info.sh
+interval = 300
+format-underline = #458588
