@@ -74,7 +74,7 @@ nnoremap <Leader>e :edit ~/.vimrc<CR>
 nnoremap <Leader>s :source $MYVIMRC<CR>
 nnoremap <Leader>i :FZFMru<CR>
 nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gb :Git blame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :Commits<CR>
 nnoremap <Leader>gbl :BCommits<CR>
@@ -92,17 +92,10 @@ vnoremap <silent> <leader>y dh:<C-u>CocList -A --normal yank<cr>
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>
 
+nnoremap <leader>uu :CocUpdate<CR> :PlugUpdate<CR> :PlugUpgrade<CR>
+
 nnoremap n nzz
 nnoremap N Nzz
-
-" Map s, S and ss just like d, D and dd but without overwriting the unnamed
-" register
-nnoremap s "_d
-vnoremap s "_d
-nnoremap S "_d$
-vnoremap S "_d$
-nnoremap ss ^"_d$
-vnoremap ss ^"_d$
 
 " Coc.vim
 nmap <silent> gd <Plug>(coc-definition) zz
@@ -110,6 +103,11 @@ nmap <silent> gy <Plug>(coc-type-definition) zz
 nmap <silent> gi <Plug>(coc-implementation) zz
 nmap <silent> gr <Plug>(coc-references) zz
 nmap <silent> K :call <SID>show_documentation()<CR>
+
+nmap <leader>n <Plug>(coc-rename)
+nnoremap <silent><nowait> <space>q :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>O :<C-u>CocList -I symbols<cr>
 
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
