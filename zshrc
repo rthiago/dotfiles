@@ -110,3 +110,7 @@ source /usr/share/nvm/init-nvm.sh
 
 # Invoke completion
 source $ZSH_CUSTOM/scripts/invoke/invoke_completion
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
