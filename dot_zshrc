@@ -5,7 +5,7 @@ ZSH_THEME=""
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM="$HOME/projects/dotfiles/oh-my-zsh-custom"
-plugins=(git colored-man-pages command-not-found fzf sudo poetry)
+plugins=(git colored-man-pages auto-notify command-not-found fzf sudo poetry)
 ZSH_DISABLE_COMPFIX="true"
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin:$HOME/.local/bin"
