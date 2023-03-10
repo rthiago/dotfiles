@@ -95,14 +95,14 @@ function timer(){
     fi
 }
 
-[ -f /home/thiago/.unlock_keys ] && source /home/thiago/.unlock_keys
+[ -f $HOME/scripts/unlock_keys ] && source $HOME/scripts/unlock_keys
 
 source /usr/share/nvm/init-nvm.sh
 
-[ -f /home/thiago/.local_keys ] && source /home/thiago/.local_keys
+[ -f $HOME/scripts/local_keys ] && source $HOME/scripts/local_keys
 
 # Invoke completion
-source /home/thiago/scripts/invoke_completion
+source $HOME/scripts/invoke_completion
 
 autoload -Uz compinit
 zstyle ':completion:*' menu select
