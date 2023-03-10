@@ -1,0 +1,23 @@
+[user]
+	email = rthiago@gmail.com
+	name = Thiago Silva
+[alias]
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	pr = pull --rebase
+	st = status
+	dt = difftool
+	dc = diff --cached
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RF
+	show = diff-so-fancy | less --tabs=4 -RF
+[merge]
+	tool = meld
+[difftool]
+	prompt = false
+[core]
+	excludesfile = ~/.gitignore
+	trustctime = false
+[pull]
+	rebase = false
+[push]
+	autoSetupRemote = true

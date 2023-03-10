@@ -1,0 +1,238 @@
+set background=dark
+set hlsearch
+set ignorecase
+set smartcase
+set guifont=Hack\ Regular\ 13
+set mouse=a
+set noswapfile
+set number
+set t_Co=256
+set title
+set updatetime=100
+set vb
+set clipboard=unnamedplus
+set relativenumber
+set showcmd
+set scrolloff=4
+set tabstop=4 shiftwidth=4 expandtab
+set hidden
+set completeopt-=preview
+set completeopt+=menu,menuone,noinsert,noselect
+set synmaxcol=5000
+set cursorline
+set nolist
+set nowrap
+
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+" Persistent undo
+set undofile
+set undodir=$HOME/.vim/undo
+set undolevels=1000
+set undoreload=10000
+
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'gruvbox'
+let g:airline#extensions#obsession#enabled = 0
+let g:airline#extensions#obsession#indicator_text = '[Tracking session]'
+
+let g:gruvbox_contrast_dark = 'hard'
+
+let g:CSApprox_loaded = 1
+
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+let g:pear_tree_repeatable_expand = 0
+let g:pear_tree_map_special_keys = 0
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+
+" This is for vim-python/python-syntax plugin
+let g:python_highlight_all = 1
+
+syntax on
+
+let g:mapleader = ' '
+
+nnoremap <F2> :Explore<CR>
+" nnoremap <C-J> :bn<CR>
+" nnoremap <C-K> :bp<CR>
+nnoremap <Leader>p :FZF<CR>
+nnoremap <BS> <C-^>
+inoremap ;; <C-o>A;<ESC>
+noremap H ^
+noremap L g_
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>r :Rg<CR>
+" nnoremap <Leader>w :bd<CR>
+nnoremap <Leader>e :edit ~/.vimrc<CR>
+nnoremap <Leader>s :source $MYVIMRC<CR>
+nnoremap <Leader>i :FZFMru<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gb :Git blame<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gl :Commits<CR>
+nnoremap <Leader>gbl :BCommits<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+nnoremap <Leader>t :terminal<CR>
+nnoremap <leader><space> :%s/\s\+$//<CR>
+noremap <silent> <F4> :let @+=expand("%:p")<CR>
+nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
+vnoremap <silent> <leader>y dh:<C-u>CocList -A --normal yank<cr>
+
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+
+nnoremap <leader>uu :CocUpdate<CR> :PlugUpdate<CR> :PlugUpgrade<CR>
+
+nnoremap n nzz
+nnoremap N Nzz
+
+" Coc.vim
+nmap <silent> gd <Plug>(coc-definition) zz
+nmap <silent> gy <Plug>(coc-type-definition) zz
+nmap <silent> gi <Plug>(coc-implementation) zz
+nmap <silent> gr <Plug>(coc-references) zz
+nmap <silent> K :call <SID>show_documentation()<CR>
+
+nmap <leader>n <Plug>(coc-rename)
+nnoremap <silent><nowait> <space>q :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>O :<C-u>CocList -I symbols<cr>
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+let g:coc_global_extensions = ['coc-phpls', 'coc-pairs', 'coc-yank', 'coc-snippets', 'coc-tsserver', 'coc-pyright']
+
+" Coc-snippets tab completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" vem-tabline
+nmap <leader>k <Plug>vem_move_buffer_left-
+nmap <leader>j <Plug>vem_move_buffer_right-
+nmap <C-J> <Plug>vem_next_buffer-
+nmap <C-K> <Plug>vem_prev_buffer-
+nmap <leader>w <Plug>vem_delete_buffer-
+
+let g:vem_tabline_show = 2
+
+" Vim plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-sensible'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/CSApprox'
+Plug '/usr/sbin/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tomtom/tcomment_vim'
+Plug 'pbogut/fzf-mru.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'machakann/vim-sandwich'
+Plug 'pacha/vem-tabline'
+Plug 'sheerun/vim-polyglot'
+Plug 'morhetz/gruvbox'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'yasuhiroki/circleci.vim'
+
+call plug#end()
+
+if has('termguicolors')
+    set termguicolors
+endif
+
+colorscheme gruvbox
+
+
+if exists('&signcolumn')  " Vim 7.4.2201
+    set signcolumn=yes
+else
+    let g:gitgutter_sign_column_always = 1
+endif
+
+" Save current view settings on a per-window, per-buffer basis.
+function! AutoSaveWinView()
+    if !exists("w:SavedBufView")
+        let w:SavedBufView = {}
+    endif
+    let w:SavedBufView[bufnr("%")] = winsaveview()
+endfunction
+
+" Restore current view settings.
+function! AutoRestoreWinView()
+    let buf = bufnr("%")
+    if exists("w:SavedBufView") && has_key(w:SavedBufView, buf)
+        let v = winsaveview()
+        let atStartOfFile = v.lnum == 1 && v.col == 0
+        if atStartOfFile && !&diff
+            call winrestview(w:SavedBufView[buf])
+        endif
+        unlet w:SavedBufView[buf]
+    endif
+endfunction
+
+" When switching buffers, preserve window view.
+if v:version >= 700
+    autocmd BufLeave * call AutoSaveWinView()
+    autocmd BufEnter * call AutoRestoreWinView()
+endif
+
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | silent! checktime | GitGutterAll | endif
+" autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed externally." | echohl None
+autocmd BufWritePost * GitGutterAll
+autocmd BufReadPost .env* set syntax=sh
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --glob !poetry.lock --no-heading --color=always --smart-case '
+  \   .shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \   <bang>0)
+
+let g:fzf_layout = { 'window': {'width': 1.0, 'height': 0.4, 'yoffset': 1.0, 'border': 'sharp'} }
+
+" Turn off relative numbers on insert mode.
+augroup every
+  autocmd!
+  au InsertEnter * set norelativenumber
+  au InsertLeave * set relativenumber
+augroup END

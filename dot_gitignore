@@ -1,0 +1,6 @@
+.session.vim*
+.php_cs.cache
+.rnd
+.vscode
+.vim
+thiago-test.ts
