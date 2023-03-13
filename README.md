@@ -2,8 +2,18 @@
 
 Dotfiles managed by https://www.chezmoi.io/.
 
-Requires: git, chezmoi, zsh, oh-my-zsh
+Requires: git, chezmoi, zsh
 
-After installing read the docs to install dotfiles:
+Optional: fzf
 
-https://www.chezmoi.io/user-guide/daily-operations/#install-chezmoi-and-your-dotfiles-on-a-new-machine-with-a-single-command
+After installing dependencies, install dotfiles with:
+
+```
+chezmoi init -v --apply rthiago
+```
+
+First time running vim run:
+
+```
+:PlugInstall
+```
