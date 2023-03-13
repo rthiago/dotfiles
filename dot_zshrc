@@ -97,7 +97,7 @@ function timer(){
 
 [ -f $HOME/scripts/unlock_keys ] && source $HOME/scripts/unlock_keys
 
-source /usr/share/nvm/init-nvm.sh
+[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 
 [ -f $HOME/scripts/local_keys ] && source $HOME/scripts/local_keys
 
@@ -107,7 +107,9 @@ source $HOME/scripts/invoke_completion
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 
-eval "$(starship init zsh)"
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi
 
 ulimit -n 100000
 
