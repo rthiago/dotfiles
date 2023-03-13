@@ -14,7 +14,7 @@ if command -v fzf &> /dev/null; then
     plugins=(fzf $plugins)
 fi
 
-if command -v poetry &> /dev/null; then
+if command -v poetry &> /dev/null && poetry &> /dev/null ; then
     plugins=(poetry $plugins)
 fi
 
