@@ -41,11 +41,9 @@ alias weather='curl wttr\.in'
 alias moon='curl wttr\.in/Moon'
 alias bc='bc -l'
 alias glg='git lg'
-# alias vim='lvim'
 alias vims='vim -S .session.vim'
 alias gvims='gvim -S .session.vim'
 alias open='xdg-open'
-alias cat='bat --paging=never'
 alias dd='dd status=progress'
 alias free='free -h'
 alias df='df -h'
@@ -53,6 +51,10 @@ alias du='du -h'
 alias vnstat='vnstat -i enp5s0'
 alias ipython='ipython --no-confirm-exit'
 alias duf='duf --hide-fs squashfs,tmpfs,devtmpfs --hide-mp /var/cache,/var/log'
+
+if command -v bat &> /dev/null; then
+    alias cat='bat --paging=never'
+fi
 
 function cs() {
     cd $1 && clear && ll
