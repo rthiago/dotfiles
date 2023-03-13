@@ -80,60 +80,60 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :Commits<CR>
 nnoremap <Leader>gbl :BCommits<CR>
 nnoremap <Leader>gc :Gcommit<CR>
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 nnoremap <Leader>t :terminal<CR>
 nnoremap <leader><space> :%s/\s\+$//<CR>
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
-nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
-vnoremap <silent> <leader>y dh:<C-u>CocList -A --normal yank<cr>
+" nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
+" vnoremap <silent> <leader>y dh:<C-u>CocList -A --normal yank<cr>
 
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>
 
-nnoremap <leader>uu :CocUpdate<CR> :PlugUpdate<CR> :PlugUpgrade<CR>
+" nnoremap <leader>uu :CocUpdate<CR> :PlugUpdate<CR> :PlugUpgrade<CR>
 
 nnoremap n nzz
 nnoremap N Nzz
 
 " Coc.vim
-nmap <silent> gd <Plug>(coc-definition) zz
-nmap <silent> gy <Plug>(coc-type-definition) zz
-nmap <silent> gi <Plug>(coc-implementation) zz
-nmap <silent> gr <Plug>(coc-references) zz
-nmap <silent> K :call <SID>show_documentation()<CR>
+" nmap <silent> gd <Plug>(coc-definition) zz
+" nmap <silent> gy <Plug>(coc-type-definition) zz
+" nmap <silent> gi <Plug>(coc-implementation) zz
+" nmap <silent> gr <Plug>(coc-references) zz
+" nmap <silent> K :call <SID>show_documentation()<CR>
 
-nmap <leader>n <Plug>(coc-rename)
-nnoremap <silent><nowait> <space>q :<C-u>CocList diagnostics<cr>
-nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <space>O :<C-u>CocList -I symbols<cr>
+" nmap <leader>n <Plug>(coc-rename)
+" nnoremap <silent><nowait> <space>q :<C-u>CocList diagnostics<cr>
+" nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <space>O :<C-u>CocList -I symbols<cr>
 
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
+    " else
+    "     call CocAction('doHover')
     endif
 endfunction
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
-let g:coc_global_extensions = ['coc-phpls', 'coc-pairs', 'coc-yank', 'coc-snippets', 'coc-tsserver', 'coc-pyright']
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+" let g:coc_global_extensions = ['coc-phpls', 'coc-pairs', 'coc-yank', 'coc-snippets', 'coc-tsserver', 'coc-pyright']
 
 " Coc-snippets tab completion
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
+" let g:coc_snippet_next = '<tab>'
 
 " vem-tabline
 nmap <leader>k <Plug>vem_move_buffer_left-
@@ -162,7 +162,7 @@ Plug '/usr/sbin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomtom/tcomment_vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'editorconfig/editorconfig-vim'
