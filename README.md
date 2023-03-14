@@ -4,7 +4,7 @@ Dotfiles managed by https://www.chezmoi.io/.
 
 Requires: git, chezmoi, zsh
 
-Optional: fzf
+Optional: fzf, bat
 
 After installing dependencies, install dotfiles with:
 
