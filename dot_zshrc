@@ -8,7 +8,7 @@ ZSH_CUSTOM="$HOME/.oh-my-zsh-custom"
 ZSH_DISABLE_COMPFIX="true"
 DISABLE_AUTO_UPDATE="true"
 
-plugins=(git colored-man-pages command-not-found sudo zsh-syntax-highlighting)
+plugins=(git colored-man-pages command-not-found sudo zsh-syntax-highlighting dircycle)
 
 if command -v fzf &> /dev/null; then
     plugins=(fzf $plugins)
@@ -126,3 +126,7 @@ ulimit -n 100000
 
 # Delete word with ctrl+backspace
 bindkey '^H' backward-kill-word
+
+# dircircle with alt+l and alt+h
+bindkey '^[l' insert-cycledright
+bindkey '^[h' insert-cycledleft
