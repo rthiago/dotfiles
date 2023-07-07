@@ -55,9 +55,11 @@ if command -v bat &> /dev/null; then
     alias cat='bat --paging=never'
 fi
 
-function cs() {
-    cd $1 && clear && ll
-}
+if command -v exa &> /dev/null; then
+    alias ls='exa --group --git'
+    alias ll='ls -l'
+    alias la='ls -la'
+fi
 
 export FZF_DEFAULT_COMMAND='fd --hidden --no-ignore --type file --follow --exclude .git --exclude Games --exclude .wine --exclude .vim --exclude .steam --exclude .snapshots --exclude .cache'
 
