@@ -34,8 +34,6 @@ AUTO_NOTIFY_IGNORE+=("docker" "tail" "docker-compose" "vi" "ctop" "sudo" "git" "
 
 alias ls='ls --color=tty -N'
 alias psgrep='ps aux | grep -v grep | grep -i'
-alias a=ll
-alias ac='clear && ll'
 alias yellow='lynx -stdin -dump'
 alias weather='curl wttr\.in'
 alias moon='curl wttr\.in/Moon'
@@ -50,7 +48,7 @@ alias df='df -h'
 alias du='du -h'
 alias vnstat='vnstat -i enp5s0'
 alias ipython='ipython --no-confirm-exit'
-alias duf='duf --hide-fs squashfs,tmpfs,devtmpfs --hide-mp /var/cache,/var/log'
+alias duf='duf --hide-fs squashfs,tmpfs,devtmpfs --hide-mp /var/cache,/var/log,/home,/var/lib/snapd/snap'
 alias yay='yay --sudoloop'
 
 if command -v bat &> /dev/null; then
