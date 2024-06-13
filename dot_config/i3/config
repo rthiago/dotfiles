@@ -171,22 +171,19 @@ for_window [class="Viewnior"] floating enable
 for_window [class="Thunar"] floating enable
 for_window [class="Protonvpn"] floating enable
 for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
-for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
-for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
 for_window [class="Nautilus"] floating enable
 for_window [class="Mate-appearance-properties"] floating enable
 for_window [class="Slack"] floating enable
 for_window [class="Mate-control-center"] floating enable
 for_window [class="Gnome-screenshot"] floating enable
 for_window [class="Blueberry.py"] floating enable
+for_window [class="Sparrow"] floating enable
+for_window [class="gnome-calculator"] floating enable
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/"
 exec_always --no-startup-id "killall picom; sleep 2 ; picom --config ~/.config/picom/picom.conf -b"
 exec --no-startup-id nm-applet
-exec_always --no-startup-id blueman-applet
-# exec --no-startup-id protonvpn
 exec --no-startup-id xautolock -time 55 -locker "i3lock-fancy-rapid 6 4"
 exec --no-startup-id /usr/bin/notify-send 'Welcome' -t 1 # Invisible notification (time = 1 millisecond) just to start dunst
 
