@@ -191,8 +191,6 @@ bindsym Mod1+Control+l exec "i3lock-fancy-rapid 6 4"
 
 bindsym Print exec gnome-screenshot -i
 
-bindsym $mod+g exec slack
-
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
@@ -228,3 +226,5 @@ client.urgent           $red      $red      $white    $red      $red
 # Scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
+bindsym $mod+g [title="Slack"] scratchpad show
+bindsym $mod+b [title="Sublime Text"] scratchpad show
