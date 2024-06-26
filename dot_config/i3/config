@@ -135,7 +135,9 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bindsym $mod+n exec "killall mate-notification-daemon"
+bindsym $mod+n exec "notify-send.py a --hint boolean:deadd-notification-center:true string:type:clearPopups"
+bindsym $mod+Shift+m exec "notify-send.py a --hint boolean:deadd-notification-center:true string:type:clearInCenter"
+bindsym $mod+m exec "kill -s USR1 $(pidof deadd-notification-center)"
 
 for_window [class="^.*"] border pixel 3
 gaps inner 10
@@ -179,6 +181,7 @@ for_window [class="Gnome-screenshot"] floating enable
 for_window [class="Blueberry.py"] floating enable
 for_window [class="Sparrow"] floating enable
 for_window [class="gnome-calculator"] floating enable
+for_window [class="file-roller"] floating enable
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/"
