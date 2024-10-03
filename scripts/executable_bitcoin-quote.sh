@@ -1,1 +1,5 @@
-echo -n "₿ " ; result=$(curl -s --fail rate.sx/1BTC) || echo "failed" ; echo $result | cut -d . -f 1 | rev | fold -w3 | paste -sd'.' - | rev
+echo -n "₿ " ; result=$(curl -s "https://api.coindesk.com/v1/bpi/currentprice/usd.json" | jq -r '
+  .bpi.USD.rate |
+  gsub(","; "tmp") |
+  gsub("\\." ; ",") |
+  gsub("tmp"; ".")') || echo "failed" ; echo $result
