@@ -182,6 +182,8 @@ for_window [class="Blueberry.py"] floating enable
 for_window [class="Sparrow"] floating enable
 for_window [class="gnome-calculator"] floating enable
 for_window [class="file-roller"] floating enable
+for_window [class="Wireguird"] floating enable
+for_window [class="Free Download Manager"] floating enable
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/"
