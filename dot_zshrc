@@ -52,7 +52,7 @@ alias ipython='ipython --no-confirm-exit'
 alias duf='duf --hide-fs squashfs,tmpfs,devtmpfs --hide-mp /var/cache,/var/log,/home,/var/lib/snapd/snap,/sys/firmware/efi/efivars'
 alias yay='yay --sudoloop'
 alias '??'='gh copilot suggest -t shell'
-alias 'usephp73'='sudo ln -sf /usr/sbin/php73 /usr/sbin/php'
+alias 'usephp83'='sudo ln -sf /usr/sbin/php83 /usr/sbin/php'
 alias 'usephp81'='sudo ln -sf /usr/sbin/php81 /usr/sbin/php'
 
 if command -v bat &> /dev/null; then
