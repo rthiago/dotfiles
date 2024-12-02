@@ -184,6 +184,7 @@ for_window [class="gnome-calculator"] floating enable
 for_window [class="file-roller"] floating enable
 for_window [class="Wireguird"] floating enable
 for_window [class="Free Download Manager"] floating enable
+for_window [class="Ente_auth"] floating enable
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/"
@@ -194,7 +195,7 @@ exec --no-startup-id /usr/bin/notify-send 'Welcome' -t 1 # Invisible notificatio
 
 bindsym Mod1+Control+l exec "i3lock-fancy-rapid 6 4"
 
-bindsym Print exec gnome-screenshot -i
+bindsym Print exec flameshot launcher
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
