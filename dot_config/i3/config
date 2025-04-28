@@ -184,7 +184,8 @@ for_window [class="gnome-calculator"] floating enable
 for_window [class="file-roller"] floating enable
 for_window [class="Wireguird"] floating enable
 for_window [class="Free Download Manager"] floating enable
-for_window [class="Ente_auth"] floating enable
+for_window [class="Io.ente.auth"] floating enable
+for_window [class="Brave-browser" window_role="pop-up"] floating enable
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/"
