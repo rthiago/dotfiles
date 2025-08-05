@@ -18,7 +18,7 @@ if command -v poetry &> /dev/null && poetry &> /dev/null ; then
     plugins=(poetry $plugins)
 fi
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin:$HOME/.local/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin:$HOME/.local/bin:$HOME/.cargo/bin"
 export GEM_HOME="$HOME/gems"
 export EDITOR="vi"
 export GIT_EDITOR="vi"
