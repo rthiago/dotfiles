@@ -51,7 +51,6 @@ alias vnstat='vnstat -i enp5s0'
 alias ipython='ipython --no-confirm-exit'
 alias duf='duf --hide-fs squashfs,tmpfs,devtmpfs --hide-mp /var/cache,/var/log,/home,/var/lib/snapd/snap,/sys/firmware/efi/efivars'
 alias yay='yay --sudoloop'
-alias '??'='gh copilot suggest -t shell'
 alias 'usephp83'='sudo ln -sf /usr/sbin/php83 /usr/sbin/php'
 alias 'usephp81'='sudo ln -sf /usr/sbin/php81 /usr/sbin/php'
 
@@ -135,3 +134,11 @@ bindkey '^H' backward-kill-word
 # dircircle with alt+l and alt+h
 bindkey '^[l' insert-cycledright
 bindkey '^[h' insert-cycledleft
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+# JS Safe-chain
+source ~/.safe-chain/scripts/init-posix.sh
+
+# Python Safety
+[ -f "/home/thiago/.safety/.safety_profile" ] && . "/home/thiago/.safety/.safety_profile"
