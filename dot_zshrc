@@ -116,6 +116,8 @@ function timer(){
 
 [ -f $HOME/scripts/local_keys ] && source $HOME/scripts/local_keys
 
+[ -f $HOME/scripts/local_startup ] && source $HOME/scripts/local_startup
+
 # Invoke completion
 source $HOME/scripts/invoke_completion
 
@@ -138,7 +140,7 @@ bindkey '^[h' insert-cycledleft
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
 # JS Safe-chain
-source ~/.safe-chain/scripts/init-posix.sh
+[ -f "~/.safe-chain/scripts/init-posix.sh" ] && . source ~/.safe-chain/scripts/init-posix.sh
 
 # Python Safety
 [ -f "/home/thiago/.safety/.safety_profile" ] && . "/home/thiago/.safety/.safety_profile"
