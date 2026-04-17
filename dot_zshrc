@@ -28,6 +28,7 @@ export XZ_DEFAULTS=--threads=0
 export PYTHONBREAKPOINT="pudb.set_trace"
 export AWS_PAGER=""
 
+fpath+=~/.zfunc
 source $ZSH/oh-my-zsh.sh
 
 export AUTO_NOTIFY_THRESHOLD=120
@@ -53,6 +54,8 @@ alias duf='duf --hide-fs squashfs,tmpfs,devtmpfs --hide-mp /var/cache,/var/log,/
 alias yay='yay --sudoloop'
 alias 'usephp83'='sudo ln -sf /usr/sbin/php83 /usr/sbin/php'
 alias 'usephp81'='sudo ln -sf /usr/sbin/php81 /usr/sbin/php'
+alias '??'='mansplain --copy'
+alias '??+'='?? --effort max'
 
 if command -v bat &> /dev/null; then
     alias cat='bat --paging=never'
@@ -112,7 +115,19 @@ function timer(){
 
 [ -f $HOME/scripts/unlock_keys ] && source $HOME/scripts/unlock_keys
 
-[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+# Lazy-load NVM — full init only on first use of nvm/node/npm/npx/yarn/pnpm
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+    _nvm_lazy_load() {
+        unset -f nvm node npm npx yarn pnpm 2>/dev/null
+        source /usr/share/nvm/init-nvm.sh
+    }
+    nvm()  { _nvm_lazy_load; nvm "$@"; }
+    node() { _nvm_lazy_load; node "$@"; }
+    npm()  { _nvm_lazy_load; npm "$@"; }
+    npx()  { _nvm_lazy_load; npx "$@"; }
+    yarn() { _nvm_lazy_load; yarn "$@"; }
+    pnpm() { _nvm_lazy_load; pnpm "$@"; }
+fi
 
 [ -f $HOME/scripts/local_keys ] && source $HOME/scripts/local_keys
 
@@ -121,7 +136,6 @@ function timer(){
 # Invoke completion
 source $HOME/scripts/invoke_completion
 
-autoload -Uz compinit
 zstyle ':completion:*' menu select
 
 if command -v starship &> /dev/null; then
@@ -137,10 +151,8 @@ bindkey '^H' backward-kill-word
 bindkey '^[l' insert-cycledright
 bindkey '^[h' insert-cycledleft
 
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
-
 # JS Safe-chain
-[ -f "~/.safe-chain/scripts/init-posix.sh" ] && . source ~/.safe-chain/scripts/init-posix.sh
+[ -f "/home/thiago/.safe-chain/scripts/init-posix.sh" ] && source ~/.safe-chain/scripts/init-posix.sh
 
 # Python Safety
 [ -f "/home/thiago/.safety/.safety_profile" ] && . "/home/thiago/.safety/.safety_profile"
