@@ -1,0 +1,221 @@
+/* swaync — Dracula notification + control center */
+
+* {
+    font-family: "Inter", "Noto Sans", "Sans", sans-serif;
+    font-size: 11pt;
+    color: #f8f8f2;
+}
+
+/* ── Notification (popup + inside center) ─────────────────────────── */
+.notification-row {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.notification {
+    background-color: rgba(40, 42, 54, 0.96);
+    border: 1px solid #44475a;
+    border-radius: 12px;
+    margin: 6px 8px;
+    padding: 0;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.notification:hover {
+    border-color: #bd93f9;
+    box-shadow: 0 6px 18px rgba(189, 147, 249, 0.35);
+}
+
+.notification-content {
+    padding: 12px 14px;
+    background: transparent;
+    border-radius: 12px;
+}
+
+.summary {
+    font-weight: 600;
+    color: #f8f8f2;
+    font-size: 11pt;
+    text-shadow: none;
+}
+
+.body {
+    color: #f8f8f2;
+    font-size: 10pt;
+    margin-top: 2px;
+}
+
+.app-name {
+    color: #6272a4;
+    font-size: 9pt;
+    font-weight: 500;
+}
+
+.time {
+    color: #6272a4;
+    font-size: 9pt;
+}
+
+.notification image {
+    border-radius: 8px;
+    margin-right: 8px;
+}
+
+/* Close button (top-right "x") */
+.close-button {
+    background: transparent;
+    color: #6272a4;
+    border: none;
+    box-shadow: none;
+    margin: 6px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+.close-button:hover {
+    background: #ff5555;
+    color: #f8f8f2;
+}
+
+/* Inline-reply / action buttons */
+.notification-action,
+.notification-default-action {
+    background: rgba(98, 114, 164, 0.25);
+    color: #f8f8f2;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    margin: 4px;
+    padding: 6px 10px;
+}
+.notification-action:hover,
+.notification-default-action:hover {
+    background: #bd93f9;
+    color: #282a36;
+}
+
+/* Urgency variants */
+.notification-critical {
+    border-color: #ff5555;
+    background-color: rgba(60, 30, 35, 0.97);
+}
+.notification-critical .summary {
+    color: #ff5555;
+}
+
+.notification-urgency-low {
+    opacity: 0.92;
+    border-color: #44475a;
+}
+
+.notification-urgency-normal {
+    border-color: #44475a;
+}
+
+/* Control Center (panel opened with super+M) ─────────────────────── */
+.control-center {
+    background: rgba(30, 31, 41, 0.97);
+    border: 1px solid #44475a;
+    border-radius: 16px;
+    margin: 14px;
+    padding: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+.control-center-list {
+    background: transparent;
+    padding: 4px 0;
+}
+
+.control-center-list-placeholder {
+    color: #6272a4;
+    font-size: 11pt;
+    opacity: 0.85;
+    padding: 24px;
+}
+
+/* Top widgets row (title / clear-all / DND) ──────────────────────── */
+.widget-title {
+    color: #f8f8f2;
+    font-size: 13pt;
+    font-weight: 700;
+    margin: 6px 4px 10px;
+    padding: 0 6px;
+}
+
+.widget-title > button {
+    background: rgba(189, 147, 249, 0.15);
+    color: #bd93f9;
+    border: 1px solid rgba(189, 147, 249, 0.35);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 10pt;
+    font-weight: 600;
+}
+.widget-title > button:hover {
+    background: #bd93f9;
+    color: #282a36;
+}
+
+.widget-dnd {
+    color: #f8f8f2;
+    background: rgba(68, 71, 90, 0.6);
+    border: 1px solid #44475a;
+    border-radius: 10px;
+    padding: 6px 12px;
+    margin: 6px 4px;
+}
+.widget-dnd > switch {
+    background: #44475a;
+    border-radius: 12px;
+    border: none;
+    box-shadow: none;
+}
+.widget-dnd > switch:checked {
+    background: #bd93f9;
+}
+.widget-dnd > switch slider {
+    background: #f8f8f2;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    margin: 2px;
+}
+
+/* Mpris (media player widget, if enabled) */
+.widget-mpris {
+    background: rgba(68, 71, 90, 0.4);
+    border: 1px solid #44475a;
+    border-radius: 12px;
+    padding: 8px;
+    margin: 6px 4px;
+}
+.widget-mpris-title {
+    color: #f8f8f2;
+    font-weight: 600;
+}
+.widget-mpris-subtitle {
+    color: #6272a4;
+}
+
+/* Volume / Backlight sliders, if enabled */
+.widget-volume,
+.widget-backlight {
+    background: rgba(68, 71, 90, 0.4);
+    border: 1px solid #44475a;
+    border-radius: 12px;
+    padding: 8px;
+    margin: 6px 4px;
+}
+.widget-volume scale trough,
+.widget-backlight scale trough {
+    background: #44475a;
+    border-radius: 6px;
+    min-height: 6px;
+}
+.widget-volume scale highlight,
+.widget-backlight scale highlight {
+    background: #bd93f9;
+    border-radius: 6px;
+}
