@@ -597,7 +597,6 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 decorations = "full"
 dynamic_padding = false
 dynamic_title = true
-opacity = 0.9
 startup_mode = "Maximized"
 
 [window.dimensions]
