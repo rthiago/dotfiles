@@ -23,6 +23,9 @@ set cursorline
 set nolist
 set nowrap
 
+set visualbell
+set t_vb=
+
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -37,11 +40,9 @@ set undoreload=10000
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'gruvbox'
+let g:airline_theme = 'dracula'
 let g:airline#extensions#obsession#enabled = 0
 let g:airline#extensions#obsession#indicator_text = '[Tracking session]'
-
-let g:gruvbox_contrast_dark = 'hard'
 
 let g:CSApprox_loaded = 1
 
@@ -169,7 +170,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'machakann/vim-sandwich'
 Plug 'pacha/vem-tabline'
 Plug 'sheerun/vim-polyglot'
-Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'yasuhiroki/circleci.vim'
 
@@ -179,8 +180,7 @@ if has('termguicolors')
     set termguicolors
 endif
 
-colorscheme gruvbox
-
+colorscheme dracula
 
 if exists('&signcolumn')  " Vim 7.4.2201
     set signcolumn=yes
