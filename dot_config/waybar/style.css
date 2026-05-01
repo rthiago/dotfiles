@@ -1,46 +1,72 @@
+/* ╔══════════════════════════════════════════════════════╗
+   ║  WAYBAR // CYBERPUNK TERMINAL THEME                  ║
+   ║  Neon edges · Glitch pulses · Dark chrome            ║
+   ╚══════════════════════════════════════════════════════╝ */
+
 * {
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    font-weight: normal; /* no bold fonts */
-    color: #f8f8f2;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: #c0caf5;
+    border: none;
+    min-height: 0;
 }
 
+/* ── BAR FRAME ───────────────────────────────────────── */
 window#waybar {
-    background: rgba(40, 42, 54, 0.95); /* Dracula base */
-    border-bottom: 2px solid #6272a4;
-    transition: background 0.5s ease-in-out;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 18, 0.96) 0%,
+        rgba(16, 16, 28, 0.92) 100%
+    );
+    border-bottom: 1px solid rgba(0, 255, 200, 0.12);
+    box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.6),
+        0 1px 0 rgba(0, 255, 200, 0.06) inset;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+    opacity: 0.05;
 }
 
-/* Workspaces */
+/* ── WORKSPACES ──────────────────────────────────────── */
 #workspaces button {
     padding: 0 8px;
-    color: #f8f8f2;
+    color: rgba(192, 202, 245, 0.15);
     background: transparent;
-    border-radius: 6px;
+    border-radius: 0;
     border: none;
-    margin: 0 2px;
+    margin: 3px 1px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
 }
 
-/* Selected workspace (always highlighted purple) */
+#workspaces button:hover {
+    color: #00ffc8;
+    background: rgba(0, 255, 200, 0.04);
+    border-bottom: 2px solid rgba(0, 255, 200, 0.3);
+}
+
 #workspaces button.active {
-    background: #bd93f9;      /* Purple background */
-    color: #282a36;           /* Dark text for contrast */
-    box-shadow: inset 0 -3px #bd93f9;
-    border: 1px solid #bd93f9;
+    color: #00ffc8;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 2px 18px;
+    background-color: #2a2a4a;
+    border: 2px solid #00ffc8;
+    border-radius: 4px;
+    margin: 2px 3px;
+    opacity: 1;
 }
 
-/* Urgent workspaces keep separate color */
 #workspaces button.urgent {
-    background: #ff5555;
-    color: #f8f8f2;
-    border: 1px solid #ff5555;
+    color: #0a0a12;
+    background: #ff2a6d;
+    border-bottom: 2px solid #ff2a6d;
+    animation: urgentPulse 1s ease-in-out infinite alternate;
 }
 
-/* Global module styling */
+/* ── GLOBAL MODULE BASE ──────────────────────────────── */
 #clock,
 #battery,
 #cpu,
@@ -60,161 +86,320 @@ window#waybar.hidden {
 #custom-keyboard,
 #custom-bitcoin,
 #custom-mouse,
+#custom-claude-usage,
+#custom-codex-usage,
+#custom-copilot-usage,
+#custom-zen-balance,
 #mpd {
-    padding: 0 14px;
-    border-radius: 6px;
-    margin: 2px 4px;
-    background: #44475a;
+    padding: 0 12px;
+    margin: 4px 2px;
+    border-radius: 2px;
+    background: rgba(22, 22, 38, 0.7);
+    border: 1px solid rgba(192, 202, 245, 0.06);
+    transition: all 0.25s ease;
 }
 
-/* Clock */
+/* Subtle hover glow on all modules */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#temperature:hover,
+#backlight:hover,
+#network:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#custom-media:hover,
+#tray:hover,
+#idle_inhibitor:hover,
+#custom-headset:hover,
+#custom-keyboard:hover,
+#custom-bitcoin:hover,
+#custom-mouse:hover,
+#custom-claude-usage:hover,
+#custom-codex-usage:hover,
+#custom-copilot-usage:hover,
+#custom-zen-balance:hover,
+#mpd:hover {
+    background: rgba(30, 30, 50, 0.85);
+    border-color: rgba(0, 255, 200, 0.15);
+}
+
+/* ── CLOCK — primary accent ──────────────────────────── */
 #clock {
-    background: #bd93f9;
-    color: #282a36;
+    color: #00ffc8;
+    background: rgba(0, 255, 200, 0.06);
+    border: 1px solid rgba(0, 255, 200, 0.2);
+    text-shadow: 0 0 8px rgba(0, 255, 200, 0.3);
+    letter-spacing: 0.5px;
 }
 
-/* Battery */
+/* ── BATTERY ─────────────────────────────────────────── */
 #battery {
-    background: #50fa7b;
-    color: #282a36;
+    color: #9ece6a;
+    border-left: 2px solid #9ece6a;
 }
 #battery.charging,
 #battery.plugged {
-    background: #8be9fd;
-    color: #282a36;
+    color: #7dcfff;
+    border-left-color: #7dcfff;
 }
 #battery.critical:not(.charging) {
-    background: #ff5555;
-    color: #f8f8f2;
-    animation: blink 0.5s infinite alternate;
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
+    background: rgba(255, 42, 109, 0.08);
+    animation: criticalBlink 0.6s infinite alternate;
 }
 
-/* CPU & Memory */
+/* ── CPU ─────────────────────────────────────────────── */
 #cpu {
-    background: #ffb86c;
-    color: #282a36;
-}
-#memory {
-    background: #ff79c6;
+    color: #ff9e64;
+    border-left: 2px solid #ff9e64;
 }
 
-/* Disk & Temperature */
-#disk {
-    background: #8be9fd;
-    color: #282a36;
+/* ── MEMORY ──────────────────────────────────────────── */
+#memory {
+    color: #bb9af7;
+    border-left: 2px solid #bb9af7;
 }
+
+/* ── DISK ────────────────────────────────────────────── */
+#disk {
+    color: #7dcfff;
+    border-left: 2px solid #7dcfff;
+}
+
+/* ── TEMPERATURE ─────────────────────────────────────── */
 #temperature {
-    background: #f1fa8c;
-    color: #282a36;
+    color: #e0af68;
+    border-left: 2px solid #e0af68;
 }
 #temperature.critical {
-    background: #ff5555;
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
+    background: rgba(255, 42, 109, 0.08);
 }
 
-/* Backlight */
+/* ── BACKLIGHT ───────────────────────────────────────── */
 #backlight {
-    background: #bd93f9;
+    color: #e0af68;
+    border-left: 2px solid rgba(224, 175, 104, 0.5);
 }
 
-/* Network */
+/* ── NETWORK ─────────────────────────────────────────── */
 #network {
-    background: #8be9fd;
-    color: #282a36;
+    color: #7dcfff;
+    border-left: 2px solid #7dcfff;
 }
 #network.disconnected {
-    background: #ff5555;
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
+    background: rgba(255, 42, 109, 0.06);
 }
 
-/* Audio */
+/* ── AUDIO ───────────────────────────────────────────── */
 #pulseaudio {
-    background: #f1fa8c;
-    color: #282a36;
+    color: #7aa2f7;
+    border-left: 2px solid #7aa2f7;
 }
 #pulseaudio.muted {
-    background: #6272a4;
-    color: #f8f8f2;
+    color: rgba(192, 202, 245, 0.25);
+    border-left-color: rgba(192, 202, 245, 0.15);
 }
+
 #wireplumber {
-    background: #f1fa8c;
-    color: #282a36;
+    color: #7aa2f7;
+    border-left: 2px solid #7aa2f7;
 }
 #wireplumber.muted {
-    background: #ff5555;
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
 }
 
-/* Custom Media */
+/* ── MEDIA ───────────────────────────────────────────── */
 #custom-media {
-    background: #50fa7b;
-    color: #282a36;
+    color: #9ece6a;
+    border-left: 2px solid #9ece6a;
+    font-style: italic;
 }
 
-/* Tray & Idle inhibitor */
+/* ── TRAY ────────────────────────────────────────────── */
 #tray {
-    background: #44475a;
+    background: rgba(22, 22, 38, 0.5);
 }
+
+/* ── IDLE INHIBITOR ──────────────────────────────────── */
 #idle_inhibitor {
-    background: #6272a4;
+    color: rgba(192, 202, 245, 0.35);
 }
 #idle_inhibitor.activated {
-    background: #50fa7b;
-    color: #282a36;
+    color: #00ffc8;
+    border: 1px solid rgba(0, 255, 200, 0.2);
+    text-shadow: 0 0 6px rgba(0, 255, 200, 0.25);
 }
 
-/* MPD */
+/* ── MPD ─────────────────────────────────────────────── */
 #mpd {
-    background: #bd93f9;
+    color: #bb9af7;
+    border-left: 2px solid #bb9af7;
 }
 #mpd.disconnected,
 #mpd.stopped {
-    background: #6272a4;
+    color: rgba(192, 202, 245, 0.2);
+    border-left-color: rgba(192, 202, 245, 0.1);
 }
 #mpd.paused {
-    background: #ffb86c;
+    color: #ff9e64;
+    border-left-color: #ff9e64;
 }
 
-/* Language & Keyboard */
+/* ── LANGUAGE & KEYBOARD ─────────────────────────────── */
 #language {
-    background: #8be9fd;
-    color: #282a36;
-    padding: 0 6px;
-    margin: 0 5px;
+    color: #7dcfff;
+    padding: 0 8px;
+    margin: 4px 2px;
     min-width: 16px;
 }
 #keyboard-state {
-    background: #50fa7b;
-    color: #282a36;
-    padding: 0 6px;
-    margin: 0 5px;
+    color: #9ece6a;
+    padding: 0 8px;
+    margin: 4px 2px;
     min-width: 16px;
 }
 #keyboard-state > label.locked {
-    background: rgba(40, 42, 54, 0.4);
+    background: rgba(255, 42, 109, 0.15);
+    color: #ff2a6d;
 }
 
-/* Scratchpad */
+/* ── SCRATCHPAD ──────────────────────────────────────── */
 #scratchpad {
-    background: #44475a;
+    color: #bb9af7;
 }
 #scratchpad.empty {
     background: transparent;
+    border-color: transparent;
 }
 
-/* Custom modules */
-#custom-headset,
-#custom-keyboard,
-#custom-bitcoin,
+/* ── CUSTOM HARDWARE MODULES ─────────────────────────── */
+#custom-bitcoin {
+    color: #f7b731;
+    border-left: 2px solid #f7b731;
+    text-shadow: 0 0 6px rgba(247, 183, 49, 0.25);
+}
+
+#custom-keyboard {
+    color: #7dcfff;
+    border-left: 2px solid #7dcfff;
+    text-shadow: 0 0 6px rgba(125, 207, 255, 0.2);
+}
+
+#custom-headset {
+    color: #bb9af7;
+    border-left: 2px solid #bb9af7;
+    text-shadow: 0 0 6px rgba(187, 154, 247, 0.2);
+}
+
 #custom-mouse {
-    padding: 0 14px;    /* consistent padding */
-    margin: 2px 4px;    /* consistent bezel */
-    border-radius: 6px; /* consistent shape */
-    background: #6272a4;
-    color: #f8f8f2;
+    color: #9ece6a;
+    border-left: 2px solid #9ece6a;
+    text-shadow: 0 0 6px rgba(158, 206, 106, 0.2);
 }
 
-/* Animations */
-@keyframes blink {
+/* ── AI USAGE MONITORS ───────────────────────────────── */
+
+/* Claude Code */
+#custom-claude-usage {
+    color: #ff9e64;
+    border-left: 2px solid #ff9e64;
+}
+#custom-claude-usage.claude-mid {
+    color: #e0af68;
+    border-left-color: #e0af68;
+    background: rgba(224, 175, 104, 0.06);
+}
+#custom-claude-usage.claude-high {
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
+    background: rgba(255, 42, 109, 0.08);
+    text-shadow: 0 0 6px rgba(255, 42, 109, 0.3);
+}
+
+/* Codex */
+#custom-codex-usage {
+    color: #9ece6a;
+    border-left: 2px solid #9ece6a;
+}
+#custom-codex-usage.codex-mid {
+    color: #e0af68;
+    border-left-color: #e0af68;
+    background: rgba(224, 175, 104, 0.06);
+}
+#custom-codex-usage.codex-high {
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
+    background: rgba(255, 42, 109, 0.08);
+    text-shadow: 0 0 6px rgba(255, 42, 109, 0.3);
+}
+
+/* Copilot */
+#custom-copilot-usage {
+    color: #bb9af7;
+    border-left: 2px solid #bb9af7;
+}
+#custom-copilot-usage.copilot-mid {
+    color: #e0af68;
+    border-left-color: #e0af68;
+    background: rgba(224, 175, 104, 0.06);
+}
+#custom-copilot-usage.copilot-high {
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
+    background: rgba(255, 42, 109, 0.08);
+    text-shadow: 0 0 6px rgba(255, 42, 109, 0.3);
+}
+
+/* Zen Balance */
+#custom-zen-balance {
+    color: #00ffc8;
+    border-left: 2px solid #00ffc8;
+}
+#custom-zen-balance.zen-medium {
+    color: #e0af68;
+    border-left-color: #e0af68;
+    background: rgba(224, 175, 104, 0.06);
+}
+#custom-zen-balance.zen-low {
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
+    background: rgba(255, 42, 109, 0.08);
+    text-shadow: 0 0 6px rgba(255, 42, 109, 0.3);
+}
+
+/* Error state — all monitors */
+#custom-claude-usage.critical,
+#custom-codex-usage.critical,
+#custom-copilot-usage.critical,
+#custom-zen-balance.critical {
+    color: #ff2a6d;
+    border-left-color: #ff2a6d;
+    background: rgba(255, 42, 109, 0.1);
+    animation: criticalBlink 0.6s infinite alternate;
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────── */
+@keyframes criticalBlink {
+    from { opacity: 1; }
+    to   { opacity: 0.4; }
+}
+
+@keyframes urgentPulse {
+    from {
+        box-shadow: 0 0 4px rgba(255, 42, 109, 0.3);
+    }
     to {
-        background: #f8f8f2;
-        color: #282a36;
+        box-shadow:
+            0 0 10px rgba(255, 42, 109, 0.5),
+            0 0 24px rgba(255, 42, 109, 0.15);
     }
 }
