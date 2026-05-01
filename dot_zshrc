@@ -56,6 +56,7 @@ alias 'usephp83'='sudo ln -sf /usr/sbin/php83 /usr/sbin/php'
 alias 'usephp81'='sudo ln -sf /usr/sbin/php81 /usr/sbin/php'
 alias '??'='mansplain --copy'
 alias '??+'='?? --effort max'
+alias claude='CLAUDE_CODE_SCROLL_SPEED=3 claude --effort max'
 
 if command -v bat &> /dev/null; then
     alias cat='bat --paging=never'
