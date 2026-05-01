@@ -1,0 +1,118 @@
+/* Dracula-leaning rofi launcher with rounded entries and subtle accents */
+
+configuration {
+    show-icons:        true;
+    display-drun:      " Apps";
+    display-run:       " Run";
+    display-window:    " Win";
+    display-combi:     " Search";
+    drun-display-format: "{name}";
+    disable-history:   false;
+    location:          0;
+    sidebar-mode:      false;
+}
+
+* {
+    bg:           #282a36;
+    bg-alt:       #21222c;
+    bg-selected:  #44475a;
+    fg:           #f8f8f2;
+    fg-muted:     #6272a4;
+    accent:       #bd93f9;
+    accent-2:     #8be9fd;
+    urgent:       #ff5555;
+
+    background-color:  transparent;
+    text-color:        @fg;
+    font:              "JetBrains Mono 12";
+}
+
+window {
+    background-color: @bg;
+    border:           1px;
+    border-color:     @accent;
+    border-radius:    14px;
+    width:            640px;
+    padding:          18px;
+}
+
+mainbox {
+    spacing:  14px;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @bg-alt;
+    border-radius:    10px;
+    padding:          10px 14px;
+    spacing:          10px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color: @accent;
+}
+
+entry {
+    placeholder:        "Type to search…";
+    placeholder-color:  @fg-muted;
+    text-color:         @fg;
+    cursor:             text;
+}
+
+listview {
+    columns:        1;
+    lines:          8;
+    spacing:        4px;
+    fixed-height:   true;
+    fixed-columns:  true;
+    scrollbar:      false;
+    cycle:          true;
+}
+
+element {
+    padding:        8px 12px;
+    spacing:        10px;
+    border-radius:  8px;
+    text-color:     @fg;
+}
+
+element normal.normal     { background-color: transparent; }
+element normal.urgent     { text-color: @urgent; }
+element normal.active     { text-color: @accent-2; }
+
+element selected.normal   { background-color: @bg-selected; text-color: @fg; }
+element selected.urgent   { background-color: @urgent; text-color: @bg; }
+element selected.active   { background-color: @accent; text-color: @bg; }
+
+element alternate.normal  { background-color: transparent; }
+element alternate.urgent  { text-color: @urgent; }
+element alternate.active  { text-color: @accent-2; }
+
+element-icon {
+    size:             22px;
+    background-color: transparent;
+    vertical-align:   0.5;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
+
+mode-switcher {
+    spacing: 0;
+}
+
+button {
+    padding:           8px;
+    background-color:  @bg-alt;
+    text-color:        @fg-muted;
+    border-radius:     8px;
+}
+
+button selected {
+    background-color: @accent;
+    text-color:       @bg;
+}
