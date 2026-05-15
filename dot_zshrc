@@ -54,7 +54,7 @@ alias duf='duf --hide-fs squashfs,tmpfs,devtmpfs --hide-mp /var/cache,/var/log,/
 alias yay='yay --sudoloop'
 alias 'usephp83'='sudo ln -sf /usr/sbin/php83 /usr/sbin/php'
 alias 'usephp81'='sudo ln -sf /usr/sbin/php81 /usr/sbin/php'
-alias '??'='mansplain --copy'
+alias '??'='CLAUDE_IGNORE_NOTIFICATION=1 mansplain --copy'
 
 if command -v bat &> /dev/null; then
     alias cat='bat --paging=never'
