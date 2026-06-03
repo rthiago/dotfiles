@@ -12,6 +12,15 @@
     min-height: 0;
 }
 
+/* ── TRAY POPUP MENUS ────────────────────────────────── */
+/* Waybar hosts SNI tray menus (e.g. nm-applet) and the reset above
+   collapses their check/radio indicators. Restore the tick size. */
+menu menuitem check,
+menu menuitem radio {
+    min-height: 16px;
+    min-width: 16px;
+}
+
 /* ── BAR FRAME ───────────────────────────────────────── */
 window#waybar {
     background: linear-gradient(
