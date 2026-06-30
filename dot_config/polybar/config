@@ -1,260 +1,190 @@
-[colors]
-background = #222
-background-alt = #444
-foreground = #dfdfdf
-foreground-alt = #666
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+; polybar bar — Tokyo Night palette, flat.
 
-[bar/monitor]
-monitor = "DP-0"
+[colors]
+background = #ee16161e
+background-alt = #2a2a4a
+foreground = #c0caf5
+foreground-alt = #565f89
+teal = #00ffc8
+alert = #ff2a6d
+green = #9ece6a
+cyan = #7dcfff
+blue = #7aa2f7
+purple = #bb9af7
+orange = #ff9e64
+amber = #e0af68
+gold = #f7b731
+
+; Primary bar: full module set + systray. launch.sh runs this ONLY on the
+; primary output. The tray lives here alone so it can't race onto the secondary.
+[bar/main]
+; launch.sh sets MONITOR per output for dual-monitor
+monitor = ${env:MONITOR:}
 width = 100%
 height = 30
-fixed-center = false
-bottom = true
+radius = 0
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = #f00
-
-border-size = 0
-border-color = #000000
-
-padding-left = 0
+line-size = 2
+padding-left = 1
 padding-right = 2
-
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Hack:pixelsize=11;1
-# font-1 = Siji:pixelsize=12;2
-# font-2 = "Wuncon Siji:pixelsize=10;1"
-font-1 = Material Icons:pixelsize=11;1
+; font-0 is text + Nerd Font glyphs; verify JetBrainsMono Nerd Font is installed
+font-0 = JetBrainsMono Nerd Font:size=11;2
+font-1 = JetBrainsMono Nerd Font:size=14;3
 
-modules-left = i3
-; modules-center = songinfo
-modules-right = cpu load memory temperature filesystem eth wlan battery pulseaudio weather mousebattery keyboardbattery date
+modules-left = i3 xwindow
+modules-center = date
+modules-right = bitcoin headset mousebattery keyboardbattery pulseaudio cpu memory temperature
 
 tray-position = right
 tray-padding = 2
 tray-background = ${colors.background}
 
 cursor-click = pointer
-cursor-scroll = ns-resize
+enable-ipc = true
 
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-mount-1 = /mnt/moar
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-} %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+; Secondary bar: workspaces + focused window title only, no clock/crypto/sensors
+; and no tray (this is the portrait monitor). Inherits all look/font/
+; color from bar/main; just blanks the center + right modules and the tray.
+[bar/secondary]
+inherit = bar/main
+modules-center =
+modules-right =
+tray-position = none
 
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
 pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-foreground = #16161e
+label-mode-background = ${colors.teal}
 
-; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-underline = ${colors.teal}
 label-focused-padding = 2
 
-; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 2
 
-; visible = Active workspace on unfocused monitor
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
+label-visible-padding = 2
 
-; urgent = Workspace with urgency hint set
-label-urgent = %index%!
+label-urgent = %index%
 label-urgent-background = ${colors.alert}
+label-urgent-foreground = #16161e
 label-urgent-padding = 2
 
-; Separator in between workspaces
-; label-separator = |
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+label-maxlen = 80
+label-foreground = ${colors.foreground}
 
+[module/date]
+type = custom/script
+exec = date +'%d/%m/%Y  %H:%M'
+interval = 5
+click-left = gsimplecal
+label = %output%
+format-foreground = ${colors.teal}
+format-underline = ${colors.teal}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume = <ramp-volume> <label-volume>
+format-volume-foreground = ${colors.blue}
+format-volume-underline = ${colors.blue}
+label-volume = %percentage%%
+label-muted = " muted"
+label-muted-foreground = ${colors.alert}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+click-right = pavucontrol
 
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #fb4934
-label = %percentage:2%%
-format = <label> <ramp-coreload>
-ramp-coreload-0 = ▁
-ramp-coreload-1 = ▂
-ramp-coreload-2 = ▃
-ramp-coreload-3 = ▄
-ramp-coreload-4 = ▅
-ramp-coreload-5 = ▆
-ramp-coreload-6 = ▇
-ramp-coreload-7 = █
+format-foreground = ${colors.orange}
+format-underline = ${colors.orange}
+label = %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #b16286
+format-prefix = "󰍛 "
+format-foreground = ${colors.purple}
+format-underline = ${colors.purple}
 label = %percentage_used%%
-
-[module/eth]
-type = internal/network
-interface = enp39s0
-interval = 3.0
-
-format-connected-underline = #b16286
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = Eth: %local_ip%   ↓ %downspeed:9%   ↑ %upspeed:9%
-
-format-disconnected =
-
-[module/wlan]
-type = internal/network
-interface = wlp4s0
-interval = 3.0
-
-format-connected-underline = #b16286
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = Wifi: %local_ip%   ↓ %downspeed:9%   ↑ %upspeed:9%
-
-format-disconnected =
-
-[module/date]
-type = internal/date
-interval = 1
-date = " %d/%m/%Y"
-time = %H:%M:%S
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #a89984
-label = %date% %time%
-
-[module/pulseaudio]
-type = internal/pulseaudio
-
-format-volume = <label-volume> <bar-volume>
-label-volume = %percentage%%
-label-volume-foreground = ${root.foreground}
-
-label-muted = 🔇 muted
-label-muted-foreground = #666
-
-ramp-volume-0 = 🔈
-ramp-volume-1 = 🔉
-ramp-volume-2 = 🔊
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 1
-bar-volume-fill = ─
-bar-volume-fill-font = 1
-bar-volume-empty = ─
-bar-volume-empty-font = 1
-bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 80
-hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp1_input
-interval = 1
-
+; If temp reads wrong/empty, set hwmon-path instead of thermal-zone. Find it via:
+;   for f in /sys/class/hwmon/hwmon*/temp*_input; do echo "$f"; done
 format = <ramp> <label>
-format-underline = #98971a
+format-foreground = ${colors.amber}
+format-underline = ${colors.amber}
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
+format-warn-underline = ${colors.alert}
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.alert}
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 
-ramp-0 = ▁
-ramp-1 = ▄
-ramp-2 = █
-ramp-foreground = ${colors.foreground-alt}
-
-[module/load]
+[module/bitcoin]
 type = custom/script
-exec = cat /proc/loadavg | awk '{ print $1, $2, $3 }'
-interval = 5
-format-underline = #d79921
-format-prefix = "∞ "
+exec = ~/scripts/bitcoin-quote.sh
+interval = 30
+format-foreground = ${colors.gold}
+format-underline = ${colors.gold}
 
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-; vim:ft=dosini
-
-[module/songinfo]
+[module/headset]
 type = custom/script
-label = %output:0:90%
-format-prefix = "♪ "
-exec = ~/projects/dotfiles/gpmdp-info.sh
-exec-if = ps aux|grep 'Google Play Music Desktop Player'|grep -v grep
-interval = 1
-
-[module/weather]
-type = custom/script
-label = %output:0:90%
-exec = ~/scripts/weather_info.sh
-interval = 300
-format-underline = #458588
+exec = ~/scripts/headphones-battery
+interval = 30
+format-foreground = ${colors.purple}
+format-underline = ${colors.purple}
 
 [module/mousebattery]
 type = custom/script
-
-label-active = %token%
-label-active-font = 1
-label-inactive = %{T3}Inactive%{T-} %time%
-
-label = %output:0:90%
-format-prefix = "🖱️ "
-exec = mow report battery
-interval = 300
-format-underline = #458588
+exec = ~/scripts/mouse-battery.sh
+interval = 30
+format-foreground = ${colors.green}
+format-underline = ${colors.green}
 
 [module/keyboardbattery]
 type = custom/script
-label = %output:0:90%
-exec = echo -n "⌨  "; python /home/thiago/projects/zmk-configs/sofle-nicenano/battery-level.py 2>/dev/null | awk '/Main:/{main=$2} /Peripheral 0:/{print main "%", $3 "%"}'
-interval = 300
-format-underline = #458588
+exec = ~/scripts/keyboard-battery.sh
+interval = 30
+format-foreground = ${colors.cyan}
+format-underline = ${colors.cyan}
+
+; ── Deferred to phase 2: claude-usage / codex-usage ─────────────────────────
+; Both binaries emit Waybar JSON (--waybar) which polybar cannot parse. They
+; need a plain-text + %{F#hex} wrapper before being wired as custom/script.
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0

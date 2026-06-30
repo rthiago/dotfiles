@@ -1,0 +1,11 @@
+# Sourced by SDDM at X11 login (see /usr/share/sddm/scripts/Xsession).
+# Set the cursor env so i3's root cursor and apps both use one
+# consistent size. Without XCURSOR_SIZE, libXcursor picks an oversized cursor via
+# its display heuristic on the large monitor (cursor looks ~2x over windows).
+export XCURSOR_THEME=Bibata-Modern-Classic
+export XCURSOR_SIZE=24
+
+# GNOME Calculator (and other libadwaita/GTK4 apps) ignore the dark GTK theme and
+# follow the system color-scheme, which i3 has no settings daemon to provide.
+# Force the dark scheme for libadwaita apps (race-free; leaves GTK3 theming alone).
+export ADW_DEBUG_COLOR_SCHEME=prefer-dark

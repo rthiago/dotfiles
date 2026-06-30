@@ -1,1 +1,3 @@
-echo -n '🎧 ' ; upower --dump | grep -A 10 'WH-1000XM3' | awk '/percentage/ {print $2}'
+#!/bin/sh
+pct=$(upower --dump | grep -A 10 'WH-1000XM3' | awk '/percentage/ {print $2}')
+echo -n " ${pct:-off}"
