@@ -40,7 +40,7 @@ font-1 = JetBrainsMono Nerd Font:size=14;3
 
 modules-left = i3 xwindow
 modules-center = date
-modules-right = bitcoin headset mousebattery keyboardbattery pulseaudio cpu memory temperature
+modules-right = claudeusage codexusage bitcoin headset mousebattery keyboardbattery pulseaudio cpu memory temperature
 
 tray-position = right
 tray-padding = 2
@@ -177,9 +177,22 @@ interval = 30
 format-foreground = ${colors.cyan}
 format-underline = ${colors.cyan}
 
-; ── Deferred to phase 2: claude-usage / codex-usage ─────────────────────────
-; Both binaries emit Waybar JSON (--waybar) which polybar cannot parse. They
-; need a plain-text + %{F#hex} wrapper before being wired as custom/script.
+; claude-usage / codex-usage only emit Waybar JSON; ai-usage-polybar.sh extracts
+; it for polybar. The bar line rewrites Pango markup to %{F}/%{u} tags, so icon
+; and underline both carry the binary's brand color (red on error) and no static
+; format-underline is set here. click-left pops the 5h/7d breakdown via dunst
+; (polybar has no hover tooltips). interval = 60 to spare the authed endpoint.
+[module/claudeusage]
+type = custom/script
+exec = ~/scripts/ai-usage-polybar.sh claude
+click-left = ~/scripts/ai-usage-polybar.sh claude popup
+interval = 60
+
+[module/codexusage]
+type = custom/script
+exec = ~/scripts/ai-usage-polybar.sh codex
+click-left = ~/scripts/ai-usage-polybar.sh codex popup
+interval = 60
 
 [settings]
 screenchange-reload = true
