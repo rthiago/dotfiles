@@ -1,5 +1,5 @@
 price=$(
-    curl -fsS "https://api.coinbase.com/v2/prices/BTC-USD/spot" | jq -er '
+    curl -fs --max-time 5 "https://api.coinbase.com/v2/prices/BTC-USD/spot" | jq -er '
         def format_price:
             (.*100 | round) as $cents
             | (($cents / 100) | floor | tostring) as $whole
