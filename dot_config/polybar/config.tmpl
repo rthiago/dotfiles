@@ -1,19 +1,18 @@
-; polybar bar — Tokyo Night palette, flat.
+; polybar bar — palette from .chezmoidata/colors.toml, flat.
 
 [colors]
-background = #ee16161e
-background-alt = #2a2a4a
-foreground = #c0caf5
-foreground-alt = #565f89
-teal = #00ffc8
-alert = #ff2a6d
-green = #9ece6a
-cyan = #7dcfff
-blue = #7aa2f7
-purple = #bb9af7
-orange = #ff9e64
-amber = #e0af68
-gold = #f7b731
+background = #ee{{ trimPrefix "#" .colors.bg }}
+background-alt = {{ .colors.bg_highlight }}
+foreground = {{ .colors.fg }}
+foreground-alt = {{ .colors.muted }}
+accent = {{ .colors.purple }}
+alert = {{ .colors.red }}
+green = {{ .colors.green }}
+cyan = {{ .colors.cyan }}
+pink = {{ .colors.pink }}
+purple = {{ .colors.purple }}
+orange = {{ .colors.orange }}
+yellow = {{ .colors.yellow }}
 
 ; Primary bar: full module set + systray. launch.sh runs this ONLY on the
 ; primary output. The tray lives here alone so it can't race onto the secondary.
@@ -66,12 +65,12 @@ wrapping-scroll = false
 pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #16161e
-label-mode-background = ${colors.teal}
+label-mode-foreground = {{ .colors.bg }}
+label-mode-background = ${colors.accent}
 
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
-label-focused-underline = ${colors.teal}
+label-focused-underline = ${colors.accent}
 label-focused-padding = 2
 
 label-unfocused = %index%
@@ -84,7 +83,7 @@ label-visible-padding = 2
 
 label-urgent = %index%
 label-urgent-background = ${colors.alert}
-label-urgent-foreground = #16161e
+label-urgent-foreground = {{ .colors.bg }}
 label-urgent-padding = 2
 
 [module/xwindow]
@@ -99,14 +98,14 @@ exec = date +'%d/%m/%Y  %H:%M'
 interval = 5
 click-left = gsimplecal
 label = %output%
-format-foreground = ${colors.teal}
-format-underline = ${colors.teal}
+format-foreground = ${colors.accent}
+format-underline = ${colors.accent}
 
 [module/pulseaudio]
 type = internal/pulseaudio
 format-volume = <ramp-volume> <label-volume>
-format-volume-foreground = ${colors.blue}
-format-volume-underline = ${colors.blue}
+format-volume-foreground = ${colors.pink}
+format-volume-underline = ${colors.pink}
 label-volume = %percentage%%
 label-muted = " muted"
 label-muted-foreground = ${colors.alert}
@@ -138,8 +137,8 @@ warn-temperature = 80
 ; If temp reads wrong/empty, set hwmon-path instead of thermal-zone. Find it via:
 ;   for f in /sys/class/hwmon/hwmon*/temp*_input; do echo "$f"; done
 format = <ramp> <label>
-format-foreground = ${colors.amber}
-format-underline = ${colors.amber}
+format-foreground = ${colors.yellow}
+format-underline = ${colors.yellow}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${colors.alert}
 label = %temperature-c%
@@ -153,8 +152,8 @@ ramp-2 = 
 type = custom/script
 exec = ~/scripts/bitcoin-quote.sh
 interval = 30
-format-foreground = ${colors.gold}
-format-underline = ${colors.gold}
+format-foreground = ${colors.yellow}
+format-underline = ${colors.yellow}
 
 [module/headset]
 type = custom/script

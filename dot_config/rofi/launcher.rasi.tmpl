@@ -1,4 +1,4 @@
-/* Dracula-leaning rofi launcher with rounded entries and subtle accents */
+/* Rofi launcher with rounded entries; palette from .chezmoidata/colors.toml */
 
 configuration {
     show-icons:        true;
@@ -13,14 +13,14 @@ configuration {
 }
 
 * {
-    bg:           #282a36;
-    bg-alt:       #21222c;
-    bg-selected:  #44475a;
-    fg:           #f8f8f2;
-    fg-muted:     #6272a4;
-    accent:       #bd93f9;
-    accent-2:     #8be9fd;
-    urgent:       #ff5555;
+    bg:           {{ .colors.bg }};
+    bg-alt:       {{ .colors.bg_dark }};
+    bg-selected:  {{ .colors.bg_highlight }};
+    fg:           {{ .colors.fg }};
+    fg-muted:     {{ .colors.muted }};
+    accent:       {{ .colors.purple }};
+    accent-2:     {{ .colors.cyan }};
+    urgent:       {{ .colors.red }};
 
     background-color:  transparent;
     text-color:        @fg;

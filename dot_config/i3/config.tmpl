@@ -14,14 +14,14 @@ gaps outer 5
 focus_follows_mouse no
 floating_modifier $mod
 
-# Dracula palette (focused border is solid purple).
-set $bg      #282a36
-set $current #44475a
-set $fg      #f8f8f2
-set $comment #6272a4
-set $purple  #bd93f9
-set $pink    #ff79c6
-set $red     #ff5555
+# Palette from .chezmoidata/colors.toml (focused border is solid purple).
+set $bg      {{ .colors.bg }}
+set $current {{ .colors.bg_highlight }}
+set $fg      {{ .colors.fg }}
+set $comment {{ .colors.muted }}
+set $purple  {{ .colors.purple }}
+set $pink    {{ .colors.pink }}
+set $red     {{ .colors.red }}
 
 #                       border   background text     indicator child_border
 client.focused          $purple  $purple    $bg      $pink     $purple

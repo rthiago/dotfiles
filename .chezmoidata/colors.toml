@@ -1,0 +1,29 @@
+# Desktop palette — single source of truth: Dracula (https://draculatheme.com).
+# Referenced by the *.tmpl configs (i3, polybar, dunst, rofi, alacritty).
+# To retheme the whole desktop: swap the values here, then
+#   chezmoi apply ~/.config/{i3,polybar,dunst,rofi,alacritty}
+# and reload each app.
+
+[colors]
+bg = "#282a36"
+bg_dark = "#21222c"      # darker panels / ANSI black
+bg_highlight = "#44475a" # "current line": selections, inactive borders, frames
+fg = "#f8f8f2"
+muted = "#6272a4"        # "comment": secondary text / ANSI bright black
+purple = "#bd93f9"       # primary accent
+pink = "#ff79c6"
+red = "#ff5555"
+green = "#50fa7b"
+cyan = "#8be9fd"
+orange = "#ffb86c"
+yellow = "#f1fa8c"
+
+# Bright ANSI variants (terminal only)
+[colors.bright]
+red = "#ff6e6e"
+green = "#69ff94"
+yellow = "#ffffa5"
+blue = "#d6acff"
+magenta = "#ff92df"
+cyan = "#a4ffff"
+white = "#ffffff"

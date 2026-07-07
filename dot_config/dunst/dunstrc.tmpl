@@ -1,4 +1,4 @@
-# dunst — Dracula theme.
+# dunst — palette from .chezmoidata/colors.toml.
 # Transparency needs a running compositor (picom is autostarted by i3).
 
 [global]
@@ -25,7 +25,7 @@
     horizontal_padding = 14
     text_icon_padding = 8
     frame_width = 2
-    frame_color = "#44475a"
+    frame_color = "{{ .colors.bg_highlight }}"
     gap_size = 6
     separator_color = frame
     sort = yes
@@ -53,19 +53,20 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    background = "#282a36"
-    foreground = "#6272a4"
-    frame_color = "#44475a"
+    background = "{{ .colors.bg }}"
+    foreground = "{{ .colors.muted }}"
+    frame_color = "{{ .colors.bg_highlight }}"
     timeout = 5
 
 [urgency_normal]
-    background = "#282a36"
-    foreground = "#f8f8f2"
-    frame_color = "#44475a"
+    background = "{{ .colors.bg }}"
+    foreground = "{{ .colors.fg }}"
+    frame_color = "{{ .colors.bg_highlight }}"
     timeout = 10
 
 [urgency_critical]
+    # red-tinted bg (hand-mixed from palette red + bg; adjust on palette swap)
     background = "#3c1e23"
-    foreground = "#f8f8f2"
-    frame_color = "#ff5555"
+    foreground = "{{ .colors.fg }}"
+    frame_color = "{{ .colors.red }}"
     timeout = 0
