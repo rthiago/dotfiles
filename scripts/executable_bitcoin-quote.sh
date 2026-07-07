@@ -8,8 +8,10 @@ price=$(
         .data.amount | tonumber | format_price
     '
 )
+# Nerd Font bitcoin glyph (U+F15A): the Unicode sign ₿ (U+20BF) is missing
+# from Hack, the bar font.
 if [ -n "$price" ]; then
-    echo "₿ $price"
+    echo " $price"
 else
-    echo "₿ failed"
+    echo " failed"
 fi

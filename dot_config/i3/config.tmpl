@@ -4,7 +4,8 @@ set $mod Mod4
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
 # Used for tab/stack titles (pixel borders draw no titlebar otherwise).
-font pango:JetBrains Mono 10
+# Family from .chezmoidata/fonts.toml.
+font pango:{{ .fonts.mono }} 10
 
 # ── Look & feel ───────────────────────────────────────────────────────────────
 default_border pixel 2

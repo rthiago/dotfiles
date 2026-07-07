@@ -1,0 +1,7 @@
+# Desktop font — single source of truth, same idea as colors.toml.
+# mono is the plain family; mono_nerd is the icon-patched build for apps that
+# render Nerd Font glyphs (polybar). Sizes stay per-app.
+
+[fonts]
+mono = "Hack"
+mono_nerd = "Hack Nerd Font"
