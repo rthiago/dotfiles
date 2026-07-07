@@ -39,23 +39,19 @@ font-1 = JetBrainsMono Nerd Font:size=14;3
 
 modules-left = i3 xwindow
 modules-center = date
-modules-right = claudeusage codexusage bitcoin headset mousebattery keyboardbattery pulseaudio cpu memory temperature
-
-tray-position = right
-tray-padding = 2
-tray-background = ${colors.background}
+modules-right = claudeusage codexusage bitcoin headset mousebattery keyboardbattery pulseaudio cpu memory temperature tray
 
 cursor-click = pointer
 enable-ipc = true
 
 ; Secondary bar: workspaces + focused window title only, no clock/crypto/sensors
 ; and no tray (this is the portrait monitor). Inherits all look/font/
-; color from bar/main; just blanks the center + right modules and the tray.
+; color from bar/main; just blanks the center + right modules (which also
+; drops the tray, since it's a module on the main bar).
 [bar/secondary]
 inherit = bar/main
 modules-center =
 modules-right =
-tray-position = none
 
 [module/i3]
 type = internal/i3
@@ -85,6 +81,13 @@ label-urgent = %index%
 label-urgent-background = ${colors.alert}
 label-urgent-foreground = {{ .colors.bg }}
 label-urgent-padding = 2
+
+; internal/tray (3.7+): rendered inside the bar window, so the translucent
+; background stays consistent (the legacy tray-position tray was a separate
+; opaque window that mismatched the bar).
+[module/tray]
+type = internal/tray
+tray-spacing = 6px
 
 [module/xwindow]
 type = internal/xwindow
