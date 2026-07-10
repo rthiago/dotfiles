@@ -13,8 +13,8 @@ status=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)   # "Volume: 0.55 [MUTED]"
 vol=$(echo "$status" | awk '{print int($2 * 100 + 0.5)}')
 
 if echo "$status" | grep -q MUTED; then
-  dunstify -a volume -u low -h string:x-dunst-stack-tag:volume -t 1500 "Muted"
+  dunstify -a volume -u low -h string:x-dunst-stack-tag:volume -t 2500 "Muted"
 else
   dunstify -a volume -u low -h string:x-dunst-stack-tag:volume \
-    -h int:value:"$vol" -t 1500 "Volume ${vol}%"
+    -h int:value:"$vol" -t 2500 "Volume ${vol}%"
 fi
