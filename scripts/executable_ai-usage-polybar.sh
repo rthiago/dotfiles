@@ -1,45 +1,43 @@
 #!/bin/sh
-# Polybar wrapper for claude-usage / codex-usage.
+# Polybar wrapper for ai-usagebar (github.com/akitaonrails/ai-usagebar).
 #
-# Both binaries only emit Waybar JSON (--waybar); their --format flag is a no-op
-# without it. This pulls the JSON apart for polybar:
-#   (no mode)  one bar line: the icon (brand-colored by the binary, red on
-#              error) plus percent + reset, with the whole widget underlined in
-#              that same color. Pango <span> markup is rewritten to polybar
+# ai-usagebar only emits Waybar JSON ({text, tooltip, class}); this pulls the
+# JSON apart for polybar:
+#   (no mode)  one bar line: brand icon + percent + reset, with the whole
+#              widget underlined and tinted in the widget's flat brand color
+#              (red on error). Pango <span> markup is rewritten to polybar
 #              %{F}/%{u} tags, since polybar can't render Pango.
-#   popup      the .tooltip breakdown (5h / 7d windows) as a dunst notification,
-#              bound to click-left in the bar (polybar has no hover tooltips).
+#   popup      the .tooltip breakdown (session / weekly windows) as a dunst
+#              notification, bound to click-left in the bar (polybar has no
+#              hover tooltips). The tooltip is Pango markup, which dunst
+#              renders natively; it's wrapped in <tt> so the box-drawing
+#              frame lines up.
 #
 # Usage: ai-usage-polybar.sh {claude|codex} [popup]
 
 tool="$1"
 mode="$2"
-bin="${tool}-usage"
-command -v "$bin" >/dev/null 2>&1 || exit 0
+command -v ai-usagebar >/dev/null 2>&1 || exit 0
 
-# claude-usage authenticates by scraping claude.ai browser cookies. Its default
-# browser order tries Chrome first and returns the first browser holding any
-# claude.ai cookie, so a stale Chrome session 403s ("Auth Err") before Brave is
-# ever tried. Pin it to Brave, the logged-in default browser. codex-usage needs
-# no browser: it reads its own token at ~/.codex/auth.json.
+# Auth comes from the CLIs' own credential files (~/.claude/.credentials.json,
+# ~/.codex/auth.json) -- if a widget shows an auth error, log the CLI back in.
 case "$tool" in
-    claude) set -- --browser brave ;;
-    *)      set -- ;;
+    claude) brand='#DE7356'; set -- --vendor anthropic --icon "󰜡" ;;
+    codex)  brand='#74AA9C'; set -- --vendor openai --icon "󰬫" ;;
+    *)      exit 0 ;;
 esac
 
-json=$("$bin" "$@" --waybar --format '{icon} {pct}% {reset}' 2>/dev/null)
+json=$(ai-usagebar "$@" --json 2>/dev/null)
 [ -n "$json" ] || exit 0
 
 if [ "$mode" = popup ]; then
-    # Drop the "Click to Refresh" footer (a waybar instruction; in polybar the
-    # click is what opened this popup) and any blank lines, then escape for
-    # dunst's pango markup and render <tt> so the table columns line up.
-    tip=$(printf '%s' "$json" | jq -r '.tooltip // empty' \
-        | grep -iv '^[[:space:]]*click to refresh[[:space:]]*$' \
-        | grep -v '^[[:space:]]*$' \
-        | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g')
+    tip=$(printf '%s' "$json" | jq -r '.tooltip // empty')
     [ -n "$tip" ] || exit 0
     title=$(printf '%s' "$tool" | sed 's/^./\u&/')
+    # Both dunst and swaync advertise the same D-Bus service. Under i3,
+    # activation can select swaync even though it requires Wayland.
+    pgrep -x dunst >/dev/null 2>&1 ||
+        systemctl --user start dunst.service >/dev/null 2>&1
     dunstify -a ai-usage -r 9911 -u normal "$title usage" "<tt>$tip</tt>"
     exit 0
 fi
@@ -47,15 +45,15 @@ fi
 text=$(printf '%s' "$json" | jq -r '.text // empty')
 [ -n "$text" ] || exit 0
 
-# The binary colors only the icon (or, on error, the whole string) with a Pango
-# <span foreground='#hex'>. Pull that hex out and paint the entire widget with
-# it -- icon, text and underline -- so each widget is one flat brand color like
-# every other module on the bar (and goes fully red on error). Then strip Pango,
-# which polybar can't render.
-color=$(printf '%s' "$text" | grep -oE '#[0-9A-Fa-f]{3,8}' | head -1)
-plain=$(printf '%s' "$text" | sed -E 's/<[^>]*>//g')
-if [ -n "$color" ]; then
-    printf '%%{u%s}%%{+u}%%{F%s}%s%%{F-}%%{-u}\n' "$color" "$color" "$plain"
+# The binary colors the line by usage level; the bar instead keeps one flat
+# brand color per widget, like every other module. The binary's Pango <span>
+# is only an error probe: on failure the text is a bare "⚠" with no span, and
+# the whole widget goes red. Strip the Pango markup, which polybar can't
+# render, then paint icon, text and underline alike.
+if printf '%s' "$text" | grep -q '<span'; then
+    color=$brand
 else
-    printf '%s\n' "$plain"
+    color='#ff5555'
 fi
+plain=$(printf '%s' "$text" | sed -E 's/<[^>]*>//g')
+printf '%%{u%s}%%{+u}%%{F%s}%s%%{F-}%%{-u}\n' "$color" "$color" "$plain"

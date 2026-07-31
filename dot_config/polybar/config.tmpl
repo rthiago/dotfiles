@@ -179,11 +179,12 @@ interval = 30
 format-foreground = ${colors.cyan}
 format-underline = ${colors.cyan}
 
-; claude-usage / codex-usage only emit Waybar JSON; ai-usage-polybar.sh extracts
-; it for polybar. The bar line rewrites Pango markup to %{F}/%{u} tags, so icon
-; and underline both carry the binary's brand color (red on error) and no static
-; format-underline is set here. click-left pops the 5h/7d breakdown via dunst
-; (polybar has no hover tooltips). interval = 60 to spare the authed endpoint.
+; ai-usagebar only emits Waybar JSON; ai-usage-polybar.sh extracts it for
+; polybar. The bar line rewrites Pango markup to %{F}/%{u} tags, so icon and
+; underline both carry the widget's flat brand color (red on error) and no
+; static format-underline is set here. click-left pops the session/weekly
+; breakdown via dunst (polybar has no hover tooltips). interval = 60 to spare
+; the authed endpoints.
 [module/claudeusage]
 type = custom/script
 exec = ~/scripts/ai-usage-polybar.sh claude
