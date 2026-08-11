@@ -183,19 +183,19 @@ format-underline = ${colors.cyan}
 ; polybar. The bar line rewrites Pango markup to %{F}/%{u} tags, so icon and
 ; underline both carry the widget's flat brand color (red on error) and no
 ; static format-underline is set here. click-left pops the session/weekly
-; breakdown via dunst (polybar has no hover tooltips). interval = 60 to spare
-; the authed endpoints.
+; breakdown via dunst (polybar has no hover tooltips). interval = 300 matches
+; ai-usagebar's upstream recommendation and avoids throttling the auth endpoints.
 [module/claudeusage]
 type = custom/script
 exec = ~/scripts/ai-usage-polybar.sh claude
 click-left = ~/scripts/ai-usage-polybar.sh claude popup
-interval = 60
+interval = 300
 
 [module/codexusage]
 type = custom/script
 exec = ~/scripts/ai-usage-polybar.sh codex
 click-left = ~/scripts/ai-usage-polybar.sh codex popup
-interval = 60
+interval = 300
 
 [settings]
 screenchange-reload = true
