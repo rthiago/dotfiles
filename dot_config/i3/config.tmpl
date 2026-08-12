@@ -190,7 +190,6 @@ for_window [class="Nautilus"] floating enable
 for_window [class="file-roller"] floating enable
 for_window [class="Solaar"] floating enable
 for_window [class="uhk-agent"] floating enable
-for_window [class="Hermes"] floating enable
 
 # Scratchpad apps. Obsidian + Sublime are shown together via $mod+b.
 for_window [class="slack"] move scratchpad
@@ -199,10 +198,11 @@ for_window [class="slack"] move scratchpad
 # the guard they were moved to the scratchpad too, leaving the editor frozen on an
 # invisible modal (Esc cancelled it). i3 auto-floats the dialog on the current ws.
 for_window [class="Sublime_text" window_type="normal"] move scratchpad
-# border pixel 2: obsidian (Electron) and gnome-calculator (libadwaita CSD) set
+# border pixel 2: obsidian and Hermes (Electron), plus gnome-calculator (libadwaita CSD), set
 # _MOTIF_WM_HINTS asking for no decorations, so i3 draws border none. Force it
 # back on, otherwise the focused purple border never appears.
 for_window [class="obsidian"] border pixel 2, move scratchpad
+for_window [class="Hermes"] border pixel 2
 for_window [class="(?i)gnome-calculator"] floating enable, border pixel 2, resize set 360 520, move scratchpad
 
 # ── Autostart ─────────────────────────────────────────────────────────────────
