@@ -156,3 +156,5 @@ bindkey '^[h' insert-cycledleft
 
 # Python Safety
 [ -f "/home/thiago/.safety/.safety_profile" ] && . "/home/thiago/.safety/.safety_profile"
+
+source <(herdr completion zsh)
