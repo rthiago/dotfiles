@@ -147,6 +147,10 @@ ulimit -n 100000
 # Delete word with ctrl+backspace
 bindkey '^H' backward-kill-word
 
+# Home and End sequences advertised by tmux-256color
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+
 # dircircle with alt+l and alt+h
 bindkey '^[l' insert-cycledright
 bindkey '^[h' insert-cycledleft
