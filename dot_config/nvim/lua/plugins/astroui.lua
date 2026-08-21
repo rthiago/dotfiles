@@ -9,7 +9,7 @@ return {
   specs = {
     {
       "AstroNvim/astrocore",
-      opts = { options = { opt = { foldcolumn = "0" } } },
+      opts = { options = { opt = { foldcolumn = "0", wrap = true } } },
     },
   },
   ---@type AstroUIOpts
