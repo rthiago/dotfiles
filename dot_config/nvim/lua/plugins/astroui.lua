@@ -6,6 +6,12 @@
 ---@type LazySpec
 return {
   "AstroNvim/astroui",
+  specs = {
+    {
+      "AstroNvim/astrocore",
+      opts = { options = { opt = { foldcolumn = "0" } } },
+    },
+  },
   ---@type AstroUIOpts
   opts = {
     -- change colorscheme
