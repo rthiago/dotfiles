@@ -9,7 +9,18 @@ return {
   specs = {
     {
       "AstroNvim/astrocore",
-      opts = { options = { opt = { foldcolumn = "0", wrap = true } } },
+      opts = {
+        features = {
+          diagnostics = {
+            virtual_text = false,
+            virtual_lines = false,
+          },
+        },
+        diagnostics = {
+          virtual_text = false,
+        },
+        options = { opt = { foldcolumn = "0", wrap = true } },
+      },
     },
   },
   ---@type AstroUIOpts
