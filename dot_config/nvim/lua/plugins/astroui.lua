@@ -19,7 +19,30 @@ return {
         diagnostics = {
           virtual_text = false,
         },
-        options = { opt = { foldcolumn = "0", wrap = true } },
+        options = { opt = { foldcolumn = "0", scrolloff = 4, wrap = true } },
+        mappings = {
+          n = {
+            ["<C-H>"] = {
+              function() require("astrocore.buffer").nav(-vim.v.count1) end,
+              desc = "Previous buffer",
+            },
+            ["<C-J>"] = { "<C-E>", desc = "Scroll viewport down" },
+            ["<C-K>"] = { "<C-Y>", desc = "Scroll viewport up" },
+            ["<C-L>"] = {
+              function() require("astrocore.buffer").nav(vim.v.count1) end,
+              desc = "Next buffer",
+            },
+            ["<BS>"] = { "<C-^>", desc = "Alternate buffer" },
+            ["<Leader>O"] = {
+              function() vim.fn.setreg("+", vim.fn.expand "%:.") end,
+              desc = "Copy file path",
+            },
+            H = { "^", desc = "First non-blank character" },
+            L = { "g_", desc = "Last non-blank character" },
+            n = { "nzz", desc = "Next search result centered" },
+            N = { "Nzz", desc = "Previous search result centered" },
+          },
+        },
       },
     },
   },
