@@ -40,6 +40,7 @@ export TERM=xterm-256color
 export XZ_DEFAULTS=--threads=0
 export PYTHONBREAKPOINT="pudb.set_trace"
 export AWS_PAGER=""
+export OPENLOC_ALLOW="$HOME"
 
 fpath+=~/.zfunc
 source $ZSH/oh-my-zsh.sh
