@@ -153,8 +153,8 @@ PanelWindow {
                 theme: root.theme
                 text: root.services.claudeText
                 accent: root.services.claudeError ? root.theme.red : root.theme.orange
-                selected: infoPopup.visible && infoPopup.heading === "Claude usage"
-                onClicked: root.openInfo(claudeChip, "Claude usage", root.services.claudeDetails, accent)
+                selected: infoPopup.visible && infoPopup.providerId === "anthropic"
+                onClicked: root.openInfo(claudeChip, "anthropic", root.services.claudeUsage, accent)
             }
 
             BarChip {
@@ -162,8 +162,8 @@ PanelWindow {
                 theme: root.theme
                 text: root.services.codexText
                 accent: root.services.codexError ? root.theme.red : root.theme.green
-                selected: infoPopup.visible && infoPopup.heading === "Codex usage"
-                onClicked: root.openInfo(codexChip, "Codex usage", root.services.codexDetails, accent)
+                selected: infoPopup.visible && infoPopup.providerId === "openai"
+                onClicked: root.openInfo(codexChip, "openai", root.services.codexUsage, accent)
             }
 
             BarChip {
@@ -295,10 +295,10 @@ PanelWindow {
         }
     }
 
-    function openInfo(item, title, content, accent) {
+    function openInfo(item, providerId, usage, accent) {
         calendarPopup.visible = false
         networkPopup.visible = false
-        infoPopup.toggleFor(item, title, content, accent)
+        infoPopup.toggleFor(item, providerId, usage, accent)
     }
 
     SystemClock {

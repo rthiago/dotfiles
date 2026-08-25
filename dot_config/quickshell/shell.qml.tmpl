@@ -17,11 +17,31 @@ ShellRoot {
 
     property string windowTitle: "Desktop"
     property string claudeText: "󰜡 —"
-    property string claudeDetails: "Waiting for usage data"
     property bool claudeError: false
+    property var claudeUsage: ({
+        display_name: "Claude",
+        id: "anthropic",
+        plan: "",
+        metrics: [],
+        sections: [],
+        status: "loading",
+        stale: false,
+        error: null,
+        fetched_at: null
+    })
     property string codexText: "󰬫 —"
-    property string codexDetails: "Waiting for usage data"
     property bool codexError: false
+    property var codexUsage: ({
+        display_name: "Codex",
+        id: "openai",
+        plan: "",
+        metrics: [],
+        sections: [],
+        status: "loading",
+        stale: false,
+        error: null,
+        fetched_at: null
+    })
     property string bitcoinText: " —"
     property string headphonesText: " off"
     property string mouseText: "󰍽 —"
@@ -78,42 +98,58 @@ ShellRoot {
         readonly property string fontFamily: "{{ .fonts.mono_nerd }}"
     }
 
-    function stripMarkup(value) {
-        return String(value || "")
-            .replace(/<br\s*\/?>/gi, "\n")
-            .replace(/<[^>]*>/g, "")
-            .replace(/&amp;/g, "&")
-            .replace(/&lt;/g, "<")
-            .replace(/&gt;/g, ">")
-            .trim()
+    function failedUsage(id, name, message) {
+        return {
+            display_name: name,
+            id: id,
+            plan: "",
+            metrics: [],
+            sections: [],
+            status: "error",
+            stale: false,
+            error: message,
+            fetched_at: null
+        }
     }
 
-    function updateAi(provider, output) {
+    function usageBarText(icon, usage) {
+        if (!usage || usage.status === "error" || usage.error)
+            return icon + " ⚠"
+        if (!usage.metrics || usage.metrics.length === 0)
+            return icon + " —"
+
+        const metric = usage.metrics[0]
+        const resetMatch = String(metric.detail || "").match(/Resets in ([^·]+)/)
+        const reset = resetMatch ? resetMatch[1].trim() : ""
+        return icon + " " + (metric.value || Math.round(Number(metric.percent) || 0) + "%")
+            + (reset ? " · " + reset : "")
+    }
+
+    function updateAiUsage(output) {
         try {
             const parsed = JSON.parse(output)
-            const text = stripMarkup(parsed.text)
-            const details = stripMarkup(parsed.tooltip)
-            const failed = String(parsed.class || "").indexOf("error") !== -1 || text.indexOf("⚠") !== -1
+            const entries = parsed.entries || []
+            let claude = null
+            let codex = null
 
-            if (provider === "claude") {
-                claudeText = text || "󰜡 —"
-                claudeDetails = details || "No usage details available"
-                claudeError = failed
-            } else {
-                codexText = text || "󰬫 —"
-                codexDetails = details || "No usage details available"
-                codexError = failed
+            for (let index = 0; index < entries.length; index++) {
+                if (entries[index].id === "anthropic") claude = entries[index]
+                if (entries[index].id === "openai") codex = entries[index]
             }
+
+            claudeUsage = claude || failedUsage("anthropic", "Claude", "No Claude usage data returned")
+            codexUsage = codex || failedUsage("openai", "Codex", "No Codex usage data returned")
+            claudeError = claudeUsage.status === "error" || Boolean(claudeUsage.error)
+            codexError = codexUsage.status === "error" || Boolean(codexUsage.error)
+            claudeText = usageBarText("󰜡", claudeUsage)
+            codexText = usageBarText("󰬫", codexUsage)
         } catch (error) {
-            if (provider === "claude") {
-                claudeText = "󰜡 ⚠"
-                claudeDetails = "Could not read Claude usage"
-                claudeError = true
-            } else {
-                codexText = "󰬫 ⚠"
-                codexDetails = "Could not read Codex usage"
-                codexError = true
-            }
+            claudeUsage = failedUsage("anthropic", "Claude", "Could not read Claude usage")
+            codexUsage = failedUsage("openai", "Codex", "Could not read Codex usage")
+            claudeText = "󰜡 ⚠"
+            codexText = "󰬫 ⚠"
+            claudeError = true
+            codexError = true
         }
     }
 
@@ -291,15 +327,9 @@ ShellRoot {
     }
 
     ScriptPoller {
-        command: ["ai-usagebar", "--vendor", "anthropic", "--icon", "󰜡", "--json"]
+        command: ["ai-usagebar", "usage", "--json"]
         interval: 300000
-        onUpdated: output => shell.updateAi("claude", output)
-    }
-
-    ScriptPoller {
-        command: ["ai-usagebar", "--vendor", "openai", "--icon", "󰬫", "--json"]
-        interval: 300000
-        onUpdated: output => shell.updateAi("codex", output)
+        onUpdated: output => shell.updateAiUsage(output)
     }
 
     ScriptPoller {
