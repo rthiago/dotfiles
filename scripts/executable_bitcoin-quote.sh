@@ -1,3 +1,5 @@
+#!/bin/sh
+
 price=$(
     curl -fs --max-time 5 "https://api.coinbase.com/v2/prices/BTC-USD/spot" | jq -er '
         def format_price:

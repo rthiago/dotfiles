@@ -1,0 +1,414 @@
+//@ pragma UseQApplication
+//@ pragma NativeTextRendering
+
+import QtQuick
+import Quickshell
+import Quickshell.Io
+import Quickshell.I3
+import Quickshell.Services.Pipewire
+
+ShellRoot {
+    id: shell
+
+    readonly property string home: Quickshell.env("HOME") || ""
+    readonly property string primaryScreenName: Quickshell.env("QS_PRIMARY_MONITOR")
+        || (Quickshell.screens.length > 0 ? Quickshell.screens[0].name : "")
+    readonly property string cpuTemperaturePath: Quickshell.env("QS_CPU_TEMP_PATH") || ""
+
+    property string windowTitle: "Desktop"
+    property string claudeText: "󰜡 —"
+    property string claudeDetails: "Waiting for usage data"
+    property bool claudeError: false
+    property string codexText: "󰬫 —"
+    property string codexDetails: "Waiting for usage data"
+    property bool codexError: false
+    property string bitcoinText: " —"
+    property string headphonesText: " off"
+    property string mouseText: "󰍽 —"
+    property string keyboardText: " —"
+    property bool networkConnected: false
+    property string networkType: ""
+    property string networkConnection: "Disconnected"
+    property var wireguardDefinitions: []
+    property var activeWireguardUuids: []
+    property var wireguardProfiles: []
+    property string pendingWireguardUuid: ""
+    property string wireguardError: ""
+    property bool wireguardConnected: false
+    property int cpuPercent: 0
+    property int memoryPercent: 0
+    property real temperature: 0
+    property real previousCpuTotal: 0
+    property real previousCpuIdle: 0
+    property bool titleRefreshPending: false
+
+    readonly property var audioSink: Pipewire.defaultAudioSink
+    readonly property bool audioMuted: audioSink && audioSink.audio ? audioSink.audio.muted : false
+    readonly property int audioPercent: audioSink && audioSink.audio
+        ? Math.round(audioSink.audio.volume * 100)
+        : 0
+    readonly property string audioText: audioMuted ? " muted" : " " + audioPercent + "%"
+    readonly property string temperatureText: temperature > 0 ? Math.round(temperature) + "°C" : "—"
+    readonly property bool temperatureWarning: temperature >= 80
+    readonly property string networkIcon: !networkConnected
+        ? "󰖪"
+        : networkType === "wifi"
+            ? "󰤨"
+            : "󰈀"
+    readonly property string networkDetails: networkConnected
+        ? networkConnection + "\n" + (networkType === "wifi" ? "Wi-Fi" : "Wired network")
+        : "No active network connection"
+
+    QtObject {
+        id: palette
+
+        readonly property color background: "{{ .colors.bg }}"
+        readonly property color panel: "#f5{{ trimPrefix "#" .colors.bg }}"
+        readonly property color barBackground: "#ee{{ trimPrefix "#" .colors.bg }}"
+        readonly property color highlight: "{{ .colors.bg_highlight }}"
+        readonly property color foreground: "{{ .colors.fg }}"
+        readonly property color muted: "{{ .colors.muted }}"
+        readonly property color purple: "{{ .colors.purple }}"
+        readonly property color pink: "{{ .colors.pink }}"
+        readonly property color red: "{{ .colors.red }}"
+        readonly property color green: "{{ .colors.green }}"
+        readonly property color cyan: "{{ .colors.cyan }}"
+        readonly property color orange: "{{ .colors.orange }}"
+        readonly property color yellow: "{{ .colors.yellow }}"
+        readonly property string fontFamily: "{{ .fonts.mono_nerd }}"
+    }
+
+    function stripMarkup(value) {
+        return String(value || "")
+            .replace(/<br\s*\/?>/gi, "\n")
+            .replace(/<[^>]*>/g, "")
+            .replace(/&amp;/g, "&")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">")
+            .trim()
+    }
+
+    function updateAi(provider, output) {
+        try {
+            const parsed = JSON.parse(output)
+            const text = stripMarkup(parsed.text)
+            const details = stripMarkup(parsed.tooltip)
+            const failed = String(parsed.class || "").indexOf("error") !== -1 || text.indexOf("⚠") !== -1
+
+            if (provider === "claude") {
+                claudeText = text || "󰜡 —"
+                claudeDetails = details || "No usage details available"
+                claudeError = failed
+            } else {
+                codexText = text || "󰬫 —"
+                codexDetails = details || "No usage details available"
+                codexError = failed
+            }
+        } catch (error) {
+            if (provider === "claude") {
+                claudeText = "󰜡 ⚠"
+                claudeDetails = "Could not read Claude usage"
+                claudeError = true
+            } else {
+                codexText = "󰬫 ⚠"
+                codexDetails = "Could not read Codex usage"
+                codexError = true
+            }
+        }
+    }
+
+    function updateCpu(value) {
+        const firstLine = String(value || "").split("\n")[0].trim()
+        const fields = firstLine.split(/\s+/).slice(1).map(Number)
+        if (fields.length < 4 || fields.some(field => !isFinite(field))) return
+
+        const idle = fields[3] + (fields[4] || 0)
+        const total = fields.reduce((sum, field) => sum + field, 0)
+        if (previousCpuTotal > 0 && total > previousCpuTotal) {
+            const busyDelta = (total - previousCpuTotal) - (idle - previousCpuIdle)
+            cpuPercent = Math.max(0, Math.min(100, Math.round(100 * busyDelta / (total - previousCpuTotal))))
+        }
+        previousCpuTotal = total
+        previousCpuIdle = idle
+    }
+
+    function updateMemory(value) {
+        const text = String(value || "")
+        const totalMatch = text.match(/^MemTotal:\s+(\d+)/m)
+        const availableMatch = text.match(/^MemAvailable:\s+(\d+)/m)
+        if (!totalMatch || !availableMatch) return
+
+        const total = Number(totalMatch[1])
+        const available = Number(availableMatch[1])
+        if (total > 0)
+            memoryPercent = Math.max(0, Math.min(100, Math.round(100 * (total - available) / total)))
+    }
+
+    function updateTemperature(value) {
+        const millidegrees = Number(String(value || "").trim())
+        if (isFinite(millidegrees) && millidegrees > 0)
+            temperature = millidegrees / 1000
+    }
+
+    function updateNetwork(value) {
+        const lines = String(value || "").trim().split("\n")
+        networkConnected = false
+        networkType = ""
+        networkConnection = "Disconnected"
+
+        for (let index = 0; index < lines.length; index++) {
+            const fields = lines[index].split(":")
+            const type = fields[0]
+            const state = fields[1] || ""
+            if ((type === "ethernet" || type === "wifi") && state.indexOf("connected") === 0) {
+                networkConnected = true
+                networkType = type
+                networkConnection = fields.slice(2).join(":") || (type === "wifi" ? "Wi-Fi" : "Wired network")
+                return
+            }
+        }
+    }
+
+    function updateWireguardDefinitions(value) {
+        const definitions = []
+        const lines = String(value || "").trim().split("\n")
+        for (let index = 0; index < lines.length; index++) {
+            const fields = lines[index].split(":")
+            const type = fields.pop() || ""
+            const uuid = fields.pop() || ""
+            const name = fields.join(":").replace(/\\:/g, ":")
+            if (type === "wireguard" && uuid)
+                definitions.push({ name: name || "WireGuard", uuid: uuid })
+        }
+        wireguardDefinitions = definitions
+        rebuildWireguardProfiles()
+    }
+
+    function updateActiveWireguard(value) {
+        const active = []
+        const lines = String(value || "").trim().split("\n")
+        for (let index = 0; index < lines.length; index++) {
+            const fields = lines[index].split(":")
+            if (fields.length >= 2 && fields[1] === "wireguard")
+                active.push(fields[0])
+        }
+        activeWireguardUuids = active
+        wireguardConnected = active.length > 0
+        rebuildWireguardProfiles()
+    }
+
+    function rebuildWireguardProfiles() {
+        wireguardProfiles = wireguardDefinitions.map(profile => ({
+            name: profile.name,
+            uuid: profile.uuid,
+            active: activeWireguardUuids.indexOf(profile.uuid) !== -1
+        }))
+    }
+
+    function refreshNetworkData() {
+        networkStatus.refresh()
+        wireguardDefinitionsStatus.refresh()
+        activeWireguardStatus.refresh()
+    }
+
+    function toggleWireguard(uuid, active) {
+        if (wireguardProcess.running) return
+        pendingWireguardUuid = uuid
+        wireguardError = ""
+        wireguardProcess.command = [
+            "env", "LC_ALL=C", "nmcli", "--wait", "15", "connection",
+            active ? "down" : "up", "uuid", uuid
+        ]
+        wireguardProcess.running = true
+    }
+
+    function focusedNode(node) {
+        if (!node) return null
+        if (node.focused && (node.type === "con" || node.type === "floating_con")) return node
+
+        const children = (node.nodes || []).concat(node.floating_nodes || [])
+        for (let index = 0; index < children.length; index++) {
+            const match = focusedNode(children[index])
+            if (match) return match
+        }
+        return null
+    }
+
+    function refreshWindowTitle() {
+        if (titleProcess.running) {
+            titleRefreshPending = true
+            return
+        }
+        titleProcess.running = true
+    }
+
+    function toggleAudioMute() {
+        if (audioSink && audioSink.audio)
+            audioSink.audio.muted = !audioSink.audio.muted
+    }
+
+    function adjustAudioVolume(delta) {
+        if (!audioSink || !audioSink.audio) return
+        audioSink.audio.muted = false
+        audioSink.audio.volume = Math.max(0, Math.min(1, audioSink.audio.volume + delta))
+    }
+
+    PwObjectTracker {
+        objects: shell.audioSink ? [shell.audioSink] : []
+    }
+
+    FileView {
+        id: cpuStat
+        path: "/proc/stat"
+        blockLoading: true
+        onLoaded: shell.updateCpu(text())
+    }
+
+    FileView {
+        id: memoryInfo
+        path: "/proc/meminfo"
+        blockLoading: true
+        onLoaded: shell.updateMemory(text())
+    }
+
+    FileView {
+        id: temperatureInfo
+        path: shell.cpuTemperaturePath
+        blockLoading: true
+        printErrors: false
+        onLoaded: shell.updateTemperature(text())
+    }
+
+    Timer {
+        interval: 2000
+        running: true
+        repeat: true
+        onTriggered: {
+            cpuStat.reload()
+            memoryInfo.reload()
+            if (shell.cpuTemperaturePath) temperatureInfo.reload()
+        }
+    }
+
+    ScriptPoller {
+        command: ["ai-usagebar", "--vendor", "anthropic", "--icon", "󰜡", "--json"]
+        interval: 300000
+        onUpdated: output => shell.updateAi("claude", output)
+    }
+
+    ScriptPoller {
+        command: ["ai-usagebar", "--vendor", "openai", "--icon", "󰬫", "--json"]
+        interval: 300000
+        onUpdated: output => shell.updateAi("codex", output)
+    }
+
+    ScriptPoller {
+        command: [shell.home + "/scripts/bitcoin-quote.sh"]
+        interval: 30000
+        onUpdated: output => shell.bitcoinText = output || " —"
+    }
+
+    ScriptPoller {
+        command: [shell.home + "/scripts/headphones-battery"]
+        interval: 30000
+        onUpdated: output => shell.headphonesText = output || " off"
+    }
+
+    ScriptPoller {
+        command: [shell.home + "/scripts/mouse-battery.sh"]
+        interval: 30000
+        onUpdated: output => shell.mouseText = output || "󰍽 —"
+    }
+
+    ScriptPoller {
+        command: [shell.home + "/scripts/keyboard-battery.sh"]
+        interval: 30000
+        onUpdated: output => shell.keyboardText = output || " —"
+    }
+
+    ScriptPoller {
+        id: networkStatus
+        command: ["env", "LC_ALL=C", "nmcli", "-t", "-f", "TYPE,STATE,CONNECTION", "device"]
+        interval: 300000
+        onUpdated: output => shell.updateNetwork(output)
+    }
+
+    ScriptPoller {
+        id: wireguardDefinitionsStatus
+        command: ["env", "LC_ALL=C", "nmcli", "-t", "-f", "NAME,UUID,TYPE", "connection", "show"]
+        interval: 300000
+        onUpdated: output => shell.updateWireguardDefinitions(output)
+    }
+
+    ScriptPoller {
+        id: activeWireguardStatus
+        command: ["env", "LC_ALL=C", "nmcli", "-t", "-f", "UUID,TYPE", "connection", "show", "--active"]
+        interval: 300000
+        onUpdated: output => shell.updateActiveWireguard(output)
+    }
+
+    Process {
+        command: ["env", "LC_ALL=C", "nmcli", "monitor"]
+        running: true
+
+        stdout: SplitParser {
+            onRead: shell.refreshNetworkData()
+        }
+    }
+
+    Process {
+        id: wireguardProcess
+
+        stderr: StdioCollector {
+            onStreamFinished: shell.wireguardError = text.trim()
+        }
+
+        onExited: exitCode => {
+            if (exitCode !== 0 && !shell.wireguardError)
+                shell.wireguardError = "Could not change the WireGuard connection"
+            shell.pendingWireguardUuid = ""
+            shell.refreshNetworkData()
+        }
+    }
+
+    Process {
+        id: titleProcess
+        command: ["i3-msg", "-t", "get_tree"]
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    const node = shell.focusedNode(JSON.parse(text))
+                    shell.windowTitle = node && node.name ? node.name : "Desktop"
+                } catch (error) {
+                    shell.windowTitle = "Desktop"
+                }
+            }
+        }
+
+        onExited: {
+            if (shell.titleRefreshPending) {
+                shell.titleRefreshPending = false
+                shell.refreshWindowTitle()
+            }
+        }
+    }
+
+    I3IpcListener {
+        subscriptions: ["window", "workspace"]
+        onIpcEvent: shell.refreshWindowTitle()
+    }
+
+    Component.onCompleted: refreshWindowTitle()
+
+    Variants {
+        model: Quickshell.screens
+
+        delegate: Component {
+            Bar {
+                services: shell
+                theme: palette
+            }
+        }
+    }
+}

@@ -215,7 +215,7 @@ exec --no-startup-id dbus-update-activation-environment --systemd --all
 exec --no-startup-id /usr/lib/xdg-desktop-portal-gtk
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 exec_always --no-startup-id feh --bg-fill --randomize $HOME/Pictures/wallpapers/
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/quickshell/launch.sh
 exec_always --no-startup-id "killall -q picom; picom --config ~/.config/picom/picom.conf -b"
 exec --no-startup-id dunst
 exec --no-startup-id nm-applet

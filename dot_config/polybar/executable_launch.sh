@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+quickshell kill >/dev/null 2>&1 || true
 killall -q polybar
 
 while pgrep -x polybar >/dev/null; do sleep 1; done
