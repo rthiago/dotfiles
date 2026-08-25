@@ -105,7 +105,7 @@ PopupWindow {
             Rectangle {
                 width: parent.width
                 height: 1
-                color: root.theme.highlight
+                color: Qt.rgba(root.theme.highlight.r, root.theme.highlight.g, root.theme.highlight.b, 0.7)
             }
 
             Text {

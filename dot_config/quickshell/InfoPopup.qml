@@ -42,7 +42,7 @@ PopupWindow {
     anchor.rect.x: Math.round(Math.max(10, Math.min(hostWindow.width - width - 10, anchorCenter - width / 2)))
     anchor.rect.y: hostWindow.height + 8
     implicitWidth: 400
-    implicitHeight: Math.min(460, Math.max(176, contentColumn.implicitHeight + 108))
+    implicitHeight: Math.min(460, Math.max(176, contentColumn.implicitHeight + 106))
     color: "transparent"
     grabFocus: true
     visible: false
@@ -81,81 +81,95 @@ PopupWindow {
         border.width: 1
         border.color: Qt.rgba(root.accent.r, root.accent.g, root.accent.b, 0.5)
 
-        Rectangle {
-            id: providerIcon
-            width: 38
-            height: 38
-            radius: 11
-            color: Qt.rgba(root.accent.r, root.accent.g, root.accent.b, 0.16)
-            anchors.left: parent.left
-            anchors.leftMargin: 18
-            anchors.top: parent.top
-            anchors.topMargin: 18
-
-            Text {
-                anchors.centerIn: parent
-                text: root.providerId === "anthropic" ? "󰜡" : "󰬫"
-                color: root.accent
-                font.family: root.theme.fontFamily
-                font.pixelSize: 18
-                renderType: Text.NativeRendering
-            }
-        }
-
-        Column {
-            anchors.left: providerIcon.right
-            anchors.leftMargin: 12
-            anchors.top: parent.top
-            anchors.topMargin: 18
-            spacing: 2
-
-            Text {
-                text: root.providerName + " usage"
-                color: root.theme.foreground
-                font.family: root.theme.fontFamily
-                font.pixelSize: 15
-                font.bold: true
-                renderType: Text.NativeRendering
-            }
-
-            Text {
-                text: root.planName
-                color: root.theme.muted
-                font.family: root.theme.fontFamily
-                font.pixelSize: 12
-                renderType: Text.NativeRendering
-            }
-        }
-
-        Rectangle {
-            width: statusLabel.implicitWidth + 18
-            height: 24
-            radius: 8
-            anchors.right: parent.right
-            anchors.rightMargin: 18
-            anchors.top: parent.top
-            anchors.topMargin: 25
-            color: Qt.rgba(root.statusColor.r, root.statusColor.g, root.statusColor.b, 0.13)
-
-            Text {
-                id: statusLabel
-                anchors.centerIn: parent
-                text: root.hasError ? "Error" : root.loading ? "Loading" : root.usage.stale ? "Stale" : "Live"
-                color: root.statusColor
-                font.family: root.theme.fontFamily
-                font.pixelSize: 11
-                font.bold: true
-                renderType: Text.NativeRendering
-            }
-        }
-
-        Rectangle {
+        Item {
+            id: popupHeader
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.leftMargin: 18
             anchors.rightMargin: 18
             anchors.top: parent.top
-            anchors.topMargin: 72
+            anchors.topMargin: 18
+            height: 44
+
+            Rectangle {
+                id: providerIcon
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                width: 34
+                height: 34
+                radius: 10
+                color: Qt.rgba(root.accent.r, root.accent.g, root.accent.b, 0.16)
+
+                Text {
+                    anchors.centerIn: parent
+                    text: root.providerId === "anthropic" ? "󰜡" : "󰬫"
+                    color: root.accent
+                    font.family: root.theme.fontFamily
+                    font.pixelSize: 17
+                    renderType: Text.NativeRendering
+                }
+            }
+
+            Rectangle {
+                id: statusBadge
+                width: statusLabel.implicitWidth + 18
+                height: 24
+                radius: 8
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                color: Qt.rgba(root.statusColor.r, root.statusColor.g, root.statusColor.b, 0.13)
+
+                Text {
+                    id: statusLabel
+                    anchors.centerIn: parent
+                    text: root.hasError ? "Error" : root.loading ? "Loading" : root.usage.stale ? "Stale" : "Live"
+                    color: root.statusColor
+                    font.family: root.theme.fontFamily
+                    font.pixelSize: 11
+                    font.bold: true
+                    renderType: Text.NativeRendering
+                }
+            }
+
+            Column {
+                anchors.left: providerIcon.right
+                anchors.leftMargin: 12
+                anchors.right: statusBadge.left
+                anchors.rightMargin: 12
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 3
+
+                Text {
+                    width: parent.width
+                    text: root.providerName + " usage"
+                    color: root.theme.foreground
+                    font.family: root.theme.fontFamily
+                    font.pixelSize: 16
+                    font.bold: true
+                    elide: Text.ElideRight
+                    renderType: Text.NativeRendering
+                }
+
+                Text {
+                    width: parent.width
+                    text: root.planName
+                    color: root.theme.muted
+                    font.family: root.theme.fontFamily
+                    font.pixelSize: 12
+                    elide: Text.ElideRight
+                    renderType: Text.NativeRendering
+                }
+            }
+        }
+
+        Rectangle {
+            id: headerDivider
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: 18
+            anchors.rightMargin: 18
+            anchors.top: popupHeader.bottom
+            anchors.topMargin: 12
             height: 1
             color: Qt.rgba(root.theme.highlight.r, root.theme.highlight.g, root.theme.highlight.b, 0.7)
         }
@@ -164,11 +178,11 @@ PopupWindow {
             id: contentViewport
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: parent.top
+            anchors.top: headerDivider.bottom
             anchors.bottom: parent.bottom
             anchors.leftMargin: 18
             anchors.rightMargin: 18
-            anchors.topMargin: 88
+            anchors.topMargin: 12
             anchors.bottomMargin: 18
             contentWidth: width
             contentHeight: contentColumn.implicitHeight
@@ -178,7 +192,7 @@ PopupWindow {
             Column {
                 id: contentColumn
                 width: parent.width
-                spacing: 16
+                spacing: 12
 
                 Rectangle {
                     visible: root.hasError

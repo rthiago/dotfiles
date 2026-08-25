@@ -22,8 +22,8 @@ PopupWindow {
     anchor.adjustment: PopupAdjustment.Slide
     anchor.rect.x: Math.round(hostWindow.width / 2 - width / 2)
     anchor.rect.y: hostWindow.height + 8
-    implicitWidth: 560
-    implicitHeight: 482
+    implicitWidth: 546
+    implicitHeight: 440
     color: "transparent"
     grabFocus: true
     visible: false
@@ -98,43 +98,73 @@ PopupWindow {
 
     Rectangle {
         anchors.fill: parent
-        radius: 16
+        radius: 14
         color: root.theme.panel
         border.width: 1
-        border.color: Qt.rgba(root.theme.purple.r, root.theme.purple.g, root.theme.purple.b, 0.45)
+        border.color: Qt.rgba(root.theme.purple.r, root.theme.purple.g, root.theme.purple.b, 0.5)
 
         Column {
             anchors.fill: parent
-            anchors.margins: 24
-            spacing: 14
+            anchors.margins: 18
+            spacing: 12
 
             Item {
                 width: parent.width
-                height: 62
+                height: 44
 
-                Row {
-                    anchors.centerIn: parent
-                    spacing: 18
+                Rectangle {
+                    id: calendarIcon
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 34
+                    height: 34
+                    radius: 10
+                    color: Qt.rgba(root.theme.purple.r, root.theme.purple.g, root.theme.purple.b, 0.16)
 
                     Text {
-                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.centerIn: parent
                         text: "󰃭"
                         color: root.theme.purple
                         font.family: root.theme.fontFamily
-                        font.pixelSize: 36
+                        font.pixelSize: 17
+                        renderType: Text.NativeRendering
+                    }
+                }
+
+                Column {
+                    anchors.left: calendarIcon.right
+                    anchors.leftMargin: 12
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: 3
+
+                    Text {
+                        width: parent.width
+                        text: "Calendar"
+                        color: root.theme.foreground
+                        font.family: root.theme.fontFamily
+                        font.pixelSize: 16
+                        font.bold: true
+                        elide: Text.ElideRight
                         renderType: Text.NativeRendering
                     }
 
                     Text {
-                        anchors.verticalCenter: parent.verticalCenter
-                        text: Qt.formatDate(root.today, "MMMM d")
-                        color: root.theme.foreground
+                        width: parent.width
+                        text: Qt.formatDate(root.today, "dddd, MMMM d")
+                        color: root.theme.muted
                         font.family: root.theme.fontFamily
-                        font.pixelSize: 42
-                        font.bold: true
+                        font.pixelSize: 12
+                        elide: Text.ElideRight
                         renderType: Text.NativeRendering
                     }
                 }
+            }
+
+            Rectangle {
+                width: parent.width
+                height: 1
+                color: Qt.rgba(root.theme.highlight.r, root.theme.highlight.g, root.theme.highlight.b, 0.7)
             }
 
             Item {
