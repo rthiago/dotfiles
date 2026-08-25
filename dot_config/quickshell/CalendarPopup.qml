@@ -19,6 +19,7 @@ PopupWindow {
     }
 
     anchor.window: hostWindow
+    anchor.adjustment: PopupAdjustment.Slide
     anchor.rect.x: Math.round(hostWindow.width / 2 - width / 2)
     anchor.rect.y: hostWindow.height + 8
     implicitWidth: 560

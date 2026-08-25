@@ -17,6 +17,7 @@ PopupWindow {
             : theme.red
 
     anchor.window: hostWindow
+    anchor.adjustment: PopupAdjustment.Slide
     anchor.rect.x: Math.round(Math.max(10, Math.min(hostWindow.width - width - 10, anchorCenter - width / 2)))
     anchor.rect.y: hostWindow.height + 8
     implicitWidth: 390

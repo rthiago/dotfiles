@@ -38,6 +38,7 @@ PopupWindow {
     }
 
     anchor.window: hostWindow
+    anchor.adjustment: PopupAdjustment.Slide
     anchor.rect.x: Math.round(Math.max(10, Math.min(hostWindow.width - width - 10, anchorCenter - width / 2)))
     anchor.rect.y: hostWindow.height + 8
     implicitWidth: 400
@@ -48,8 +49,7 @@ PopupWindow {
 
     function progressColor(percent) {
         const value = Number(percent) || 0
-        if (value >= 85) return theme.red
-        if (value >= 60) return theme.yellow
+        if (value > 80) return theme.red
         return theme.green
     }
 
