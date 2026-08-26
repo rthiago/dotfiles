@@ -1,7 +1,7 @@
 # Desktop palette — single source of truth: Dracula (https://draculatheme.com).
-# Referenced by the *.tmpl configs (i3, polybar, dunst, rofi, alacritty).
+# Referenced by the *.tmpl configs (i3, polybar, quickshell, rofi, alacritty).
 # To retheme the whole desktop: swap the values here, then
-#   chezmoi apply ~/.config/{i3,polybar,dunst,rofi,alacritty}
+#   chezmoi apply ~/.config/{i3,polybar,quickshell,rofi,alacritty}
 # and reload each app.
 
 [colors]

@@ -306,6 +306,17 @@ PanelWindow {
         precision: SystemClock.Minutes
     }
 
+    Loader {
+        active: root.isPrimary
+
+        sourceComponent: Component {
+            NotificationCenter {
+                hostWindow: root
+                theme: root.theme
+            }
+        }
+    }
+
     CalendarPopup {
         id: calendarPopup
         hostWindow: root

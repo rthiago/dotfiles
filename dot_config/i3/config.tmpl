@@ -57,10 +57,10 @@ bindsym Control+Mod1+Shift+l exec i3lock-fancy-rapid 6 4
 bindsym $mod+i layout toggle split
 bindsym $mod+o split toggle
 
-# Notifications (dunst has no notification center)
-bindsym $mod+n exec dunstctl close
-bindsym $mod+m exec dunstctl history-pop
-bindsym $mod+Shift+m exec dunstctl close-all
+# Notifications
+bindsym $mod+n exec --no-startup-id quickshell ipc call notifications dismissLatest
+bindsym $mod+m exec --no-startup-id quickshell ipc call notifications restoreLatest
+bindsym $mod+Shift+n exec --no-startup-id quickshell ipc call notifications dismissAll
 
 # Focus
 bindsym $mod+h focus left
@@ -217,7 +217,6 @@ exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 exec_always --no-startup-id feh --bg-fill --randomize $HOME/Pictures/wallpapers/
 exec_always --no-startup-id $HOME/.config/quickshell/launch.sh
 exec_always --no-startup-id "killall -q picom; picom --config ~/.config/picom/picom.conf -b"
-exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

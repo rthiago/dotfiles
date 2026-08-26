@@ -1,5 +1,5 @@
 #!/bin/sh
-# Change volume and show a dunst notification with a progress bar slider.
+# Change volume and show a replaceable desktop notification.
 # Usage: volume-osd.sh up|down|mute
 
 case "$1" in
@@ -13,8 +13,7 @@ status=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)   # "Volume: 0.55 [MUTED]"
 vol=$(echo "$status" | awk '{print int($2 * 100 + 0.5)}')
 
 if echo "$status" | grep -q MUTED; then
-  dunstify -a volume -u low -h string:x-dunst-stack-tag:volume -t 2500 "Muted"
+  notify-send -a volume -r 9912 -u low -h int:value:0 -t 2500 "Muted"
 else
-  dunstify -a volume -u low -h string:x-dunst-stack-tag:volume \
-    -h int:value:"$vol" -t 2500 "Volume ${vol}%"
+  notify-send -a volume -r 9912 -u low -h int:value:"$vol" -t 2500 "Volume ${vol}%"
 fi

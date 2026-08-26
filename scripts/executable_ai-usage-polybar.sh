@@ -7,11 +7,10 @@
 #              widget underlined and tinted in the widget's flat brand color
 #              (red on error). Pango <span> markup is rewritten to polybar
 #              %{F}/%{u} tags, since polybar can't render Pango.
-#   popup      the .tooltip breakdown (session / weekly windows) as a dunst
+#   popup      the .tooltip breakdown (session / weekly windows) as a desktop
 #              notification, bound to click-left in the bar (polybar has no
-#              hover tooltips). The tooltip is Pango markup, which dunst
-#              renders natively; it's wrapped in <tt> so the box-drawing
-#              frame lines up.
+#              hover tooltips). Markup is stripped so every freedesktop
+#              notification server renders the box-drawing frame correctly.
 #
 # Usage: ai-usage-polybar.sh {claude|codex} [popup]
 
@@ -31,14 +30,10 @@ json=$(ai-usagebar "$@" --json 2>/dev/null)
 [ -n "$json" ] || exit 0
 
 if [ "$mode" = popup ]; then
-    tip=$(printf '%s' "$json" | jq -r '.tooltip // empty')
+    tip=$(printf '%s' "$json" | jq -r '.tooltip // empty' | sed -E 's/<[^>]*>//g')
     [ -n "$tip" ] || exit 0
     title=$(printf '%s' "$tool" | sed 's/^./\u&/')
-    # Both dunst and swaync advertise the same D-Bus service. Under i3,
-    # activation can select swaync even though it requires Wayland.
-    pgrep -x dunst >/dev/null 2>&1 ||
-        systemctl --user start dunst.service >/dev/null 2>&1
-    dunstify -a ai-usage -r 9911 -u normal "$title usage" "<tt>$tip</tt>"
+    notify-send -a ai-usage -r 9911 -u normal "$title usage" "$tip"
     exit 0
 fi
 
