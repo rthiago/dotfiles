@@ -8,14 +8,14 @@ set $mod Mod4
 font pango:{{ .fonts.mono }} 10
 
 # ── Look & feel ───────────────────────────────────────────────────────────────
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 1
+default_floating_border pixel 1
 gaps inner 10
-gaps outer 5
+gaps outer 10
 focus_follows_mouse no
 floating_modifier $mod
 
-# Palette from .chezmoidata/colors.toml (focused border is solid purple).
+# Palette from .chezmoidata/colors.toml (focused border is a thin purple accent).
 set $bg      {{ .colors.bg }}
 set $current {{ .colors.bg_highlight }}
 set $fg      {{ .colors.fg }}
