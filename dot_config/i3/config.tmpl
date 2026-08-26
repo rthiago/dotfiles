@@ -33,10 +33,10 @@ client.urgent           $red     $red       $fg      $red      $red
 # ── Monitors ──────────────────────────────────────────────────────────────────
 # Layout (modes, positions, rotation, refresh) is owned by nvidia-settings ->
 # /etc/X11/xorg.conf metamodes, NOT by an xrandr line here. Real outputs are
-# DP-0 (Samsung G9, 5120x1440) + DP-2 (3440x1440 portrait). Do NOT add an
+# DP-0 (Samsung G9, 5120x1440) + HDMI-0 (Dell 3440x1440 portrait). Do NOT add an
 # `exec_always xrandr` line back: it re-runs every login and clobbers the
-# xorg.conf layout (and DP-1 is not the right output name under X11 anyway).
-workspace 10 output DP-2
+# xorg.conf layout. HDMI-0 is temporary until the Dell returns to DisplayPort.
+workspace 10 output HDMI-0
 
 # Keyboard layout
 exec_always --no-startup-id setxkbmap us intl
