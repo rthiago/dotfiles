@@ -2,7 +2,20 @@
 
 # Stop only bar processes. The Polybar configuration remains intact as the
 # rollback path while Quickshell is being evaluated.
+quickshell_pids=$(quickshell list 2>/dev/null | awk '$1 == "Process" && $2 == "ID:" { print $3 }')
 quickshell kill >/dev/null 2>&1 || true
+
+for quickshell_pid in $quickshell_pids; do
+    wait_attempts=0
+    while kill -0 "$quickshell_pid" 2>/dev/null; do
+        if [ "$wait_attempts" -ge 100 ]; then
+            printf 'Timed out waiting for Quickshell process %s to stop.\n' "$quickshell_pid" >&2
+            exit 1
+        fi
+        wait_attempts=$((wait_attempts + 1))
+        sleep 0.05
+    done
+done
 killall -q polybar 2>/dev/null || true
 
 primary_monitor=$(xrandr --query | awk '$2 == "connected" && $3 == "primary" { print $1; exit }')

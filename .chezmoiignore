@@ -6,3 +6,5 @@ README.md
 .config/nvim/README.md
 .config/nvim/.git
 .config/nvim/.git/**
+
+tests/**
