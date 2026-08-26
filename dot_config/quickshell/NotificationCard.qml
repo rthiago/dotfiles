@@ -20,6 +20,17 @@ Rectangle {
         if (requestedIcon.startsWith("/") || requestedIcon.includes(":")) return requestedIcon
         return Quickshell.iconPath(requestedIcon, true)
     }
+    readonly property bool usesFallbackIcon: notificationIcon.status !== Image.Ready
+    readonly property string fallbackText: {
+        const label = (notification.appName || notification.summary || "").trim()
+        return label.length > 0 ? label.charAt(0).toUpperCase() : "•"
+    }
+    readonly property bool hasVisibleActions: {
+        for (let index = 0; index < notification.actions.length; index++) {
+            if ((notification.actions[index].text || "").trim().length > 0) return true
+        }
+        return false
+    }
     readonly property int timeoutMs: notification.expireTimeout > 0
         ? Math.round(notification.expireTimeout)
         : 6000
@@ -61,23 +72,30 @@ Rectangle {
                 width: 40
                 height: 40
                 radius: 11
-                color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.16)
+                color: root.usesFallbackIcon
+                    ? Qt.rgba(root.theme.muted.r, root.theme.muted.g, root.theme.muted.b, 0.1)
+                    : Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.16)
 
                 IconImage {
+                    id: notificationIcon
+
                     anchors.centerIn: parent
                     width: 28
                     height: 28
                     source: root.iconSource
-                    visible: root.iconSource !== ""
+                    visible: status === Image.Ready
                 }
 
                 Text {
                     anchors.centerIn: parent
-                    visible: root.iconSource === ""
-                    text: root.notification.urgency === NotificationUrgency.Critical ? "" : ""
-                    color: root.accentColor
-                    font.family: root.theme.iconFontFamily
-                    font.pixelSize: root.theme.fontSizeIcon
+                    visible: root.usesFallbackIcon
+                    text: root.notification.urgency === NotificationUrgency.Critical ? "!" : root.fallbackText
+                    color: root.notification.urgency === NotificationUrgency.Critical
+                        ? root.accentColor
+                        : root.theme.muted
+                    font.family: root.theme.fontFamily
+                    font.pixelSize: root.theme.fontSizeSmall
+                    font.weight: Font.DemiBold
                 }
             }
 
@@ -158,7 +176,7 @@ Rectangle {
         Flow {
             id: actions
 
-            visible: root.notification.actions.length > 0
+            visible: root.hasVisibleActions
             width: parent.width
             height: visible ? childrenRect.height : 0
             spacing: 8
@@ -171,8 +189,9 @@ Rectangle {
 
                     required property var modelData
 
-                    width: actionLabel.implicitWidth + 20
-                    height: 28
+                    visible: (modelData.text || "").trim().length > 0
+                    width: visible ? actionLabel.implicitWidth + 20 : 0
+                    height: visible ? 28 : 0
                     radius: 9
                     color: actionMouse.containsMouse ? root.theme.highlight : Qt.rgba(root.theme.highlight.r, root.theme.highlight.g, root.theme.highlight.b, 0.55)
                     border.width: 1
@@ -182,7 +201,7 @@ Rectangle {
                         id: actionLabel
 
                         anchors.centerIn: parent
-                        text: actionButton.modelData.text
+                        text: (actionButton.modelData.text || "").trim()
                         color: root.theme.foreground
                         font.family: root.theme.fontFamily
                         font.pixelSize: root.theme.fontSizeCaption
