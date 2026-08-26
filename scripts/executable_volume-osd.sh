@@ -1,5 +1,5 @@
 #!/bin/sh
-# Change volume and show a replaceable desktop notification.
+# Change volume and update the Quickshell OSD.
 # Usage: volume-osd.sh up|down|mute
 
 case "$1" in
@@ -9,11 +9,4 @@ case "$1" in
   *)    echo "usage: $0 up|down|mute" >&2; exit 1 ;;
 esac
 
-status=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)   # "Volume: 0.55 [MUTED]"
-vol=$(echo "$status" | awk '{print int($2 * 100 + 0.5)}')
-
-if echo "$status" | grep -q MUTED; then
-  notify-send -a volume -r 9912 -u low -h int:value:0 -t 2500 "Muted"
-else
-  notify-send -a volume -r 9912 -u low -h int:value:"$vol" -t 2500 "Volume ${vol}%"
-fi
+quickshell ipc call volumeOsd display >/dev/null 2>&1 || true

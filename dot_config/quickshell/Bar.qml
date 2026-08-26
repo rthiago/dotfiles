@@ -314,6 +314,18 @@ PanelWindow {
         }
     }
 
+    Loader {
+        active: root.isPrimary
+
+        sourceComponent: Component {
+            VolumeOsd {
+                hostWindow: root
+                theme: root.theme
+                services: root.services
+            }
+        }
+    }
+
     CalendarPopup {
         id: calendarPopup
         hostWindow: root
