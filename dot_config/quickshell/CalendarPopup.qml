@@ -125,8 +125,8 @@ PopupWindow {
                         anchors.centerIn: parent
                         text: "󰃭"
                         color: root.theme.purple
-                        font.family: root.theme.fontFamily
-                        font.pixelSize: 17
+                        font.family: root.theme.iconFontFamily
+                        font.pixelSize: root.theme.fontSizeIcon
                         renderType: Text.NativeRendering
                     }
                 }
@@ -143,8 +143,8 @@ PopupWindow {
                         text: "Calendar"
                         color: root.theme.foreground
                         font.family: root.theme.fontFamily
-                        font.pixelSize: 16
-                        font.bold: true
+                        font.pixelSize: root.theme.fontSizeTitle
+                        font.weight: Font.DemiBold
                         elide: Text.ElideRight
                         renderType: Text.NativeRendering
                     }
@@ -154,7 +154,7 @@ PopupWindow {
                         text: Qt.formatDate(root.today, "dddd, MMMM d")
                         color: root.theme.muted
                         font.family: root.theme.fontFamily
-                        font.pixelSize: 12
+                        font.pixelSize: root.theme.fontSizeSmall
                         elide: Text.ElideRight
                         renderType: Text.NativeRendering
                     }
@@ -177,8 +177,8 @@ PopupWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     text: root.today.getFullYear()
                     color: root.theme.muted
-                    font.family: root.theme.fontFamily
-                    font.pixelSize: 11
+                    font.family: root.theme.monoFontFamily
+                    font.pixelSize: root.theme.fontSizeCaption
                     font.letterSpacing: 1
                     renderType: Text.NativeRendering
                 }
@@ -189,8 +189,8 @@ PopupWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     text: root.yearPercent + "%"
                     color: root.theme.foreground
-                    font.family: root.theme.fontFamily
-                    font.pixelSize: 11
+                    font.family: root.theme.monoFontFamily
+                    font.pixelSize: root.theme.fontSizeCaption
                     renderType: Text.NativeRendering
                 }
 
@@ -231,8 +231,8 @@ PopupWindow {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font.family: root.theme.fontFamily
-                    font.pixelSize: 10
-                    font.bold: true
+                    font.pixelSize: root.theme.fontSizeLabel
+                    font.weight: Font.DemiBold
                     renderType: Text.NativeRendering
                 }
 
@@ -248,8 +248,8 @@ PopupWindow {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         font.family: root.theme.fontFamily
-                        font.pixelSize: 10
-                        font.bold: true
+                        font.pixelSize: root.theme.fontSizeLabel
+                        font.weight: Font.DemiBold
                         font.letterSpacing: 1
                         renderType: Text.NativeRendering
                     }
@@ -287,7 +287,7 @@ PopupWindow {
                                 horizontalAlignment: Text.AlignHCenter
                                 verticalAlignment: Text.AlignVCenter
                                 font.family: root.theme.fontFamily
-                                font.pixelSize: 10
+                                font.pixelSize: root.theme.fontSizeLabel
                                 renderType: Text.NativeRendering
                             }
 
@@ -314,7 +314,7 @@ PopupWindow {
                                                 ? root.theme.muted
                                                 : root.theme.foreground
                                         font.family: root.theme.fontFamily
-                                        font.pixelSize: 13
+                                        font.pixelSize: root.theme.fontSizeBody
                                         font.bold: parent.modelData.today
                                         renderType: Text.NativeRendering
                                     }
@@ -342,8 +342,8 @@ PopupWindow {
                         anchors.centerIn: parent
                         text: "󰅁"
                         color: root.theme.foreground
-                        font.family: root.theme.fontFamily
-                        font.pixelSize: 16
+                        font.family: root.theme.iconFontFamily
+                        font.pixelSize: root.theme.fontSizeTitle
                         renderType: Text.NativeRendering
                     }
 
@@ -361,7 +361,7 @@ PopupWindow {
                     text: Qt.formatDate(root.viewDate, "MMMM yyyy").toUpperCase()
                     color: root.theme.muted
                     font.family: root.theme.fontFamily
-                    font.pixelSize: 13
+                    font.pixelSize: root.theme.fontSizeBody
                     font.letterSpacing: 1
                     renderType: Text.NativeRendering
 
@@ -385,8 +385,8 @@ PopupWindow {
                         anchors.centerIn: parent
                         text: "󰅂"
                         color: root.theme.foreground
-                        font.family: root.theme.fontFamily
-                        font.pixelSize: 16
+                        font.family: root.theme.iconFontFamily
+                        font.pixelSize: root.theme.fontSizeTitle
                         renderType: Text.NativeRendering
                     }
 

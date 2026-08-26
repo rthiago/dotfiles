@@ -91,7 +91,7 @@ PanelWindow {
                                 ? root.theme.background
                                 : root.theme.foreground
                             font.family: root.theme.fontFamily
-                            font.pixelSize: 16
+                            font.pixelSize: root.theme.fontSizeTitle
                             font.bold: workspace.modelData.active
                             renderType: Text.NativeRendering
                         }
@@ -120,7 +120,7 @@ PanelWindow {
                 text: root.services.windowTitle || "Desktop"
                 color: root.theme.muted
                 font.family: root.theme.fontFamily
-                font.pixelSize: 16
+                font.pixelSize: root.theme.fontSizeTitle
                 elide: Text.ElideRight
                 renderType: Text.NativeRendering
             }

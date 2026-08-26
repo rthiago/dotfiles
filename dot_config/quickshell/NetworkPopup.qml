@@ -66,8 +66,8 @@ PopupWindow {
                         anchors.centerIn: parent
                         text: root.services.networkIcon || "󰖪"
                         color: root.networkAccent
-                        font.family: root.theme.fontFamily
-                        font.pixelSize: 17
+                        font.family: root.theme.iconFontFamily
+                        font.pixelSize: root.theme.fontSizeIcon
                         renderType: Text.NativeRendering
                     }
                 }
@@ -83,8 +83,8 @@ PopupWindow {
                         text: "Network"
                         color: root.theme.foreground
                         font.family: root.theme.fontFamily
-                        font.pixelSize: 16
-                        font.bold: true
+                        font.pixelSize: root.theme.fontSizeTitle
+                        font.weight: Font.DemiBold
                         renderType: Text.NativeRendering
                     }
 
@@ -95,7 +95,7 @@ PopupWindow {
                             : "Disconnected"
                         color: root.theme.muted
                         font.family: root.theme.fontFamily
-                        font.pixelSize: 12
+                        font.pixelSize: root.theme.fontSizeSmall
                         elide: Text.ElideRight
                         renderType: Text.NativeRendering
                     }
@@ -112,8 +112,8 @@ PopupWindow {
                 text: "WIREGUARD"
                 color: root.theme.muted
                 font.family: root.theme.fontFamily
-                font.pixelSize: 10
-                font.bold: true
+                font.pixelSize: root.theme.fontSizeLabel
+                font.weight: Font.DemiBold
                 font.letterSpacing: 1.2
                 renderType: Text.NativeRendering
             }
@@ -128,7 +128,7 @@ PopupWindow {
                     text: "No WireGuard profiles configured"
                     color: root.theme.muted
                     font.family: root.theme.fontFamily
-                    font.pixelSize: 12
+                    font.pixelSize: root.theme.fontSizeSmall
                     renderType: Text.NativeRendering
                 }
 
@@ -168,7 +168,7 @@ PopupWindow {
                                     text: profileRow.modelData.name
                                     color: root.theme.foreground
                                     font.family: root.theme.fontFamily
-                                    font.pixelSize: 13
+                                    font.pixelSize: root.theme.fontSizeBody
                                     font.bold: profileRow.modelData.active
                                     elide: Text.ElideRight
                                     renderType: Text.NativeRendering
@@ -186,8 +186,8 @@ PopupWindow {
                                             ? root.theme.green
                                             : root.theme.muted
                                     font.family: root.theme.fontFamily
-                                    font.pixelSize: 9
-                                    font.bold: true
+                                    font.pixelSize: root.theme.fontSizeLabel
+                                    font.weight: Font.DemiBold
                                     font.letterSpacing: 0.8
                                     renderType: Text.NativeRendering
                                 }
@@ -241,7 +241,7 @@ PopupWindow {
                 text: root.services.wireguardError
                 color: root.theme.red
                 font.family: root.theme.fontFamily
-                font.pixelSize: 11
+                font.pixelSize: root.theme.fontSizeCaption
                 wrapMode: Text.Wrap
                 renderType: Text.NativeRendering
             }
@@ -258,9 +258,9 @@ PopupWindow {
                     anchors.centerIn: parent
                     text: "󰒓  Open Network Settings"
                     color: root.theme.foreground
-                    font.family: root.theme.fontFamily
-                    font.pixelSize: 12
-                    font.bold: true
+                    font.family: root.theme.iconFontFamily
+                    font.pixelSize: root.theme.fontSizeSmall
+                    font.weight: Font.DemiBold
                     renderType: Text.NativeRendering
                 }
 

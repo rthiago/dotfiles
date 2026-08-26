@@ -104,8 +104,8 @@ PopupWindow {
                     anchors.centerIn: parent
                     text: root.providerId === "anthropic" ? "󰜡" : "󰬫"
                     color: root.accent
-                    font.family: root.theme.fontFamily
-                    font.pixelSize: 17
+                    font.family: root.theme.iconFontFamily
+                    font.pixelSize: root.theme.fontSizeIcon
                     renderType: Text.NativeRendering
                 }
             }
@@ -125,8 +125,8 @@ PopupWindow {
                     text: root.hasError ? "Error" : root.loading ? "Loading" : root.usage.stale ? "Stale" : "Live"
                     color: root.statusColor
                     font.family: root.theme.fontFamily
-                    font.pixelSize: 11
-                    font.bold: true
+                    font.pixelSize: root.theme.fontSizeCaption
+                    font.weight: Font.DemiBold
                     renderType: Text.NativeRendering
                 }
             }
@@ -144,8 +144,8 @@ PopupWindow {
                     text: root.providerName + " usage"
                     color: root.theme.foreground
                     font.family: root.theme.fontFamily
-                    font.pixelSize: 16
-                    font.bold: true
+                    font.pixelSize: root.theme.fontSizeTitle
+                    font.weight: Font.DemiBold
                     elide: Text.ElideRight
                     renderType: Text.NativeRendering
                 }
@@ -155,7 +155,7 @@ PopupWindow {
                     text: root.planName
                     color: root.theme.muted
                     font.family: root.theme.fontFamily
-                    font.pixelSize: 12
+                    font.pixelSize: root.theme.fontSizeSmall
                     elide: Text.ElideRight
                     renderType: Text.NativeRendering
                 }
@@ -210,7 +210,7 @@ PopupWindow {
                         text: root.usage && root.usage.error ? root.usage.error : "Usage data is unavailable"
                         color: root.theme.red
                         font.family: root.theme.fontFamily
-                        font.pixelSize: 12
+                        font.pixelSize: root.theme.fontSizeSmall
                         wrapMode: Text.Wrap
                         renderType: Text.NativeRendering
                     }
@@ -235,8 +235,8 @@ PopupWindow {
                                 text: metric.modelData.label || "Usage"
                                 color: root.theme.foreground
                                 font.family: root.theme.fontFamily
-                                font.pixelSize: 13
-                                font.bold: true
+                                font.pixelSize: root.theme.fontSizeBody
+                                font.weight: Font.DemiBold
                                 renderType: Text.NativeRendering
                             }
 
@@ -245,9 +245,9 @@ PopupWindow {
                                 anchors.verticalCenter: parent.verticalCenter
                                 text: metric.modelData.value || Math.round(Number(metric.modelData.percent) || 0) + "%"
                                 color: root.progressColor(metric.modelData.percent)
-                                font.family: root.theme.fontFamily
-                                font.pixelSize: 13
-                                font.bold: true
+                                font.family: root.theme.monoFontFamily
+                                font.pixelSize: root.theme.fontSizeBody
+                                font.weight: Font.DemiBold
                                 renderType: Text.NativeRendering
                             }
                         }
@@ -280,8 +280,8 @@ PopupWindow {
                                 anchors.verticalCenter: parent.verticalCenter
                                 text: root.detailPart(metric.modelData.detail, 0)
                                 color: root.theme.muted
-                                font.family: root.theme.fontFamily
-                                font.pixelSize: 11
+                                font.family: root.theme.monoFontFamily
+                                font.pixelSize: root.theme.fontSizeCaption
                                 renderType: Text.NativeRendering
                             }
 
@@ -290,8 +290,8 @@ PopupWindow {
                                 anchors.verticalCenter: parent.verticalCenter
                                 text: root.detailRemainder(metric.modelData.detail)
                                 color: root.theme.muted
-                                font.family: root.theme.fontFamily
-                                font.pixelSize: 11
+                                font.family: root.theme.monoFontFamily
+                                font.pixelSize: root.theme.fontSizeCaption
                                 renderType: Text.NativeRendering
                             }
                         }
@@ -321,8 +321,8 @@ PopupWindow {
                                 text: detailBlock.modelData.label || "Details"
                                 color: root.theme.foreground
                                 font.family: root.theme.fontFamily
-                                font.pixelSize: 12
-                                font.bold: true
+                                font.pixelSize: root.theme.fontSizeSmall
+                                font.weight: Font.DemiBold
                                 renderType: Text.NativeRendering
                             }
 
@@ -334,8 +334,8 @@ PopupWindow {
                                     width: blockContent.width
                                     text: modelData
                                     color: root.theme.muted
-                                    font.family: root.theme.fontFamily
-                                    font.pixelSize: 11
+                                    font.family: root.theme.monoFontFamily
+                                    font.pixelSize: root.theme.fontSizeCaption
                                     renderType: Text.NativeRendering
                                 }
                             }
@@ -350,7 +350,7 @@ PopupWindow {
                     color: root.theme.muted
                     horizontalAlignment: Text.AlignHCenter
                     font.family: root.theme.fontFamily
-                    font.pixelSize: 12
+                    font.pixelSize: root.theme.fontSizeSmall
                     renderType: Text.NativeRendering
                 }
 
@@ -360,8 +360,8 @@ PopupWindow {
                     color: root.theme.muted
                     opacity: 0.8
                     horizontalAlignment: Text.AlignRight
-                    font.family: root.theme.fontFamily
-                    font.pixelSize: 10
+                    font.family: root.theme.iconFontFamily
+                    font.pixelSize: root.theme.fontSizeLabel
                     renderType: Text.NativeRendering
                 }
             }

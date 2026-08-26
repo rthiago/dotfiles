@@ -32,8 +32,8 @@ Rectangle {
         anchors.centerIn: parent
         text: root.text
         color: root.accent
-        font.family: root.theme.fontFamily
-        font.pixelSize: 17
+        font.family: root.theme.iconFontFamily
+        font.pixelSize: root.theme.fontSizeBar
         font.weight: Font.Medium
         renderType: Text.NativeRendering
     }

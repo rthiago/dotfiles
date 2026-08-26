@@ -95,7 +95,16 @@ ShellRoot {
         readonly property color cyan: "{{ .colors.cyan }}"
         readonly property color orange: "{{ .colors.orange }}"
         readonly property color yellow: "{{ .colors.yellow }}"
-        readonly property string fontFamily: "{{ .fonts.mono_nerd }}"
+        readonly property string fontFamily: "{{ .fonts.ui }}"
+        readonly property string monoFontFamily: "{{ .fonts.mono }}"
+        readonly property string iconFontFamily: "{{ .fonts.icons }}"
+        readonly property int fontSizeLabel: 10
+        readonly property int fontSizeCaption: 11
+        readonly property int fontSizeSmall: 12
+        readonly property int fontSizeBody: 13
+        readonly property int fontSizeBar: 17
+        readonly property int fontSizeTitle: 16
+        readonly property int fontSizeIcon: 17
     }
 
     function failedUsage(id, name, message) {

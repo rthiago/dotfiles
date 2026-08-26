@@ -1,7 +1,8 @@
-# Desktop font — single source of truth, same idea as colors.toml.
-# mono is the plain family; mono_nerd is the icon-patched build for apps that
-# render Nerd Font glyphs (polybar). Sizes stay per-app.
+# Desktop typography roles shared by generated application configs.
+# UI chrome uses a proportional sans; terminals and technical values stay
+# monospaced; icon-only labels use the Nerd Font build.
 
 [fonts]
+ui = "Noto Sans"
 mono = "Hack"
-mono_nerd = "Hack Nerd Font"
+icons = "Hack Nerd Font"
