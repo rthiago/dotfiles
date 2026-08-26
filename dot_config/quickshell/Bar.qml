@@ -242,10 +242,7 @@ PanelWindow {
                         : root.theme.red
                 selected: networkPopup.visible
                 onClicked: button => {
-                    if (button === Qt.LeftButton) {
-                        networkPopup.visible = false
-                        Quickshell.execDetached({ command: ["nm-connection-editor"] })
-                    } else if (button === Qt.RightButton) {
+                    if (button === Qt.LeftButton || button === Qt.RightButton) {
                         calendarPopup.visible = false
                         infoPopup.visible = false
                         networkPopup.toggleFor(networkChip)
