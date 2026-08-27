@@ -177,4 +177,4 @@ bindkey '^[h' insert-cycledleft
 
 source <(herdr completion zsh)
 
-eval "$(hermes completion zsh)"
+[ -x "$commands[hermes]" ] && eval "$(hermes completion zsh)"
