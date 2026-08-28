@@ -10,6 +10,7 @@ PopupWindow {
     property int viewYear: today.getFullYear()
     property int viewMonth: today.getMonth()
     property var weeks: []
+    readonly property var weekdayLabels: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 
     readonly property date viewDate: new Date(viewYear, viewMonth, 1)
     readonly property int yearPercent: {
@@ -44,15 +45,14 @@ PopupWindow {
 
     function rebuild() {
         const first = new Date(viewYear, viewMonth, 1)
-        const mondayOffset = (first.getDay() + 6) % 7
-        const start = new Date(viewYear, viewMonth, 1 - mondayOffset)
+        const start = new Date(viewYear, viewMonth, 1 - first.getDay())
         const result = []
 
         for (let row = 0; row < 6; row++) {
-            const monday = new Date(start.getFullYear(), start.getMonth(), start.getDate() + row * 7)
+            const sunday = new Date(start.getFullYear(), start.getMonth(), start.getDate() + row * 7)
             const days = []
             for (let column = 0; column < 7; column++) {
-                const date = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + column)
+                const date = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate() + column)
                 days.push({
                     day: date.getDate(),
                     inMonth: date.getMonth() === viewMonth,
@@ -60,6 +60,7 @@ PopupWindow {
                     weekend: date.getDay() === 0 || date.getDay() === 6
                 })
             }
+            const monday = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate() + 1)
             result.push({ week: isoWeek(monday), days: days })
         }
 
@@ -237,7 +238,7 @@ PopupWindow {
                 }
 
                 Repeater {
-                    model: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+                    model: root.weekdayLabels
 
                     Text {
                         required property string modelData
