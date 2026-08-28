@@ -21,6 +21,9 @@ return {
         },
         options = { opt = { foldcolumn = "0", scrolloff = 4, wrap = true } },
         mappings = {
+          i = {
+            ["<C-S>"] = { "<Esc><Cmd>silent! update! | redraw<CR>", desc = "Force write" },
+          },
           n = {
             ["<C-H>"] = {
               function() require("astrocore.buffer").nav(-vim.v.count1) end,
@@ -41,6 +44,10 @@ return {
             L = { "g_", desc = "Last non-blank character" },
             n = { "nzz", desc = "Next search result centered" },
             N = { "Nzz", desc = "Previous search result centered" },
+          },
+          x = {
+            H = { "^", desc = "First non-blank character" },
+            L = { "g_", desc = "Last non-blank character" },
           },
         },
       },
