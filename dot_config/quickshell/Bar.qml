@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.I3
+import Quickshell.Io
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 
@@ -13,6 +14,8 @@ PanelWindow {
 
     readonly property bool isPrimary: modelData.name === services.primaryScreenName
     readonly property int barHeight: 42
+    property string utcClockText: "UTC --:--"
+    property string centralEuropeanClockText: "CET --:--"
 
     screen: modelData
     anchors {
@@ -138,6 +141,25 @@ PanelWindow {
                 infoPopup.visible = false
                 networkPopup.visible = false
                 calendarPopup.visible = !calendarPopup.visible
+            }
+        }
+
+        Row {
+            visible: !root.isPrimary
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 6
+
+            BarChip {
+                theme: root.theme
+                text: root.centralEuropeanClockText
+                accent: root.theme.orange
+            }
+
+            BarChip {
+                theme: root.theme
+                text: root.utcClockText
+                accent: root.theme.cyan
             }
         }
 
@@ -298,9 +320,40 @@ PanelWindow {
         infoPopup.toggleFor(item, providerId, usage, accent)
     }
 
+    function refreshWorldClocks() {
+        if (root.isPrimary)
+            return
+
+        utcClock.running = true
+        centralEuropeanClock.running = true
+    }
+
+    Component.onCompleted: refreshWorldClocks()
+
     SystemClock {
         id: clock
         precision: SystemClock.Minutes
+        onDateChanged: root.refreshWorldClocks()
+    }
+
+    Process {
+        id: utcClock
+        command: ["date", "+UTC %H:%M"]
+        environment: ({ TZ: "UTC" })
+
+        stdout: StdioCollector {
+            onStreamFinished: root.utcClockText = text.trim()
+        }
+    }
+
+    Process {
+        id: centralEuropeanClock
+        command: ["date", "+%Z %H:%M"]
+        environment: ({ TZ: "Europe/Berlin" })
+
+        stdout: StdioCollector {
+            onStreamFinished: root.centralEuropeanClockText = text.trim()
+        }
     }
 
     Loader {
