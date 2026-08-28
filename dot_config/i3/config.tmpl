@@ -3,9 +3,12 @@
 set $mod Mod4
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
-# Used for tab/stack titles (pixel borders draw no titlebar otherwise).
-# Family from .chezmoidata/fonts.toml.
-font pango:{{ .fonts.ui }} 10
+# Titlebar font (only tabbed/stacked draw titlebars; pixel borders have none).
+# The tiny size is deliberate: titlebar height follows the font, so this
+# collapses the tab bar into a thin indicator strip (~10px). Titles are blanked
+# below since no text fits. Family from .chezmoidata/fonts.toml.
+font pango:{{ .fonts.ui }} 2
+for_window [all] title_format " "
 
 # ── Look & feel ───────────────────────────────────────────────────────────────
 default_border pixel 1
@@ -15,8 +18,12 @@ gaps outer 10
 focus_follows_mouse no
 floating_modifier $mod
 
-# Palette from .chezmoidata/colors.toml (focused border is a thin purple accent).
+# Palette from .chezmoidata/colors.toml. The tabbed/stacked titlebar is a thin
+# strip: the selected tab is a purple segment, inactive tabs recede on bg_dark,
+# and the segment dims to bg_highlight when the container loses focus. Content
+# keeps the thin purple border.
 set $bg      {{ .colors.bg }}
+set $bg_dark {{ .colors.bg_dark }}
 set $current {{ .colors.bg_highlight }}
 set $fg      {{ .colors.fg }}
 set $comment {{ .colors.muted }}
@@ -27,7 +34,7 @@ set $red     {{ .colors.red }}
 #                       border   background text     indicator child_border
 client.focused          $purple  $purple    $bg      $pink     $purple
 client.focused_inactive $current $current   $fg      $current  $current
-client.unfocused        $bg      $bg        $comment $bg       $bg
+client.unfocused        $bg_dark $bg_dark   $comment $bg       $bg
 client.urgent           $red     $red       $fg      $red      $red
 
 # ── Monitors ──────────────────────────────────────────────────────────────────
