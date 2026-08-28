@@ -21,9 +21,9 @@ This machine currently runs **i3 on X11**. The active desktop configuration is:
 
 - i3: `dot_config/i3/config.tmpl`
 - Picom compositor: `dot_config/picom/picom.conf`
-- Polybar: `dot_config/polybar/`
+- Quickshell bar, notifications, and OSDs: `dot_config/quickshell/`
 
-`dot_config/hypr/` is retained but does not affect an i3 session. Do not infer the active window manager or compositor from the presence of config files. Check `XDG_CURRENT_DESKTOP`, `XDG_SESSION_DESKTOP`, and `DESKTOP_SESSION` first.
+`dot_config/hypr/` and `dot_config/polybar/` are retained but do not affect the active i3 session. Do not infer the active window manager, compositor, bar, or notification service from the presence of config files. Check `XDG_CURRENT_DESKTOP`, `XDG_SESSION_DESKTOP`, and `DESKTOP_SESSION` first.
 
 In i3, Picom owns compositor-level opacity, blur, and shadows. Check Picom rules before changing an application's own window settings.
 
@@ -44,7 +44,7 @@ Pass paths to `chezmoi apply` — applying without args walks the whole tree, wh
 | --- | --- |
 | i3 | `i3-msg reload` |
 | Picom | `killall -q picom; picom --config ~/.config/picom/picom.conf -b` |
-| Polybar | `~/.config/polybar/launch.sh` |
+| Quickshell | `~/.config/quickshell/launch.sh` |
 | Hyprland (only in a Hyprland session) | `hyprctl reload` |
 | Waybar | `killall -SIGUSR2 waybar` (or `pkill waybar && waybar &`) |
 | swaync | `swaync-client --reload-config && swaync-client --reload-css` |
