@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="mouse" x1="18" y1="8" x2="46" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6272a4"/>
+      <stop offset="1" stop-color="#44475a"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 5C20.4 5 12 14.4 12 28v12c0 11.4 8.4 19 20 19s20-7.6 20-19V28C52 14.4 43.6 5 32 5Z" fill="url(#mouse)" stroke="#f8f8f2" stroke-width="4"/>
+  <path d="M32 7v17" stroke="#f8f8f2" stroke-width="3" stroke-linecap="round"/>
+  <rect x="29" y="11" width="6" height="10" rx="3" fill="#8be9fd"/>
+  <rect x="37" y="37" width="22" height="15" rx="3" fill="#282a36" stroke="#ff5555" stroke-width="3"/>
+  <path d="M60 41v7" stroke="#ff5555" stroke-width="3" stroke-linecap="round"/>
+  <rect x="40.5" y="40.5" width="5" height="8" rx="1" fill="#ff5555"/>
+</svg>
