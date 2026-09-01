@@ -67,7 +67,7 @@ ShellRoot {
     readonly property int audioPercent: audioSink && audioSink.audio
         ? Math.round(audioSink.audio.volume * 100)
         : 0
-    readonly property string audioText: audioMuted ? " muted" : " " + audioPercent + "%"
+    readonly property string audioText: audioMuted ? "  muted" : "  " + audioPercent + "%"
     readonly property string temperatureText: temperature > 0 ? Math.round(temperature) + "°C" : "—"
     readonly property bool temperatureWarning: temperature >= 80
     readonly property string networkIcon: !networkConnected
