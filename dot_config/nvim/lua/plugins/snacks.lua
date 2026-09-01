@@ -6,6 +6,7 @@ return {
       indent = {
         scope = { enabled = false },
       },
+      words = { enabled = false },
     },
   },
 }
