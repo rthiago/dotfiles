@@ -189,6 +189,15 @@ PanelWindow {
             }
 
             BarChip {
+                id: opencodeGoChip
+                theme: root.theme
+                text: root.services.opencodeGoText
+                accent: root.services.opencodeGoError ? root.theme.red : root.theme.cyan
+                selected: infoPopup.visible && infoPopup.providerId === "opencode-go"
+                onClicked: root.openInfo(opencodeGoChip, "opencode-go", root.services.opencodeGoUsage, accent)
+            }
+
+            BarChip {
                 theme: root.theme
                 text: root.services.bitcoinText
                 accent: root.theme.yellow

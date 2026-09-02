@@ -6,6 +6,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.I3
 import Quickshell.Services.Pipewire
+import "UsageFormatting.js" as UsageFormatting
 
 ShellRoot {
     id: shell
@@ -34,6 +35,19 @@ ShellRoot {
     property var codexUsage: ({
         display_name: "Codex",
         id: "openai",
+        plan: "",
+        metrics: [],
+        sections: [],
+        status: "loading",
+        stale: false,
+        error: null,
+        fetched_at: null
+    })
+    property string opencodeGoText: "󰚩 —"
+    property bool opencodeGoError: false
+    property var opencodeGoUsage: ({
+        display_name: "OpenCode Go",
+        id: "opencode-go",
         plan: "",
         metrics: [],
         sections: [],
@@ -128,8 +142,7 @@ ShellRoot {
             return icon + " —"
 
         const metric = usage.metrics[0]
-        const resetMatch = String(metric.detail || "").match(/Resets in ([^·]+)/)
-        const reset = resetMatch ? resetMatch[1].trim() : ""
+        const reset = UsageFormatting.resetCountdown(metric, Date.now())
         return icon + " " + (metric.value || Math.round(Number(metric.percent) || 0) + "%")
             + (reset ? " · " + reset : "")
     }
@@ -140,25 +153,33 @@ ShellRoot {
             const entries = parsed.entries || []
             let claude = null
             let codex = null
+            let opencodeGo = null
 
             for (let index = 0; index < entries.length; index++) {
                 if (entries[index].id === "anthropic") claude = entries[index]
                 if (entries[index].id === "openai") codex = entries[index]
+                if (entries[index].id === "opencode-go") opencodeGo = entries[index]
             }
 
             claudeUsage = claude || failedUsage("anthropic", "Claude", "No Claude usage data returned")
             codexUsage = codex || failedUsage("openai", "Codex", "No Codex usage data returned")
+            opencodeGoUsage = opencodeGo || failedUsage("opencode-go", "OpenCode Go", "No OpenCode Go usage data returned")
             claudeError = claudeUsage.status === "error" || Boolean(claudeUsage.error)
             codexError = codexUsage.status === "error" || Boolean(codexUsage.error)
+            opencodeGoError = opencodeGoUsage.status === "error" || Boolean(opencodeGoUsage.error)
             claudeText = usageBarText("󰜡", claudeUsage)
             codexText = usageBarText("󰬫", codexUsage)
+            opencodeGoText = usageBarText("󰚩", opencodeGoUsage)
         } catch (error) {
             claudeUsage = failedUsage("anthropic", "Claude", "Could not read Claude usage")
             codexUsage = failedUsage("openai", "Codex", "Could not read Codex usage")
+            opencodeGoUsage = failedUsage("opencode-go", "OpenCode Go", "Could not read OpenCode Go usage")
             claudeText = "󰜡 ⚠"
             codexText = "󰬫 ⚠"
+            opencodeGoText = "󰚩 ⚠"
             claudeError = true
             codexError = true
+            opencodeGoError = true
         }
     }
 
