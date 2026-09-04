@@ -17,22 +17,28 @@ function resetCountdown(metric, nowMs) {
     return days > 0 ? days + "d " + hours + "h" : hours + "h " + minutes + "m"
 }
 
-function opencodeGoDetail(metric, nowMs) {
-    if (!metric || metric.detail) return metric && metric.detail || ""
+function pacingDetail(metric, windowMinutes, nowMs) {
+    const existing = String(metric && metric.detail || "")
+    if (!metric || !windowMinutes || existing.indexOf("% elapsed") !== -1) return existing
 
-    const windowMinutes = metric.label === "Rolling" ? 5 * 60
-        : metric.label === "Weekly" ? 7 * 24 * 60
-        : metric.label === "Monthly" ? 30 * 24 * 60
-        : 0
     const reset = resetCountdown(metric, nowMs)
-    if (!windowMinutes || !reset) return ""
+    if (!reset) return existing
 
+    const windowMs = windowMinutes * 60000
     const remainingMs = Date.parse(metric.reset_at) - nowMs
     const elapsed = Math.max(0, Math.min(100,
-        Math.floor((windowMinutes * 60000 - remainingMs) * 100 / (windowMinutes * 60000))))
+        Math.floor((windowMs - remainingMs) * 100 / windowMs)))
     const delta = Math.round(Number(metric.percent) || 0) - elapsed
     const pace = delta > 0 ? delta + "pts ahead"
         : delta < 0 ? -delta + "pts under"
         : "on track"
     return "Resets in " + reset + " · " + elapsed + "% elapsed · " + pace
+}
+
+function opencodeGoDetail(metric, nowMs) {
+    const windowMinutes = metric && metric.label === "Rolling" ? 5 * 60
+        : metric && metric.label === "Weekly" ? 7 * 24 * 60
+        : metric && metric.label === "Monthly" ? 30 * 24 * 60
+        : 0
+    return pacingDetail(metric, windowMinutes, nowMs)
 }

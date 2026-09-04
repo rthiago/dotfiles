@@ -4,8 +4,7 @@ import "../dot_config/quickshell/UsageFormatting.js" as UsageFormatting
 Item {
     id: root
     visible: false
-    function expectCountdown(metric, now, expected, scenario) {
-        const actual = UsageFormatting.resetCountdown(metric, now)
+    function expectValue(actual, expected, scenario) {
         if (actual === expected) return true
 
         console.error("FAIL - " + scenario + ": expected '" + expected + "', got '" + actual + "'")
@@ -13,13 +12,12 @@ Item {
         return false
     }
 
-    function expectOpenCodeDetail(metric, now, expected, scenario) {
-        const actual = UsageFormatting.opencodeGoDetail(metric, now)
-        if (actual === expected) return true
+    function expectCountdown(metric, now, expected, scenario) {
+        return expectValue(UsageFormatting.resetCountdown(metric, now), expected, scenario)
+    }
 
-        console.error("FAIL - " + scenario + ": expected '" + expected + "', got '" + actual + "'")
-        Qt.exit(1)
-        return false
+    function expectOpenCodeDetail(metric, now, expected, scenario) {
+        return expectValue(UsageFormatting.opencodeGoDetail(metric, now), expected, scenario)
     }
 
     function runTests() {
@@ -60,7 +58,25 @@ Item {
             detail: "Provider-supplied detail"
         }, now, "Provider-supplied detail", "provider detail remains authoritative")) return
 
-        console.log("ok - usage reset countdown formatting")
+        const fable = {
+            label: "Fable (7d)",
+            percent: 34,
+            reset_at: "2026-09-06T05:00:00Z",
+            detail: "Resets in 3d 12h"
+        }
+        if (!expectValue(
+            UsageFormatting.pacingDetail(fable, 7 * 24 * 60, now),
+            "Resets in 3d 12h · 50% elapsed · 16pts under",
+            "Fable pacing"
+        )) return
+        fable.detail = "Resets in 3d 12h · 50% elapsed · 16pts under"
+        if (!expectValue(
+            UsageFormatting.pacingDetail(fable, 7 * 24 * 60, now),
+            fable.detail,
+            "complete provider pacing remains authoritative"
+        )) return
+
+        console.log("ok - usage formatting behavior")
         Qt.exit(0)
     }
 
