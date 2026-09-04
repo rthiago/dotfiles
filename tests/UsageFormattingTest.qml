@@ -38,6 +38,21 @@ Item {
             reset_at: "2026-09-02T16:00:00Z"
         }, now, "", "expired timestamp is omitted")) return
 
+        const openRouter = {
+            status: "ready",
+            error: null,
+            metrics: [{
+                value: "$10.35",
+                percent: 89,
+                reset_at: null
+            }]
+        }
+        if (!expectValue(
+            UsageFormatting.barText("󰑩", openRouter, now),
+            "󰑩 $10.35",
+            "OpenRouter bar uses remaining credit"
+        )) return
+
         if (!expectOpenCodeDetail({
             label: "Rolling",
             percent: 30,

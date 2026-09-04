@@ -198,6 +198,15 @@ PanelWindow {
             }
 
             BarChip {
+                id: openRouterChip
+                theme: root.theme
+                text: root.services.openRouterText
+                accent: root.services.openRouterError ? root.theme.red : root.theme.purple
+                selected: infoPopup.visible && infoPopup.providerId === "openrouter"
+                onClicked: root.openInfo(openRouterChip, "openrouter", root.services.openRouterUsage, accent)
+            }
+
+            BarChip {
                 theme: root.theme
                 text: root.services.bitcoinText
                 accent: root.theme.yellow

@@ -17,6 +17,16 @@ function resetCountdown(metric, nowMs) {
     return days > 0 ? days + "d " + hours + "h" : hours + "h " + minutes + "m"
 }
 
+function barText(icon, usage, nowMs) {
+    if (!usage || usage.status === "error" || usage.error) return icon + " ⚠"
+    if (!usage.metrics || usage.metrics.length === 0) return icon + " —"
+
+    const metric = usage.metrics[0]
+    const reset = resetCountdown(metric, nowMs)
+    return icon + " " + (metric.value || Math.round(Number(metric.percent) || 0) + "%")
+        + (reset ? " · " + reset : "")
+}
+
 function pacingDetail(metric, windowMinutes, nowMs) {
     const existing = String(metric && metric.detail || "")
     if (!metric || !windowMinutes || existing.indexOf("% elapsed") !== -1) return existing
