@@ -161,6 +161,12 @@ ShellRoot {
                 if (entries[index].id === "opencode-go") opencodeGo = entries[index]
             }
 
+            if (opencodeGo && opencodeGo.metrics) {
+                const nowMs = Date.now()
+                for (let index = 0; index < opencodeGo.metrics.length; index++)
+                    opencodeGo.metrics[index].detail = UsageFormatting.opencodeGoDetail(opencodeGo.metrics[index], nowMs)
+            }
+
             claudeUsage = claude || failedUsage("anthropic", "Claude", "No Claude usage data returned")
             codexUsage = codex || failedUsage("openai", "Codex", "No Codex usage data returned")
             opencodeGoUsage = opencodeGo || failedUsage("opencode-go", "OpenCode Go", "No OpenCode Go usage data returned")
