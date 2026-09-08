@@ -209,7 +209,7 @@ for_window [class="Sublime_text" window_type="normal"] move scratchpad
 # gnome-calculator (libadwaita CSD), set
 # _MOTIF_WM_HINTS asking for no decorations, so i3 draws border none. Force it
 # back on, otherwise the focused purple border never appears.
-for_window [class="obsidian"] border pixel 2, move scratchpad
+for_window [class="^(obsidian|md\.obsidian\.Obsidian)$"] border pixel 2, move scratchpad
 for_window [class="Hermes"] border pixel 2
 for_window [class="beekeeper-studio"] border pixel 2
 for_window [class="(?i)gnome-calculator"] floating enable, border pixel 2, resize set 360 520, move scratchpad

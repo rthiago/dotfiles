@@ -11,7 +11,7 @@ window is hidden first, and the next press shows both.
 import json
 import subprocess
 
-TARGETS = ("sublime_text", "obsidian")
+TARGETS = ("sublime_text", "obsidian", "md.obsidian.obsidian")
 
 
 def i3(*args):
