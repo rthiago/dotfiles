@@ -27,6 +27,12 @@ function barText(icon, usage, nowMs) {
         + (reset ? " · " + reset : "")
 }
 
+function withoutCodexSparkMetrics(metrics) {
+    if (!metrics) return []
+    return metrics.filter(metric =>
+        String(metric && metric.label || "").indexOf("GPT-5.3-Codex-Spark") !== 0)
+}
+
 function pacingDetail(metric, windowMinutes, nowMs) {
     const existing = String(metric && metric.detail || "")
     if (!metric || !windowMinutes || existing.indexOf("% elapsed") !== -1) return existing

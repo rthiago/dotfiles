@@ -91,8 +91,19 @@ Item {
             "complete provider pacing remains authoritative"
         )) return
 
+        const codexMetrics = UsageFormatting.withoutCodexSparkMetrics([
+            { label: "Codex weekly", value: "6%" },
+            { label: "GPT-5.3-Codex-Spark (5h)", value: "0%" },
+            { label: "GPT-5.3-Codex-Spark (7d)", value: "0%" }
+        ])
+        if (!expectValue(
+            codexMetrics.map(metric => metric.label).join(","),
+            "Codex weekly",
+            "Codex popup omits GPT-5.3-Codex-Spark limits"
+        )) return
+
         console.log("ok - usage formatting behavior")
-        Qt.exit(0)
+        Qt.quit()
     }
 
     Timer {

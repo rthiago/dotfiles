@@ -164,6 +164,9 @@ ShellRoot {
                 if (entries[index].id === "openrouter") openRouter = entries[index]
             }
 
+            if (codex && codex.metrics)
+                codex.metrics = UsageFormatting.withoutCodexSparkMetrics(codex.metrics)
+
             const nowMs = Date.now()
             if (claude && claude.metrics) {
                 for (let index = 0; index < claude.metrics.length; index++) {
