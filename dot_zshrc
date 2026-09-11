@@ -14,10 +14,6 @@ if command -v fzf &> /dev/null; then
     plugins=(fzf $plugins)
 fi
 
-if command -v poetry &> /dev/null; then
-    plugins=(poetry $plugins)
-fi
-
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/gems/bin:$HOME/.config/composer/vendor/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.bun/bin"
 export GEM_HOME="$HOME/gems"
 if command -v nvim &> /dev/null; then
