@@ -22,6 +22,7 @@ return {
         options = { opt = { foldcolumn = "0", scrolloff = 4, wrap = true } },
         mappings = {
           i = {
+            ["<C-BS>"] = { "<C-w>", desc = "Delete previous word" },
             ["<C-S>"] = { "<Esc><Cmd>silent! update! | redraw<CR>", desc = "Force write" },
           },
           n = {
