@@ -14,7 +14,7 @@ if command -v fzf &> /dev/null; then
     plugins=(fzf $plugins)
 fi
 
-if command -v poetry &> /dev/null && poetry &> /dev/null ; then
+if command -v poetry &> /dev/null; then
     plugins=(poetry $plugins)
 fi
 
@@ -176,7 +176,21 @@ bindkey '^[h' insert-cycledleft
 
 source <(herdr completion zsh)
 
-[ -x "$commands[hermes]" ] && eval "$(hermes completion zsh)"
+# Hermes completion: the CLI takes ~0.8s to print this script, so cache it and
+# regenerate only when the binary is newer than the cache.
+if (( $+commands[hermes] )); then
+    _hermes_completion="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/hermes-completion.zsh"
+    if [[ ! -s $_hermes_completion || $commands[hermes] -nt $_hermes_completion ]]; then
+        mkdir -p ${_hermes_completion:h}
+        if command hermes completion zsh >| ${_hermes_completion}.tmp; then
+            mv -f ${_hermes_completion}.tmp $_hermes_completion
+        else
+            command rm -f ${_hermes_completion}.tmp
+        fi
+    fi
+    source $_hermes_completion
+    unset _hermes_completion
+fi
 
 # Make Kitty `clear` command keep the current screen on the scrollback even on Herdr
 if [[ -n $KITTY_WINDOW_ID || $HERDR_ENV == 1 ]]; then
