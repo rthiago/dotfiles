@@ -177,3 +177,17 @@ bindkey '^[h' insert-cycledleft
 source <(herdr completion zsh)
 
 [ -x "$commands[hermes]" ] && eval "$(hermes completion zsh)"
+
+# Make Kitty `clear` command keep the current screen on the scrollback even on Herdr
+if [[ -n $KITTY_WINDOW_ID || $HERDR_ENV == 1 ]]; then
+    clear-with-scrollback() {
+        builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
+        builtin zle .reset-prompt
+        builtin zle -R
+    }
+
+    zle -N clear-with-scrollback
+    bindkey '^L' clear-with-scrollback
+
+    alias clear="printf '\033[H\033[22J'"
+fi
