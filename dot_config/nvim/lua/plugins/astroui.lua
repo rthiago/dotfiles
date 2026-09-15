@@ -41,6 +41,8 @@ return {
               function() vim.fn.setreg("+", vim.fn.expand "%:.") end,
               desc = "Copy file path",
             },
+            ["<Leader>q"] = { "<Cmd>confirm qall<CR>", desc = "Exit AstroNvim" },
+            ["<Leader>Q"] = { "<Cmd>confirm q<CR>", desc = "Quit Window" },
             H = { "^", desc = "First non-blank character" },
             L = { "g_", desc = "Last non-blank character" },
             n = { "nzz", desc = "Next search result centered" },
