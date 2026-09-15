@@ -220,6 +220,12 @@ PanelWindow {
 
             BarChip {
                 theme: root.theme
+                text: root.services.xboxControllerText
+                accent: root.theme.green
+            }
+
+            BarChip {
+                theme: root.theme
                 text: root.services.mouseText
                 accent: root.theme.green
             }

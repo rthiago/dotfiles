@@ -71,6 +71,7 @@ ShellRoot {
     })
     property string bitcoinText: " —"
     property string headphonesText: " off"
+    property string xboxControllerText: "󰊴 off"
     property string mouseText: "󰍽 —"
     property string keyboardText: " —"
     property bool networkConnected: false
@@ -400,8 +401,14 @@ ShellRoot {
     }
 
     ScriptPoller {
-        command: [shell.home + "/scripts/mouse-battery.sh"]
+        command: [shell.home + "/scripts/xbox-controller-battery"]
         interval: 30000
+        onUpdated: output => shell.xboxControllerText = output || "󰊴 off"
+    }
+
+    ScriptPoller {
+        command: [shell.home + "/scripts/mouse-battery.sh"]
+        interval: 300000
         onUpdated: output => shell.mouseText = output || "󰍽 —"
     }
 

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+percentage=$(
+    upower --dump 2>/dev/null |
+        awk '
+            /^Device:/ { is_xbox_controller = 0 }
+            /model:[[:space:]]+Xbox Wireless Controller$/ { is_xbox_controller = 1 }
+            is_xbox_controller && /percentage:/ { print $2; exit }
+        '
+)
+
+printf '󰊴 %s' "${percentage:-off}"
