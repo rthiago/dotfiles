@@ -36,6 +36,8 @@ return {
               function() require("astrocore.buffer").nav(vim.v.count1) end,
               desc = "Next buffer",
             },
+            ["<C-Left>"] = { "b", desc = "Previous word" },
+            ["<C-Right>"] = { "w", desc = "Next word" },
             ["<BS>"] = { "<C-^>", desc = "Alternate buffer" },
             ["<Leader>O"] = {
               function() vim.fn.setreg("+", vim.fn.expand "%:.") end,
