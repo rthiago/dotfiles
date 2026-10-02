@@ -384,7 +384,7 @@ ShellRoot {
 
     ScriptPoller {
         command: ["ai-usagebar", "usage", "--json"]
-        interval: 120000
+        interval: 60000
         onUpdated: output => shell.updateAiUsage(output)
     }
 
