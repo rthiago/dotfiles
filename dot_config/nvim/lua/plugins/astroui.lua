@@ -19,7 +19,7 @@ return {
         diagnostics = {
           virtual_text = false,
         },
-        options = { opt = { foldcolumn = "0", scrolloff = 4, wrap = true, mousescroll = "ver:10,hor:6" } },
+        options = { opt = { foldcolumn = "0", scrolloff = 4, wrap = true, mousescroll = "ver:5,hor:6" } },
         mappings = {
           i = {
             ["<C-BS>"] = { "<C-w>", desc = "Delete previous word" },
