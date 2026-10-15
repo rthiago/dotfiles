@@ -13,6 +13,10 @@ for_window [all] title_format " "
 # ── Look & feel ───────────────────────────────────────────────────────────────
 default_border pixel 1
 default_floating_border pixel 1
+# Some apps (Electron, libadwaita CSD) set _MOTIF_WM_HINTS asking for no
+# decorations, which makes i3 skip default_border and draw border none. Force
+# the border on for every window; later for_window rules can still override.
+for_window [all] border pixel 1
 gaps inner 10
 gaps outer 10
 focus_follows_mouse no
