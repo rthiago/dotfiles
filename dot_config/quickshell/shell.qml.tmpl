@@ -69,6 +69,19 @@ ShellRoot {
         error: null,
         fetched_at: null
     })
+    property string grokText: "󰬅 —"
+    property bool grokError: false
+    property var grokUsage: ({
+        display_name: "Grok",
+        id: "grokbot",
+        plan: "",
+        metrics: [],
+        sections: [],
+        status: "loading",
+        stale: false,
+        error: null,
+        fetched_at: null
+    })
     property string bitcoinText: " —"
     property string headphonesText: " off"
     property string xboxControllerText: "󰊴 off"
@@ -157,12 +170,14 @@ ShellRoot {
             let codex = null
             let opencodeGo = null
             let openRouter = null
+            let grok = null
 
             for (let index = 0; index < entries.length; index++) {
                 if (entries[index].id === "anthropic") claude = entries[index]
                 if (entries[index].id === "openai") codex = entries[index]
                 if (entries[index].id === "opencode-go") opencodeGo = entries[index]
                 if (entries[index].id === "openrouter") openRouter = entries[index]
+                if (entries[index].id === "grokbot") grok = entries[index]
             }
 
             if (codex && codex.metrics)
@@ -185,27 +200,33 @@ ShellRoot {
             codexUsage = codex || failedUsage("openai", "Codex", "No Codex usage data returned")
             opencodeGoUsage = opencodeGo || failedUsage("opencode-go", "OpenCode Go", "No OpenCode Go usage data returned")
             openRouterUsage = openRouter || failedUsage("openrouter", "OpenRouter", "No OpenRouter usage data returned")
+            grokUsage = grok || failedUsage("grokbot", "Grok", "No Grok usage data returned")
             claudeError = claudeUsage.status === "error" || Boolean(claudeUsage.error)
             codexError = codexUsage.status === "error" || Boolean(codexUsage.error)
             opencodeGoError = opencodeGoUsage.status === "error" || Boolean(opencodeGoUsage.error)
             openRouterError = openRouterUsage.status === "error" || Boolean(openRouterUsage.error)
+            grokError = grokUsage.status === "error" || Boolean(grokUsage.error)
             claudeText = UsageFormatting.barText("󰜡", claudeUsage, nowMs)
             codexText = UsageFormatting.barText("󰬫", codexUsage, nowMs)
             opencodeGoText = UsageFormatting.barText("󰚩", opencodeGoUsage, nowMs)
             openRouterText = UsageFormatting.barText("󰑩", openRouterUsage, nowMs)
+            grokText = UsageFormatting.barText("󰬅", grokUsage, nowMs)
         } catch (error) {
             claudeUsage = failedUsage("anthropic", "Claude", "Could not read Claude usage")
             codexUsage = failedUsage("openai", "Codex", "Could not read Codex usage")
             opencodeGoUsage = failedUsage("opencode-go", "OpenCode Go", "Could not read OpenCode Go usage")
             openRouterUsage = failedUsage("openrouter", "OpenRouter", "Could not read OpenRouter usage")
+            grokUsage = failedUsage("grokbot", "Grok", "Could not read Grok usage")
             claudeText = "󰜡 ⚠"
             codexText = "󰬫 ⚠"
             opencodeGoText = "󰚩 ⚠"
             openRouterText = "󰑩 ⚠"
+            grokText = "󰬅 ⚠"
             claudeError = true
             codexError = true
             opencodeGoError = true
             openRouterError = true
+            grokError = true
         }
     }
 

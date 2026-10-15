@@ -207,6 +207,15 @@ PanelWindow {
             }
 
             BarChip {
+                id: grokChip
+                theme: root.theme
+                text: root.services.grokText
+                accent: root.services.grokError ? root.theme.red : root.theme.pink
+                selected: infoPopup.visible && infoPopup.providerId === "grokbot"
+                onClicked: root.openInfo(grokChip, "grokbot", root.services.grokUsage, accent)
+            }
+
+            BarChip {
                 theme: root.theme
                 text: root.services.bitcoinText
                 accent: root.theme.yellow
